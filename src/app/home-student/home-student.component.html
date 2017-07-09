@@ -1,0 +1,39 @@
+<md-toolbar>
+  <span class="spacer"></span>
+  <form [formGroup]="searchForm" >
+    <table cellspacing="10">
+      <tr>
+        <td>
+          <md-input-container style="width: 400px;" floatPlaceholder="never">
+            <input mdInput type="text" [formControl] = "searchForm.controls['search']" placeholder="Search jobs by
+              title, keyword or company" required>
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container style="width: 400px;" floatPlaceholder="never">
+            <input mdInput type="text" [formControl] = "searchForm.controls['location']" placeholder="Cty, state, postal
+              code or country">
+          </md-input-container>
+        </td>
+        <td>
+          <button md-icon-button [disabled] = "!searchForm.valid" type="submit">
+            <md-icon>search</md-icon>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <span class="spacer"></span>
+</md-toolbar>
+<h1>Recommended for you</h1>
+<md-grid-list cols="4" rowHeight="150px">
+  <md-grid-tile *ngFor="let job of jobsList | async">
+    <md-card class="full-width">
+      <md-card-title>{{job.companyName}}</md-card-title>
+      <md-card-content>
+        <h3>{{job.jobTitle}}</h3>
+        <p>{{job.city}}, {{job.country}}</p>
+      </md-card-content>
+    </md-card>
+  </md-grid-tile>
+</md-grid-list>
