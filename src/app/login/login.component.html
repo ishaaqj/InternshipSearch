@@ -1,24 +1,26 @@
-<!--<button md-raised-button>Login</button>-->
 <div class="container">
-  <div fxLayout="row" fxLayoutAlign="space-around center" class="content">
-    <md-card class="blocks" fxFlex="40%">
-      <md-toolbar>Login</md-toolbar>
-      <form #loginForm = "ngForm">
+  <div fxLayout="row" fxLayoutAlign="space-around center" class="content center-flex-object">
+  <div class="blocks" fxFlex="40%">
+    <md-toolbar color="primary"><h2 class="center-object-h-v">Internship Success</h2></md-toolbar>
+    <md-card>
+      <md-card-title>Login</md-card-title>
+      <form [formGroup]="loginForm" >
         <p>
-          <md-input-container>
-            <input mdInput [formControl] = "emailFormControl" [(ngModel)] = "email" name="email" placeholder="email" required>
-            <md-error *ngIf="emailFormControl.hasError('required')">This field is required</md-error>
-            <md-error *ngIf="emailFormControl.hasError('pattern')">Not a valid email address</md-error>
+          <md-input-container class="full-width">
+            <input mdInput type="email" [formControl] = "loginForm.controls['email']" placeholder="email" required>
+            <md-error *ngIf="loginForm.controls['email'].hasError('required')">This field is required</md-error>
+            <md-error *ngIf="loginForm.controls['email'].hasError('pattern')">Not a valid email address</md-error>
           </md-input-container>
         </p>
         <p>
-          <md-input-container>
-            <input mdInput type="password" [(ngModel)] = "password" name="password" placeholder="password" required>
+          <md-input-container class="full-width">
+            <input mdInput type="password" [formControl] = "loginForm.controls['password']" placeholder="password" required>
             <md-error>This field is required</md-error>
           </md-input-container>
         </p>
-        <button md-raised-button [disabled] = "!loginForm.form.valid" type="submit"> Login </button>
+        <button class="center-object-h-v" md-raised-button [disabled] = "!loginForm.valid" type="submit" (click)="login()"> Login </button>
       </form>
     </md-card>
+    </div>
   </div>
 </div>

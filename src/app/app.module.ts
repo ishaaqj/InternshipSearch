@@ -6,6 +6,10 @@ import { LoginComponent } from './login/login.component';
 import {Approutes} from "./app.routing";
 import {AppMaterialModule} from "./app.material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AngularFireAuthModule, AngularFireAuthProvider} from "angularfire2/auth";
+import {AngularFireModule} from "angularfire2";
+import {env} from "./app.env";
+import {AngularFireDatabaseModule} from "angularfire2/database";
 
 @NgModule({
   declarations: [
@@ -17,7 +21,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     Approutes,
     AppMaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(env.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
