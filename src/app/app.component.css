@@ -1,7 +1,4 @@
 .content {
-  min-height: calc(100vh - 160px);
-}
-
-.footer{
-  height: 50px;
+  min-height:100%;
+  margin-bottom: 60px;
 }

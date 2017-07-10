@@ -4,7 +4,7 @@
 
 import {NgModule} from "@angular/core";
 import {
-  MdButtonModule, MdCardModule, MdGridListModule, MdIconModule, MdInputModule,
+  MdButtonModule, MdCardModule, MdGridListModule, MdIconModule, MdInputModule, MdMenuModule,
   MdToolbarModule
 } from "@angular/material";
 import {FlexLayoutModule} from '@angular/flex-layout'
@@ -18,7 +18,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MdToolbarModule,
     MdInputModule,
     BrowserAnimationsModule,
-    MdGridListModule
+    MdGridListModule,
+    MdMenuModule
   ],
   exports: [
     MdButtonModule,
@@ -28,7 +29,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MdToolbarModule,
     MdInputModule,
     BrowserAnimationsModule,
-    MdGridListModule
+    MdGridListModule,
+    MdMenuModule
   ]
 })
 

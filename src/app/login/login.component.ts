@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
     this.angularFireAuth = angularFireAuth;
     this.router = router;
     this.buildForm();
-
   }
 
   private buildForm() {
@@ -35,15 +34,18 @@ export class LoginComponent implements OnInit {
   private login(){
     this.angularFireAuth.auth.signInWithEmailAndPassword(this.loginForm.controls['email'].value,
       this.loginForm.controls['password'].value).then(
-      (success) => {
-        alert(success.uid)
+      _ => {
         this.router.navigate(['']);
       }
     ).catch(
       (err) => {
-        alert(err.message)
+        alert(err.message);
       }
     )
+  }
+
+  public logout(){
+    this.angularFireAuth.auth.signOut();
   }
 
   ngOnInit() {

@@ -1,21 +1,17 @@
-<md-toolbar color="primary">
+<md-toolbar color="primary" *ngIf="showNavBar">
   <button md-icon-button>
     <md-icon [routerLink]="['']">home</md-icon>
   </button>
-  <h2>Internship Search</h2>
+  <h2 [routerLink]="['']">Internship Search</h2>
   <span class="spacer"></span>
-  <button md-icon-button>
+  <button md-icon-button [mdMenuTriggerFor]="menu">
     <md-icon>person</md-icon>
   </button>
-  <h6>My Account</h6>
 </md-toolbar>
+<md-menu #menu="mdMenu">
+  <button md-menu-item>My Account</button>
+  <button md-menu-item (click)="logout()">Sign Out</button>
+</md-menu>
 <div class="content">
   <router-outlet></router-outlet>
 </div>
-<md-toolbar color="primary" class="footer">
-  <span class="spacer"></span>
-  <h6>Contact us</h6>
-  <span class="spacer"></span>
-  <h6>About us</h6>
-  <span class="spacer"></span>
-</md-toolbar>

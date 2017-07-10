@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {Approutes} from "./app.routing";
-import {AppMaterialModule} from "./MyOwnCustomMaterialModule";
+import {AppMaterialModule} from "./CustomMaterialModule";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AngularFireAuthModule} from "angularfire2/auth";
 import {AngularFireModule} from "angularfire2";
@@ -16,7 +16,7 @@ import { HomeRecruiterComponent } from './home-recruiter/home-recruiter.componen
 import { CreateUserComponent } from './create-user/create-user.component';
 import { CreateUserRecruiterComponent } from './create-user-recruiter/create-user-recruiter.component';
 import { CreateUserStudentComponent } from './create-user-student/create-user-student.component';
-import {EqualValidator} from "./equal-validator.directive";
+import {AuthGuardService} from "./login/auth-guard.service"
 
 @NgModule({
   declarations: [
@@ -27,8 +27,7 @@ import {EqualValidator} from "./equal-validator.directive";
     HomeRecruiterComponent,
     CreateUserComponent,
     CreateUserRecruiterComponent,
-    CreateUserStudentComponent,
-    EqualValidator
+    CreateUserStudentComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +39,7 @@ import {EqualValidator} from "./equal-validator.directive";
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
