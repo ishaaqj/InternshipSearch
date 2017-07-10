@@ -1,6 +1,6 @@
 <md-toolbar color="primary">
   <button md-icon-button>
-    <md-icon>home</md-icon>
+    <md-icon [routerLink]="['']">home</md-icon>
   </button>
   <h2>Internship Search</h2>
   <span class="spacer"></span>
@@ -9,8 +9,10 @@
   </button>
   <h6>My Account</h6>
 </md-toolbar>
-<router-outlet></router-outlet>
-<md-toolbar color="primary">
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
+<md-toolbar color="primary" class="footer">
   <span class="spacer"></span>
   <h6>Contact us</h6>
   <span class="spacer"></span>

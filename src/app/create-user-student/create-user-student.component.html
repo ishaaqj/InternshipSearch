@@ -1,0 +1,20 @@
+<md-card>
+  <md-card-title>Login</md-card-title>
+  <form >
+    <p>
+      <!--<md-input-container class="full-width">-->
+      <!--<input mdInput type="email" [formControl] = "loginForm.controls['email']" placeholder="email" required>-->
+      <!--<md-error *ngIf="loginForm.controls['email'].hasError('required')">This field is required</md-error>-->
+      <!--<md-error *ngIf="loginForm.controls['email'].hasError('pattern')">Not a valid email address</md-error>-->
+      <!--</md-input-container>-->
+    </p>
+    <p>
+      <!--<md-input-container class="full-width">-->
+      <!--<input mdInput type="password" [formControl] = "loginForm.controls['password']" placeholder="password" required>-->
+      <!--<md-error>This field is required</md-error>-->
+      <!--</md-input-container>-->
+    </p>
+    <button class="center-object-h-v" md-raised-button [disabled] = "!loginForm.valid" type="submit" (click)="login()"> Login </button>
+  </form>
+</md-card>
+

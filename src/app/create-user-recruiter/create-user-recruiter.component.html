@@ -1,0 +1,47 @@
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="space-around center" class="content">
+      <md-card class="blocks" fxFlex="40%">
+        <md-card-title>Create recruiter account</md-card-title>
+        <form [formGroup]="createRecruiterForm">
+          <md-input-container class="full-width">
+            <input mdInput type="text" [formControl] = "createRecruiterForm.controls['firstName']"
+                   placeholder="First name" required>
+            <md-error>This field is required</md-error>
+          </md-input-container>
+          <md-input-container class="full-width">
+            <input mdInput type="text" [formControl] = "createRecruiterForm.controls['lastName']"
+                   placeholder="Last name" required>
+            <md-error>This field is required</md-error>
+          </md-input-container>
+          <md-input-container class="full-width">
+            <input mdInput type="email" [formControl] = "createRecruiterForm.controls['email']" placeholder="email"
+                   required>
+            <md-error *ngIf="createRecruiterForm.controls['email'].hasError('required')">This field is required
+            </md-error>
+            <md-error *ngIf="createRecruiterForm.controls['email'].hasError('pattern')">Not a valid email address
+            </md-error>
+          </md-input-container>
+          <md-input-container class="full-width">
+            <input mdInput type="password" [formControl]="createRecruiterForm.controls['password']"
+                   placeholder="Password" required>
+            <md-error *ngIf="createRecruiterForm.controls['password'].hasError('required')">This field is required
+            </md-error>
+            <md-error *ngIf="createRecruiterForm.controls['password'].hasError('pattern')">8 digit password with one
+              capital and one small alphabet, one number and one special symbol</md-error>
+          </md-input-container>
+          <md-input-container class="full-width">
+            <input mdInput type="text" [formControl] = "createRecruiterForm.controls['companyName']"
+                   placeholder="Company name" required>
+            <md-error>This field is required</md-error>
+          </md-input-container>
+          <md-input-container class="full-width">
+            <input mdInput type="email" [formControl] = "createRecruiterForm.controls['companyWebsite']"
+                   placeholder="Company website" required>
+            <md-error>This field is required</md-error>
+          </md-input-container>
+          <p style="text-align: center"><button md-raised-button [disabled] = "!createRecruiterForm.valid"
+                                                type="submit" (click)="createRecruiter()">Create Account</button></p>
+        </form>
+      </md-card>
+  </div>
+</div>

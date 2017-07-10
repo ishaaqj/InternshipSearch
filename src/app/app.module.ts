@@ -6,13 +6,17 @@ import { LoginComponent } from './login/login.component';
 import {Approutes} from "./app.routing";
 import {AppMaterialModule} from "./MyOwnCustomMaterialModule";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AngularFireAuthModule, AngularFireAuthProvider} from "angularfire2/auth";
+import {AngularFireAuthModule} from "angularfire2/auth";
 import {AngularFireModule} from "angularfire2";
 import {env} from "./app.env";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import { HomeComponent } from './home/home.component';
 import { HomeStudentComponent } from './home-student/home-student.component';
 import { HomeRecruiterComponent } from './home-recruiter/home-recruiter.component';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { CreateUserRecruiterComponent } from './create-user-recruiter/create-user-recruiter.component';
+import { CreateUserStudentComponent } from './create-user-student/create-user-student.component';
+import {EqualValidator} from "./equal-validator.directive";
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { HomeRecruiterComponent } from './home-recruiter/home-recruiter.componen
     LoginComponent,
     HomeComponent,
     HomeStudentComponent,
-    HomeRecruiterComponent
+    HomeRecruiterComponent,
+    CreateUserComponent,
+    CreateUserRecruiterComponent,
+    CreateUserStudentComponent,
+    EqualValidator
   ],
   imports: [
     BrowserModule,
