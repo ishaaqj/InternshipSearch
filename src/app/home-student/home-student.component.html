@@ -34,6 +34,9 @@
         <h3>{{job.jobTitle}}</h3>
         <p>{{job.city}}, {{job.country}}</p>
       </md-card-content>
+      <button md-button (click)="openJobPost(job)">
+        See More
+      </button>
     </md-card>
   </md-grid-tile>
 </md-grid-list>

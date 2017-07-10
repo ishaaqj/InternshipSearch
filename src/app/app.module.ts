@@ -16,7 +16,8 @@ import { HomeRecruiterComponent } from './home-recruiter/home-recruiter.componen
 import { CreateUserComponent } from './create-user/create-user.component';
 import { CreateUserRecruiterComponent } from './create-user-recruiter/create-user-recruiter.component';
 import { CreateUserStudentComponent } from './create-user-student/create-user-student.component';
-import {AuthGuardService} from "./login/auth-guard.service"
+import {AuthGuardService} from "./login/auth-guard.service";
+import { JobPostComponent } from './job-post/job-post.component'
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {AuthGuardService} from "./login/auth-guard.service"
     HomeRecruiterComponent,
     CreateUserComponent,
     CreateUserRecruiterComponent,
-    CreateUserStudentComponent
+    CreateUserStudentComponent,
+    JobPostComponent
   ],
   imports: [
     BrowserModule,

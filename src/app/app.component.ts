@@ -11,6 +11,7 @@ import {AngularFireAuth} from "angularfire2/auth";
 })
 export class AppComponent {
   showNavBar: boolean = true;
+  private job;
   constructor(private loginComponent: LoginComponent, private router: Router,
               private angularFireAuth: AngularFireAuth){
     this.angularFireAuth.authState.subscribe((authState)=>{
@@ -21,5 +22,13 @@ export class AppComponent {
   private logout(){
     this.loginComponent.logout();
     this.router.navigate(['/login']);
+  }
+
+  setJobPostToOpen(job){
+    this.job = job;
+  }
+
+  getJobPostToOpen(){
+    return this.job;
   }
 }
