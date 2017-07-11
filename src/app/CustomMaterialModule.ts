@@ -4,7 +4,8 @@
 
 import {NgModule} from "@angular/core";
 import {
-  MdButtonModule, MdCardModule, MdDatepickerModule, MdGridListModule, MdIconModule, MdInputModule, MdMenuModule,
+  MdButtonModule, MdCardModule, MdDatepickerModule, MdDialogModule, MdGridListModule, MdIconModule, MdInputModule,
+  MdMenuModule,
   MdNativeDateModule,
   MdSortModule,
   MdTableModule,
@@ -28,7 +29,8 @@ import {CdkTableModule} from "@angular/cdk";
     CdkTableModule,
     MdSortModule,
     MdDatepickerModule,
-    MdNativeDateModule
+    MdNativeDateModule,
+    MdDialogModule
   ],
   exports: [
     MdButtonModule,
@@ -44,7 +46,8 @@ import {CdkTableModule} from "@angular/cdk";
     CdkTableModule,
     MdSortModule,
     MdDatepickerModule,
-    MdNativeDateModule
+    MdNativeDateModule,
+    MdDialogModule
   ]
 })
 

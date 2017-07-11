@@ -17,7 +17,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { CreateUserRecruiterComponent } from './create-user-recruiter/create-user-recruiter.component';
 import { CreateUserStudentComponent } from './create-user-student/create-user-student.component';
 import {AuthGuardService} from "./login/auth-guard.service";
-import { JobPostComponent } from './job-post/job-post.component';
+import {DialogResultExampleDialog, JobPostComponent} from './job-post/job-post.component';
 import {MdDatepickerIntl, MdNativeDateModule} from "@angular/material";
 
 @NgModule({
@@ -30,7 +30,8 @@ import {MdDatepickerIntl, MdNativeDateModule} from "@angular/material";
     CreateUserComponent,
     CreateUserRecruiterComponent,
     CreateUserStudentComponent,
-    JobPostComponent
+    JobPostComponent,
+    DialogResultExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -42,6 +43,7 @@ import {MdDatepickerIntl, MdNativeDateModule} from "@angular/material";
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
+  entryComponents: [DialogResultExampleDialog],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })

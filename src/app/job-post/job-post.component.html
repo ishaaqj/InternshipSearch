@@ -1,3 +1,56 @@
-<p>
-  {{job.companyName}}
-</p>
+<md-toolbar>
+  <h2>Job Post</h2>
+  <span class="spacer"></span>
+  <h2 (click)="editJob()">Edit</h2>
+  <h2 style="margin-left: 20px" (click)="deleteJob()">Delete</h2>
+</md-toolbar>
+<div class="contaner">
+  <div fxLayout="row" fxLayoutAlign="space-around start" class="content">
+    <span class="spacer"></span>
+    <md-card class="blocks" fxFlex="60%">
+      <table>
+        <tr>
+          <th>Job Title:</th>
+          <td>{{job.jobTitle}}</td>
+        </tr>
+        <tr>
+          <th>Company Name:</th>
+          <td>{{job.companyName}}</td>
+        </tr>
+        <tr>
+          <th>Company Website:</th>
+          <td>{{job.companyWebsite}}</td>
+        </tr>
+        <tr>
+          <th>Location:</th>
+          <td>{{job.cty}}, {{job.stateOrProvince}}, {{job.country}}</td>
+        </tr>
+        <tr>
+          <th>Salary:</th>
+          <td>{{job.minSalary}} to {{job.maxSalary}} paid {{job.salaryPaid}}</td>
+        </tr>
+        <tr>
+          <th>Job description:</th>
+          <td>{{job.jobDescription}}</td>
+        </tr>
+        <tr>
+          <th>Preferred Qulaifications:</th>
+          <td>{{job.preferredQualifications}}</td>
+        </tr>
+        <tr>
+          <th>Sponsoring Visa:</th>
+          <td>{{job.sponsoringVisa}}</td>
+        </tr>
+        <tr>
+          <th>Provide Relocation:</th>
+          <td>{{job.providingRelocation}}</td>
+        </tr>
+        <tr>
+          <th>Additional Information:</th>
+          <td>{{job.additionalInfo}}</td>
+        </tr>
+      </table>
+    </md-card>
+    <span class="spacer"></span>
+  </div>
+</div>

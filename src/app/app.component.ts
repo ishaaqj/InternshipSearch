@@ -13,7 +13,7 @@ import {HomeComponent} from "./home/home.component";
 })
 export class AppComponent {
   private showNavBar: boolean;
-  private job;
+  static job;
   private userRole = '';
 
   constructor(private loginComponent: LoginComponent, private router: Router,
@@ -35,10 +35,10 @@ export class AppComponent {
   }
 
   setJobPostToOpen(job) {
-    this.job = job;
+    AppComponent.job = job;
   }
 
   getJobPostToOpen() {
-    return this.job;
+    return AppComponent.job;
   }
 }

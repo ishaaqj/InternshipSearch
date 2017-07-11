@@ -76,8 +76,8 @@
           <th class="table-row" (click)="sortByJobLocation()">Job Location</th>
         </tr>
         <ng-container *ngFor="let job of jobsList|async">
-          <tr>
-            <td class="table-row" (click)="openJobPost(job)">{{job.jobId}}</td>
+          <tr (click)="openJobPost(job)">
+            <td class="table-row">{{job.jobId}}</td>
             <td class="table-row">{{job.jobTitle}}</td>
             <td class="table-row">{{job.companyName}}</td>
             <td class="table-row">{{job.city}}, {{job.stateOrProvince}}, {{job.country}}</td>
