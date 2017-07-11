@@ -24,12 +24,14 @@ import {Subscription} from "rxjs/Subscription";
 })
 export class HomeRecruiterComponent implements OnInit {
   private searchForm: FormGroup;
+  private filterForm: FormGroup;
   private userId;
   private jobsList;
 
   constructor(private formBuilder: FormBuilder,private database: AngularFireDatabase, private appComponent: AppComponent,
               private router: Router, private angularFireAuth :AngularFireAuth, private cd: ChangeDetectorRef) {
     this.buildSearchForm();
+    this.buildFilterForm();
   }
 
   ngOnInit() {
@@ -51,15 +53,38 @@ export class HomeRecruiterComponent implements OnInit {
     });
   }
 
+  private buildFilterForm() {
+    this.filterForm = this.formBuilder.group({
+      'minSalary': '',
+      'maxSalary': '',
+      'companyName': '',
+      'datePosted': ''
+    });
+  }
+
   private openJobPost(jobPost){
     this.appComponent.setJobPostToOpen(jobPost);
     this.router.navigate(['/job-post'])
   }
 
+  private filterResult(){
+    this.search();
+    let companyName = this.filterForm.controls['companyName'].value.toLocaleLowerCase();
+    let minSalary = this.filterForm.controls['minSalary'].value;
+    let maxSalary = this.filterForm.controls['maxSalary'].value;
+    let datePosted = this.filterForm.controls['datePosted'].value;
+    this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => job.companyName.toLocaleLowerCase().indexOf(companyName) != -1)) as FirebaseListObservable<any[]>
+    this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => job.minSalary - minSalary + 1)) as FirebaseListObservable<any[]>;
+    this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => maxSalary - job.maxSalary + 1)) as FirebaseListObservable<any[]>;
+    if(this.filterForm.controls['datePosted'].value != '') {
+      this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => (new Date(job.datePosted)) >= (new Date(datePosted)))) as FirebaseListObservable<any[]>;
+    }
+  }
+
   private search(){
     let location = this.searchForm.controls['location'].value.toLocaleLowerCase();
     let keyword = this.searchForm.controls['search'].value.toLocaleLowerCase();
-    if (location =='' && keyword =='') alert("Enter search values:");
+    // if (location =='' && keyword =='') alert("Enter search values:");
       this.jobsList = this.jobsList = this.database.list('/jobApplications', {
         query: {
           orderByChild: 'employerUID',

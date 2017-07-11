@@ -32,23 +32,55 @@
   <div fxLayout="row" fxLayoutAlign="space-around start" class="content">
     <md-card class="blocks" fxFlex="25%">
       <md-card-title>Filter By</md-card-title>
+      <form [formGroup]="filterForm" >
+        <md-input-container class="full-width">
+          <input mdInput type="text" [formControl] = "filterForm.controls['companyName']" placeholder="Company name">
+        </md-input-container>
+        <table>
+          <tr>
+            <td style="padding-right: 10px">
+              <md-input-container floatPlaceholder="never">
+                <input mdInput type="text" [formControl] = "filterForm.controls['minSalary']" placeholder="min Salary">
+              </md-input-container>
+            </td>
+            <td>
+              to
+            </td>
+            <td style="padding-left: 10px">
+              <md-input-container  floatPlaceholder="never">
+                <input mdInput type="text" [formControl] = "filterForm.controls['maxSalary']" placeholder="max Salary">
+              </md-input-container>
+            </td>
+          </tr>
+        </table>
+        <md-input-container>
+          <input mdInput [formControl] = "filterForm.controls['datePosted']" [mdDatepicker]="picker" placeholder="Date posted">
+          <button mdSuffix [mdDatepickerToggle]="picker"></button>
+        </md-input-container>
+        <md-datepicker #picker></md-datepicker>
+        <p style="text-align: center">
+          <button md-raised-button (click)="filterResult()" [disabled] = "!filterForm.valid" type="submit">
+            Filter
+          </button>
+        </p>
+      </form>
     </md-card>
     <span class="spacer"></span>
     <md-card class="blocks" fxFlex="74%">
       <md-card-title>Results</md-card-title>
       <table>
         <tr>
-          <th (click)="sortByJobId()">Job Id</th>
-          <th (click)="sortByJobTitle()">Job Title</th>
-          <th (click)="sortByCompanyName()">Company Name</th>
-          <th (click)="sortByJobLocation()">Job Location</th>
+          <th class="table-row" (click)="sortByJobId()">Job Id</th>
+          <th class="table-row" (click)="sortByJobTitle()">Job Title</th>
+          <th class="table-row" (click)="sortByCompanyName()">Company Name</th>
+          <th class="table-row" (click)="sortByJobLocation()">Job Location</th>
         </tr>
         <ng-container *ngFor="let job of jobsList|async">
           <tr>
-            <td>{{job.jobId}}</td>
-            <td>{{job.jobTitle}}</td>
-            <td>{{job.companyName}}</td>
-            <td>{{job.city}}, {{job.stateOrProvince}}, {{job.country}}</td>
+            <td class="table-row" (click)="openJobPost(job)">{{job.jobId}}</td>
+            <td class="table-row">{{job.jobTitle}}</td>
+            <td class="table-row">{{job.companyName}}</td>
+            <td class="table-row">{{job.city}}, {{job.stateOrProvince}}, {{job.country}}</td>
           </tr>
         </ng-container>
       </table>

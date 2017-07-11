@@ -18,6 +18,7 @@ import { CreateUserRecruiterComponent } from './create-user-recruiter/create-use
 import { CreateUserStudentComponent } from './create-user-student/create-user-student.component';
 import {AuthGuardService} from "./login/auth-guard.service";
 import { JobPostComponent } from './job-post/job-post.component';
+import {MdDatepickerIntl, MdNativeDateModule} from "@angular/material";
 
 @NgModule({
   declarations: [
