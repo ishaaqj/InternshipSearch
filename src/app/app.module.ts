@@ -17,7 +17,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { CreateUserRecruiterComponent } from './create-user-recruiter/create-user-recruiter.component';
 import { CreateUserStudentComponent } from './create-user-student/create-user-student.component';
 import {AuthGuardService} from "./login/auth-guard.service";
-import { JobPostComponent } from './job-post/job-post.component'
+import { JobPostComponent } from './job-post/job-post.component';
 
 @NgModule({
   declarations: [

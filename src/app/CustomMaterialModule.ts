@@ -4,11 +4,13 @@
 
 import {NgModule} from "@angular/core";
 import {
-  MdButtonModule, MdCardModule, MdGridListModule, MdIconModule, MdInputModule, MdMenuModule,
+  MdButtonModule, MdCardModule, MdGridListModule, MdIconModule, MdInputModule, MdMenuModule, MdSortModule,
+  MdTableModule,
   MdToolbarModule
 } from "@angular/material";
 import {FlexLayoutModule} from '@angular/flex-layout'
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {CdkTableModule} from "@angular/cdk";
 @NgModule({
   imports: [
     MdButtonModule,
@@ -19,7 +21,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MdInputModule,
     BrowserAnimationsModule,
     MdGridListModule,
-    MdMenuModule
+    MdMenuModule,
+    MdTableModule,
+    CdkTableModule,
+    MdSortModule
   ],
   exports: [
     MdButtonModule,
@@ -30,7 +35,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MdInputModule,
     BrowserAnimationsModule,
     MdGridListModule,
-    MdMenuModule
+    MdMenuModule,
+    MdTableModule,
+    CdkTableModule,
+    MdSortModule
   ]
 })
 

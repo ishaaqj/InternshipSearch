@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   private angularFireAuth: AngularFireAuth;
   private router: Router;
 
-
   constructor(formBuilder: FormBuilder, angularFireAuth: AngularFireAuth, router: Router) {
     this.formBuilder = formBuilder;
     this.angularFireAuth = angularFireAuth;
@@ -25,7 +24,8 @@ export class LoginComponent implements OnInit {
 
   private buildForm() {
     this.loginForm = this.formBuilder.group({
-      'email': [null, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)])],
+      'email': [null, Validators.compose([Validators.required,
+        Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])],
       'password': [null, Validators.required]
     });
     // for use in registration forms for password field Validators.compose([Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)])

@@ -15,7 +15,7 @@ export class HomeStudentComponent implements OnInit {
   private jobsList;
   private database: AngularFireDatabase;
 
-  constructor(formBuilder: FormBuilder, database: AngularFireDatabase,private appComponent: AppComponent,
+  constructor(formBuilder: FormBuilder, database: AngularFireDatabase, private appComponent: AppComponent,
               private router: Router) {
     this.database = database;
     this.formBuilder = formBuilder;

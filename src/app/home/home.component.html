@@ -1,2 +1,2 @@
-<app-home-student></app-home-student>
-<app-home-recruiter></app-home-recruiter>
+<app-home-student *ngIf="userRole == 'student'"></app-home-student>
+<app-home-recruiter *ngIf="userRole == 'recruiter'"></app-home-recruiter>

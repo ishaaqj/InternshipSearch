@@ -1,3 +1,57 @@
-<p>
-  home-recruiter works!
-</p>
+<md-toolbar>
+  <span class="spacer"></span>
+  <form [formGroup]="searchForm" >
+    <table cellspacing="10">
+      <tr>
+        <td>
+          <md-input-container style="width: 400px;" floatPlaceholder="never">
+            <input mdInput #filter type="text" [formControl] = "searchForm.controls['search']" placeholder="Search jobs by
+              title, keyword or company">
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container style="width: 400px;" floatPlaceholder="never">
+            <input mdInput type="text" [formControl] = "searchForm.controls['location']" placeholder="Cty, state, postal
+              code or country">
+          </md-input-container>
+        </td>
+        <td>
+          <button md-icon-button [disabled] = "!searchForm.valid" type="submit">
+            <md-icon (click)="search()">search</md-icon>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <span class="spacer"></span>
+</md-toolbar>
+<div class="container">
+  <div>
+    <h2>Jobs Posted</h2>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around start" class="content">
+    <md-card class="blocks" fxFlex="25%">
+      <md-card-title>Filter By</md-card-title>
+    </md-card>
+    <span class="spacer"></span>
+    <md-card class="blocks" fxFlex="74%">
+      <md-card-title>Results</md-card-title>
+      <table>
+        <tr>
+          <th (click)="sortByJobId()">Job Id</th>
+          <th (click)="sortByJobTitle()">Job Title</th>
+          <th (click)="sortByCompanyName()">Company Name</th>
+          <th (click)="sortByJobLocation()">Job Location</th>
+        </tr>
+        <ng-container *ngFor="let job of jobsList|async">
+          <tr>
+            <td>{{job.jobId}}</td>
+            <td>{{job.jobTitle}}</td>
+            <td>{{job.companyName}}</td>
+            <td>{{job.city}}, {{job.stateOrProvince}}, {{job.country}}</td>
+          </tr>
+        </ng-container>
+      </table>
+    </md-card>
+  </div>
+</div>
