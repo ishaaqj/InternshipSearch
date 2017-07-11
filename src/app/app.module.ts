@@ -19,6 +19,7 @@ import { CreateUserStudentComponent } from './create-user-student/create-user-st
 import {AuthGuardService} from "./login/auth-guard.service";
 import {DialogResultExampleDialog, JobPostComponent} from './job-post/job-post.component';
 import {MdDatepickerIntl, MdNativeDateModule} from "@angular/material";
+import { CreateJobPostComponent } from './create-job-post/create-job-post.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {MdDatepickerIntl, MdNativeDateModule} from "@angular/material";
     CreateUserRecruiterComponent,
     CreateUserStudentComponent,
     JobPostComponent,
-    DialogResultExampleDialog
+    DialogResultExampleDialog,
+    CreateJobPostComponent
   ],
   imports: [
     BrowserModule,
