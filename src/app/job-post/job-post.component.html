@@ -1,15 +1,15 @@
 <md-toolbar>
   <h2>Job Post</h2>
   <span class="spacer"></span>
-  <h2 (click)="editJob()">Edit</h2>
-  <h2 style="margin-left: 20px" (click)="deleteJob()">Delete</h2>
+  <h2 *ngIf="userRole == 'recruiter'" [routerLink]="['/edit-job-post',job.jobId]">Edit</h2>
+  <h2 *ngIf="userRole == 'recruiter'" style="margin-left: 20px" (click)="deleteJob()">Delete</h2>
 </md-toolbar>
 <div class="contaner">
   <div fxLayout="row" fxLayoutAlign="space-around start" class="content">
     <span class="spacer"></span>
     <md-card class="blocks" fxFlex="60%">
-      <table>
-        <tr>
+      <table class="table">
+        <tr class="table-row">
           <th>Job Title:</th>
           <td>{{job.jobTitle}}</td>
         </tr>
@@ -23,7 +23,7 @@
         </tr>
         <tr>
           <th>Location:</th>
-          <td>{{job.cty}}, {{job.stateOrProvince}}, {{job.country}}</td>
+          <td>{{job.city}}, {{job.stateOrProvince}}, {{job.country}}</td>
         </tr>
         <tr>
           <th>Salary:</th>

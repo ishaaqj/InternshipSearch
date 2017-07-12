@@ -25,7 +25,7 @@ export class HomeStudentComponent implements OnInit {
 
   private buildSearchForm() {
     this.searchForm = this.formBuilder.group({
-      'search': [null, Validators.required],
+      'search': '',
       'location': ''
     });
   }
@@ -35,11 +35,6 @@ export class HomeStudentComponent implements OnInit {
 
   private getJobsFromDatabase() {
     this.jobsList = this.database.list('/jobApplications')
-  }
-
-  private openJobPost(jobPost){
-    this.appComponent.setJobPostToOpen(jobPost);
-    this.router.navigate(['/job-post'])
   }
 
 }

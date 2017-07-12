@@ -1,10 +1,10 @@
-<md-toolbar color="primary" *ngIf="showNavBar">
+<md-toolbar color="primary">
   <button md-icon-button>
     <md-icon [routerLink]="['']">home</md-icon>
   </button>
   <h2 [routerLink]="['']">Internship Search</h2>
   <span class="spacer"></span>
-  <button md-icon-button [mdMenuTriggerFor]="menu">
+  <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="showAccountButton">
     <md-icon>person</md-icon>
   </button>
 </md-toolbar>
@@ -13,6 +13,4 @@
   <button md-menu-item [routerLink]="['/create-job-post']" *ngIf="userRole == 'recruiter'">Create Job Post</button>
   <button md-menu-item (click)="logout()">Sign Out</button>
 </md-menu>
-<div class="content">
-  <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>

@@ -12,19 +12,21 @@ import {HomeComponent} from "./home/home.component";
   providers:[LoginComponent, HomeComponent]
 })
 export class AppComponent {
-  private showNavBar: boolean;
+  private showAccountButton: boolean;
   static job;
   private userRole = '';
 
   constructor(private loginComponent: LoginComponent, private router: Router,
               private angularFireAuth: AngularFireAuth, private angularFireDatabase: AngularFireDatabase) {
     this.angularFireAuth.authState.subscribe(authState => {
-      let userId = authState.uid;
-      this.showNavBar = authState != null;
-      let userObservable = this.angularFireDatabase.object('users/' + userId, {preserveSnapshot: true});
-      userObservable.subscribe(snapshot => {
-        this.userRole = snapshot.val().role;
-      })
+      this.showAccountButton = authState != null;
+      if (authState != null) {
+        let userId = authState.uid;
+        let userObservable = this.angularFireDatabase.object('users/' + userId, {preserveSnapshot: true});
+        userObservable.subscribe(snapshot => {
+          this.userRole = snapshot.val().role;
+        })
+      }
     });
   }
 
@@ -32,13 +34,5 @@ export class AppComponent {
     this.loginComponent.logout();
     this.userRole='';
     this.router.navigate(['/login']);
-  }
-
-  setJobPostToOpen(job) {
-    AppComponent.job = job;
-  }
-
-  getJobPostToOpen() {
-    return AppComponent.job;
   }
 }

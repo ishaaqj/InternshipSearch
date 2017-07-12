@@ -16,8 +16,8 @@
           </md-input-container>
         </td>
         <td>
-          <button md-icon-button [disabled] = "!searchForm.valid" type="submit">
-            <md-icon (click)="search()">search</md-icon>
+          <button md-icon-button (click)="search()" [disabled] = "!searchForm.valid" type="submit">
+            <md-icon>search</md-icon>
           </button>
         </td>
       </tr>
@@ -76,7 +76,7 @@
           <th class="table-row" (click)="sortByJobLocation()">Job Location</th>
         </tr>
         <ng-container *ngFor="let job of jobsList|async">
-          <tr (click)="openJobPost(job)">
+          <tr [routerLink]="['/job-post',job.jobId]">
             <td class="table-row">{{job.jobId}}</td>
             <td class="table-row">{{job.jobTitle}}</td>
             <td class="table-row">{{job.companyName}}</td>

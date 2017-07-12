@@ -62,11 +62,6 @@ export class HomeRecruiterComponent implements OnInit {
     });
   }
 
-  private openJobPost(jobPost){
-    this.appComponent.setJobPostToOpen(jobPost);
-    this.router.navigate(['/job-post'])
-  }
-
   private filterResult(){
     this.search();
     let companyName = this.filterForm.controls['companyName'].value.toLocaleLowerCase();
@@ -84,14 +79,13 @@ export class HomeRecruiterComponent implements OnInit {
   private search(){
     let location = this.searchForm.controls['location'].value.toLocaleLowerCase();
     let keyword = this.searchForm.controls['search'].value.toLocaleLowerCase();
-    // if (location =='' && keyword =='') alert("Enter search values:");
       this.jobsList = this.jobsList = this.database.list('/jobApplications', {
         query: {
           orderByChild: 'employerUID',
           equalTo: this.userId
         }
-      }).map(_jobs => _jobs.filter(job => job.city.toLocaleLowerCase().indexOf(location) != -1)) as FirebaseListObservable<any[]>
-      this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => job.jobTitle.toLocaleLowerCase().indexOf(keyword) != -1)) as FirebaseListObservable<any[]>
+      }).map(_jobs => _jobs.filter(job => ((job.city.toLocaleLowerCase()+', '+job.stateOrProvince.toLocaleLowerCase()+', '+job.country.toLocaleLowerCase()).indexOf(location) != -1))) as FirebaseListObservable<any[]>;
+      this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => (job.jobTitle.toLocaleLowerCase().indexOf(keyword) != -1) || (job.companyName.toLocaleLowerCase().indexOf(keyword) != -1))) as FirebaseListObservable<any[]>
   }
 
   private sortByJobId(){

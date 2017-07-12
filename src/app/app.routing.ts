@@ -16,11 +16,13 @@ const appRoutes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuardService]},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginComponent},
-  {path: 'create-user', component: CreateUserComponent, canActivate: [AuthGuardService]},
-  {path: 'create-user-recruiter', component: CreateUserRecruiterComponent, canActivate: [AuthGuardService]},
-  {path: 'create-user-student', component: CreateUserStudentComponent, canActivate: [AuthGuardService]},
-  {path: 'job-post', component: JobPostComponent, canActivate: [AuthGuardService]},
-  {path: 'create-job-post', component: CreateJobPostComponent, canActivate: [AuthGuardService]}
+  {path: 'create-user', component: CreateUserComponent},
+  {path: 'create-user-recruiter', component: CreateUserRecruiterComponent},
+  {path: 'create-user-student', component: CreateUserStudentComponent},
+  {path: 'job-post/:id', component: JobPostComponent, canActivate: [AuthGuardService]},
+  {path: 'create-job-post', component: CreateJobPostComponent, canActivate: [AuthGuardService]},
+  {path: 'edit-job-post/:id', component: CreateJobPostComponent, canActivate: [AuthGuardService]}
+
 ];
 
 export const Approutes: ModuleWithProviders = RouterModule.forRoot(appRoutes);

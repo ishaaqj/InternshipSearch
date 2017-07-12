@@ -6,7 +6,7 @@
         <td>
           <md-input-container style="width: 400px;" floatPlaceholder="never">
             <input mdInput type="text" [formControl] = "searchForm.controls['search']" placeholder="Search jobs by
-              title, keyword or company" required>
+              title, keyword or company">
           </md-input-container>
         </td>
         <td>
@@ -28,7 +28,7 @@
 <h1>Recommended for you</h1>
 <md-grid-list cols="4" rowHeight="150px">
   <md-grid-tile *ngFor="let job of jobsList | async">
-    <md-card class="full-width" (click)="openJobPost(job)">
+    <md-card class="full-width card" [routerLink]="['/job-post',job.jobId]">
       <md-card-title>{{job.companyName}}</md-card-title>
       <md-card-content>
         <h3>{{job.jobTitle}}</h3>
