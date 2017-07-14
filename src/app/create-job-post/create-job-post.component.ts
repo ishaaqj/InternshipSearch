@@ -17,6 +17,7 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
   private durationType = 'Week(s)';
   private subscribeToRoute;
   private updateForm;
+  private gotData;
 
   constructor(private activatedRoute: ActivatedRoute, private angularFireDatabase: AngularFireDatabase,
               private angularFireAuth: AngularFireAuth, private formBuilder: FormBuilder, private router: Router,
@@ -29,6 +30,7 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
       this.angularFireDatabase.object('jobApplications/' + params['id'], {preserveSnapshot: true}).subscribe(snapshot => {
         this.job = snapshot.val();
         if (this.job != null) {
+          this.gotData=true;
           this.buildFilledForm();
           this.updateForm = true;
         }
@@ -45,28 +47,37 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
   }
 
   private buildEmptyForm() {
-    this.createjobpostform = this.formBuilder.group({
-      'jobTitle': [null, Validators.required],
-      'city': [null, Validators.required],
-      'companyName': [null, Validators.required],
-      'companyWebsite': [null, Validators.required],
-      'country': [null, Validators.compose([Validators.required])],
-      'datePosted': [null, Validators.required],
-      'durationOfInternship': [null, Validators.compose([Validators.required, Validators.pattern(/^(([0-9]*)|(([0-9]*)\.([0-9]*)))$/)])],
-      'durationOfInternshipType': [null, Validators.required],
-      'jobDescription': [null, Validators.required],
-      'maxSalary': [null, Validators.compose([Validators.required, Validators.pattern(/^(([0-9]*)|(([0-9]*)\.([0-9]*)))$/)])],
-      'minSalary': [null, Validators.compose([Validators.required, Validators.pattern(/^(([0-9]*)|(([0-9]*)\.([0-9]*)))$/)])],
-      'preferredEducation': [null, Validators.required],
-      'preferredQualification': [null, Validators.required],
-      'providingRelocation': '',
-      'salaryPaid': [null, Validators.required],
-      'securityClearanceRequired': '',
-      'sponsoringVisa': '',
-      'startDate': [null, Validators.required],
-      'stateOrProvince': [null, Validators.required],
-      'additionalInfo': ''
+    let companyName;
+    let companyWebsite;
+    this.angularFireAuth.authState.subscribe(user => {
+      this.angularFireDatabase.object('/users/' + user.uid, {preserveSnapshot: true}).subscribe(snapshot=>{
+        companyName = snapshot.val().companyName;
+        companyWebsite = snapshot.val().companyWebsite;
+        this.gotData = true;
+        this.createjobpostform = this.formBuilder.group({
+          'jobTitle': [null, Validators.required],
+          'city': [null, Validators.required],
+          'companyName': [companyName, Validators.required],
+          'companyWebsite': [companyWebsite, Validators.required],
+          'country': [null, Validators.compose([Validators.required])],
+          'durationOfInternship': [null, Validators.compose([Validators.required, Validators.pattern(/^(([0-9]*)|(([0-9]*)\.([0-9]*)))$/)])],
+          'durationOfInternshipType': [null, Validators.required],
+          'jobDescription': [null, Validators.required],
+          'maxSalary': [null, Validators.compose([Validators.required, Validators.pattern(/^(([0-9]*)|(([0-9]*)\.([0-9]*)))$/)])],
+          'minSalary': [null, Validators.compose([Validators.required, Validators.pattern(/^(([0-9]*)|(([0-9]*)\.([0-9]*)))$/)])],
+          'preferredEducation': [null, Validators.required],
+          'preferredQualification': [null, Validators.required],
+          'providingRelocation': '',
+          'salaryPaid': [null, Validators.required],
+          'securityClearanceRequired': '',
+          'sponsoringVisa': '',
+          'startDate': [null, Validators.required],
+          'stateOrProvince': [null, Validators.required],
+          'additionalInfo': ''
+        });
+      })
     });
+
   }
 
   private buildFilledForm() {
@@ -76,7 +87,6 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
       'companyName': [this.job.companyName, Validators.required],
       'companyWebsite': [this.job.companyWebsite, Validators.required],
       'country': [this.job.country, Validators.required],
-      'datePosted': [this.job.datePosted, Validators.required],
       'durationOfInternship': [this.job.durationOfInternship.split(' ')[0], Validators.required],
       'durationOfInternshipType': [this.job.durationOfInternship.split(' ')[1], Validators.required],
       'jobDescription': [this.job.jobDescription, Validators.required],
@@ -98,14 +108,14 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
     let uid;
     this.angularFireAuth.authState.subscribe(user => {
       uid = user.uid;
-      console.log(this.createjobpostform.controls['startDate'].value);
+      console.log("start" + this.createjobpostform.controls['startDate'].value);
       this.angularFireDatabase.list('/jobApplications').push({
         'jobTitle': this.createjobpostform.controls['jobTitle'].value,
         'city': this.createjobpostform.controls['city'].value,
         'companyName': this.createjobpostform.controls['companyName'].value,
         'companyWebsite': this.createjobpostform.controls['companyWebsite'].value,
         'country': this.createjobpostform.controls['country'].value,
-        'datePosted': this.createjobpostform.controls['datePosted'].value,
+        'datePosted': (new Date()).toLocaleDateString(),
         'durationOfInternship': this.createjobpostform.controls['durationOfInternship'].value + " " + this.createjobpostform.controls['durationOfInternshipType'].value,
         'jobDescription': this.createjobpostform.controls['jobDescription'].value,
         'employerUID': uid,
@@ -117,14 +127,14 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
         'salaryPaid': this.createjobpostform.controls['salaryPaid'].value,
         'securityClearanceRequired': this.createjobpostform.controls['securityClearanceRequired'].value,
         'sponsoringVisa': this.createjobpostform.controls['sponsoringVisa'].value,
-        'startDate': this.createjobpostform.controls['startDate'].value,
+        'startDate': (new Date(this.createjobpostform.controls['startDate'].value)).toLocaleDateString(),
         'stateOrProvince': this.createjobpostform.controls['stateOrProvince'].value,
         'additionalInfo': this.createjobpostform.controls['additionalInfo'].value
       }).then(jobpost => {
         this.angularFireDatabase.object('/jobApplications/' + jobpost.key).update({
           'jobId': jobpost.key
-        }).catch(err => console.log(err.message))
-        this.router.navigate([''])
+        }).catch(err => console.log(err.message));
+        this.router.navigate(['job-post', jobpost.key])
       }).catch(err => console.log(err.message))
     })
   }
@@ -139,7 +149,6 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
           'companyName': this.createjobpostform.controls['companyName'].value,
           'companyWebsite': this.createjobpostform.controls['companyWebsite'].value,
           'country': this.createjobpostform.controls['country'].value,
-          'datePosted': this.createjobpostform.controls['datePosted'].value,
           'durationOfInternship': this.createjobpostform.controls['durationOfInternship'].value + " " + this.createjobpostform.controls['durationOfInternshipType'].value,
           'jobDescription': this.createjobpostform.controls['jobDescription'].value,
           'maxSalary': this.createjobpostform.controls['maxSalary'].value,
@@ -153,8 +162,10 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
           'startDate': this.createjobpostform.controls['startDate'].value,
           'stateOrProvince': this.createjobpostform.controls['stateOrProvince'].value,
           'additionalInfo': this.createjobpostform.controls['additionalInfo'].value,
-        }).then(success => console.log(success))
-          .catch(err => console.log(err.message))
+        }).then(success => {
+          console.log(success);
+          this.router.navigate(['job-post', this.job.jobId])
+        }).catch(err => console.log(err.message))
       }
     });
   }

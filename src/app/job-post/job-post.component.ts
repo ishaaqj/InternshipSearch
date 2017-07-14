@@ -14,6 +14,7 @@ export class JobPostComponent implements OnInit, OnDestroy {
   private job;
   private subscribeToRoute;
   private userRole;
+  private gotData;
 
   constructor(private appComponent: AppComponent, private angularFireDatabase: AngularFireDatabase
     , private router: Router, private dialog: MdDialog, private activatedRoute: ActivatedRoute
@@ -24,8 +25,9 @@ export class JobPostComponent implements OnInit, OnDestroy {
     this.subscribeToRoute = this.activatedRoute.params.subscribe(params=>{
       this.angularFireDatabase.object('jobApplications/' + params['id'], {preserveSnapshot: true}).subscribe(snapshot => {
         this.job = snapshot.val();
-        this.job.startDate=this.job.startDate.slice(0,10);
-        this.job.datePosted=this.job.datePosted.slice(0,10);
+        this.gotData = true;
+        // this.job.startDate=this.job.startDate.slice(0,10);
+        // this.job.datePosted=this.job.datePosted.slice(0,10);
         if (this.job.sponsoringVisa='true'){
           this.job.sponsoringVisa ='Yes'
         }else {
