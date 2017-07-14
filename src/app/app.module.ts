@@ -17,7 +17,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { CreateUserRecruiterComponent } from './create-user-recruiter/create-user-recruiter.component';
 import { CreateUserStudentComponent } from './create-user-student/create-user-student.component';
 import {AuthGuardService} from "./login/auth-guard.service";
-import {DialogResultExampleDialog, JobPostComponent} from './job-post/job-post.component';
+import {DeleteDialogBox, DialogResultExampleDialog, JobPostComponent} from './job-post/job-post.component';
 import {CreateJobPostComponent, UpdateDialogBox} from './create-job-post/create-job-post.component';
 
 @NgModule({
@@ -33,7 +33,8 @@ import {CreateJobPostComponent, UpdateDialogBox} from './create-job-post/create-
     JobPostComponent,
     DialogResultExampleDialog,
     CreateJobPostComponent,
-    UpdateDialogBox
+    UpdateDialogBox,
+    DeleteDialogBox
   ],
   imports: [
     BrowserModule,
@@ -45,7 +46,7 @@ import {CreateJobPostComponent, UpdateDialogBox} from './create-job-post/create-
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
-  entryComponents: [DialogResultExampleDialog, UpdateDialogBox],
+  entryComponents: [DialogResultExampleDialog, UpdateDialogBox, DeleteDialogBox],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
