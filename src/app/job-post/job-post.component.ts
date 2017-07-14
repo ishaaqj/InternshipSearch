@@ -15,6 +15,8 @@ export class JobPostComponent implements OnInit, OnDestroy {
   private subscribeToRoute;
   private userRole;
   private gotData;
+  private showDeleteButton;
+  private userId;
 
   constructor(private appComponent: AppComponent, private angularFireDatabase: AngularFireDatabase
     , private router: Router, private dialog: MdDialog, private activatedRoute: ActivatedRoute
@@ -23,35 +25,42 @@ export class JobPostComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscribeToRoute = this.activatedRoute.params.subscribe(params=>{
-      this.angularFireDatabase.object('jobApplications/' + params['id'], {preserveSnapshot: true}).subscribe(snapshot => {
-        this.job = snapshot.val();
-        this.gotData = true;
-        // this.job.startDate=this.job.startDate.slice(0,10);
-        // this.job.datePosted=this.job.datePosted.slice(0,10);
-        if (this.job.sponsoringVisa='true'){
-          this.job.sponsoringVisa ='Yes'
-        }else {
-          this.job.sponsoringVisa ='No'
-        }
-        if (this.job.providingRelocation='true'){
-          this.job.providingRelocation ='Yes'
-        }else {
-          this.job.providingRelocation ='No'
-        }
-        if (this.job.securityClearanceRequired='true'){
-          this.job.securityClearanceRequired ='Yes'
-        }else {
-          this.job.securityClearanceRequired ='No'
+      this.angularFireAuth.authState.subscribe(authState => {
+        if (authState != null) {
+          let userObservable = this.angularFireDatabase.object('users/' + authState.uid, {preserveSnapshot: true});
+          userObservable.subscribe(snapshot => {
+            this.userRole = snapshot.val().role;
+          });
+          this.angularFireDatabase.object('jobApplications/' + params['id'], {preserveSnapshot: true}).subscribe(snapshot => {
+            this.job = snapshot.val();
+            this.userId = authState.uid;
+            this.gotData = true;
+            this.angularFireDatabase.object('/jobsAppliedTo/' + authState.uid + '/' + this.job.jobId).subscribe(item => {
+              console.log(item);
+              if (item.jobId==this.job.jobId) {
+                this.showDeleteButton = true;
+              }
+            });
+            this.job.datePosted = this.job.datePosted.slice(0,10);
+            this.job.startDate = this.job.startDate.slice(0,10);
+            if (this.job.sponsoringVisa='true'){
+              this.job.sponsoringVisa ='Yes'
+            }else {
+              this.job.sponsoringVisa ='No'
+            }
+            if (this.job.providingRelocation='true'){
+              this.job.providingRelocation ='Yes'
+            }else {
+              this.job.providingRelocation ='No'
+            }
+            if (this.job.securityClearanceRequired='true'){
+              this.job.securityClearanceRequired ='Yes'
+            }else {
+              this.job.securityClearanceRequired ='No'
+            }
+          });
         }
       });
-    });
-    this.angularFireAuth.authState.subscribe(authState => {
-      if (authState != null) {
-        let userObservable = this.angularFireDatabase.object('users/' + authState.uid, {preserveSnapshot: true});
-        userObservable.subscribe(snapshot => {
-          this.userRole = snapshot.val().role;
-        })
-      }
     });
   }
 
@@ -67,8 +76,55 @@ export class JobPostComponent implements OnInit, OnDestroy {
   }
 
   private editJob(){
-    // this.appComponent.setJobPostToOpen(this.job);
     this.router.navigate(['/create-job-post']);
+  }
+
+  private deleteApplication(){
+    let dialogRef = this.dialog.open(DeleteDialogBox);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'yes'){
+        this.angularFireDatabase.object('/jobsAppliedTo/' + this.userId + '/' + this.job.jobId).remove();
+        this.angularFireDatabase.object('/studentsApplied/'+this.job.jobId+'/'+this.userId).remove();
+        this.router.navigate(['']);
+      }
+    });
+  }
+
+  private applyToJob(){
+    this.angularFireAuth.authState.subscribe(authState => {
+      if (authState != null) {
+        this.angularFireDatabase.object('/jobsAppliedTo/'+authState.uid+'/'+this.job.jobId).set({
+          'jobTitle': this.job.jobTitle,
+          'city': this.job.city,
+          'companyName': this.job.companyName,
+          'companyWebsite': this.job.companyWebsite,
+          'country': this.job.country,
+          'durationOfInternship': this.job.durationOfInternship.split(' ')[0],
+          'durationOfInternshipType': this.job.durationOfInternship.split(' ')[1],
+          'jobDescription': this.job.jobDescription,
+          'maxSalary': this.job.minSalary,
+          'minSalary': this.job.maxSalary,
+          'preferredEducation': this.job.preferredEducation,
+          'preferredQualification': this.job.preferredQualifications,
+          'providingRelocation': this.job.providingRelocation,
+          'salaryPaid': this.job.salaryPaid,
+          'securityClearanceRequired': this.job.securityClearanceRequired,
+          'sponsoringVisa': this.job.sponsoringVisa,
+          'startDate': this.job.startDate,
+          'stateOrProvince': this.job.stateOrProvince,
+          'additionalInfo': this.job.additionalInfo,
+          'studentUID': authState.uid,
+          'jobId': this.job.jobId,
+          'datePosted': this.job.datePosted
+        });
+        this.angularFireDatabase.object('/studentsApplied/'+this.job.jobId+'/'+authState.uid).set({
+          'studentUID': authState.uid,
+          'jobId': this.job.jobId,
+          'employerUID': this.job.employerUID
+        })
+      }
+    });
+    alert("Applyng to job successful")
   }
 
   ngOnDestroy(){
@@ -83,4 +139,12 @@ export class JobPostComponent implements OnInit, OnDestroy {
 })
 export class DialogResultExampleDialog {
   constructor(public dialogRef: MdDialogRef<DialogResultExampleDialog>) {}
+}
+
+@Component({
+  selector: 'delete-dialog-box',
+  templateUrl: 'delete-dialog-box.html',
+})
+export class DeleteDialogBox {
+  constructor(public dialogRef: MdDialogRef<DeleteDialogBox>) {}
 }
