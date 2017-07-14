@@ -11,6 +11,7 @@
 <md-menu #menu="mdMenu">
   <button md-menu-item>My Account</button>
   <button md-menu-item [routerLink]="['/create-job-post']" *ngIf="userRole == 'recruiter'">Create Job Post</button>
+  <button md-menu-item [routerLink]="['/jobs-applied-to']" *ngIf="userRole == 'student'">Jobs Applied To</button>
   <button md-menu-item (click)="logout()">Sign Out</button>
 </md-menu>
 <router-outlet></router-outlet>

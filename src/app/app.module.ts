@@ -19,6 +19,7 @@ import { CreateUserStudentComponent } from './create-user-student/create-user-st
 import {AuthGuardService} from "./login/auth-guard.service";
 import {DeleteDialogBox, DialogResultExampleDialog, JobPostComponent} from './job-post/job-post.component';
 import {CreateJobPostComponent, UpdateDialogBox} from './create-job-post/create-job-post.component';
+import { JobsAppliedToComponent } from './jobs-applied-to/jobs-applied-to.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {CreateJobPostComponent, UpdateDialogBox} from './create-job-post/create-
     DialogResultExampleDialog,
     CreateJobPostComponent,
     UpdateDialogBox,
-    DeleteDialogBox
+    DeleteDialogBox,
+    JobsAppliedToComponent
   ],
   imports: [
     BrowserModule,

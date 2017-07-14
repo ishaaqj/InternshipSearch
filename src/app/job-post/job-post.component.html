@@ -63,7 +63,7 @@
         </tr>
       </table>
       <p *ngIf="userRole=='student'" style="text-align: center">
-        <button md-raised-button  (click)="applyToJob()">Apply</button>
+        <button md-raised-button *ngIf="!showDeleteButton" (click)="applyToJob()">Apply</button>
         <button md-raised-button style="margin-left: 10%" *ngIf="showDeleteButton" (click)="deleteApplication()">Delete Applcation</button>
       </p>
     </md-card>

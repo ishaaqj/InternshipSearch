@@ -85,7 +85,8 @@ export class JobPostComponent implements OnInit, OnDestroy {
       if (result == 'yes'){
         this.angularFireDatabase.object('/jobsAppliedTo/' + this.userId + '/' + this.job.jobId).remove();
         this.angularFireDatabase.object('/studentsApplied/'+this.job.jobId+'/'+this.userId).remove();
-        this.router.navigate(['']);
+        this.showDeleteButton=false;
+        this.router.navigate(['jobs-applied-to']);
       }
     });
   }
@@ -93,7 +94,7 @@ export class JobPostComponent implements OnInit, OnDestroy {
   private applyToJob(){
     this.angularFireAuth.authState.subscribe(authState => {
       if (authState != null) {
-        this.angularFireDatabase.object('/jobsAppliedTo/'+authState.uid+'/'+this.job.jobId).set({
+        this.angularFireDatabase.object('/jobsAppliedTo/'+authState.uid+'/'+this.job.jobId).update({
           'jobTitle': this.job.jobTitle,
           'city': this.job.city,
           'companyName': this.job.companyName,

@@ -28,8 +28,8 @@ export class HomeRecruiterComponent implements OnInit {
   private userId;
   private jobsList;
 
-  constructor(private formBuilder: FormBuilder,private database: AngularFireDatabase, private appComponent: AppComponent,
-              private router: Router, private angularFireAuth :AngularFireAuth, private cd: ChangeDetectorRef) {
+  constructor(private formBuilder: FormBuilder,private database: AngularFireDatabase,
+              private router: Router, private angularFireAuth :AngularFireAuth) {
     this.buildSearchForm();
     this.buildFilterForm();
   }
