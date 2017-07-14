@@ -58,6 +58,11 @@
           <button mdSuffix [mdDatepickerToggle]="picker"></button>
         </md-input-container>
         <md-datepicker #picker></md-datepicker>
+        <md-input-container>
+          <input mdInput [formControl] = "filterForm.controls['dateStarts']" [mdDatepicker]="picker2" placeholder="Date Starts">
+          <button mdSuffix [mdDatepickerToggle]="picker2"></button>
+        </md-input-container>
+        <md-datepicker #picker2></md-datepicker>
         <p style="text-align: center">
           <button md-raised-button (click)="filterResult()" [disabled] = "!filterForm.valid" type="submit">
             Filter
@@ -72,6 +77,7 @@
         <tr>
           <th class="table-row" (click)="sortByJobId()">Job Id</th>
           <th class="table-row" (click)="sortByJobTitle()">Job Title</th>
+          <th class="table-row" (click)="sortByJobStartDate()">Job Start Date</th>
           <th class="table-row" (click)="sortByCompanyName()">Company Name</th>
           <th class="table-row" (click)="sortByJobLocation()">Job Location</th>
         </tr>
@@ -79,6 +85,7 @@
           <tr [routerLink]="['/job-post',job.jobId]">
             <td class="table-row">{{job.jobId}}</td>
             <td class="table-row">{{job.jobTitle}}</td>
+            <td class="table-row">{{job.startDate}}</td>
             <td class="table-row">{{job.companyName}}</td>
             <td class="table-row">{{job.city}}, {{job.stateOrProvince}}, {{job.country}}</td>
           </tr>

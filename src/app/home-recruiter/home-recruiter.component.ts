@@ -58,7 +58,8 @@ export class HomeRecruiterComponent implements OnInit {
       'minSalary': '',
       'maxSalary': '',
       'companyName': '',
-      'datePosted': ''
+      'datePosted': '',
+      'dateStarts': ''
     });
   }
 
@@ -68,11 +69,15 @@ export class HomeRecruiterComponent implements OnInit {
     let minSalary = this.filterForm.controls['minSalary'].value;
     let maxSalary = this.filterForm.controls['maxSalary'].value;
     let datePosted = this.filterForm.controls['datePosted'].value;
+    let dateStarts = this.filterForm.controls['dateStarts'].value;
     this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => job.companyName.toLocaleLowerCase().indexOf(companyName) != -1)) as FirebaseListObservable<any[]>
     this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => job.minSalary - minSalary + 1)) as FirebaseListObservable<any[]>;
     this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => maxSalary - job.maxSalary + 1)) as FirebaseListObservable<any[]>;
     if(this.filterForm.controls['datePosted'].value != '') {
       this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => (new Date(job.datePosted)) >= (new Date(datePosted)))) as FirebaseListObservable<any[]>;
+    }
+    if(this.filterForm.controls['dateStarts'].value != '') {
+      this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => (new Date(job.startDate)) >= (new Date(dateStarts)))) as FirebaseListObservable<any[]>;
     }
   }
 
@@ -90,6 +95,10 @@ export class HomeRecruiterComponent implements OnInit {
 
   private sortByJobId(){
     this.jobsList = this.jobsList.map(jobs=> jobs.sort((a,b)=> a.jobId > b.jobId)) as FirebaseListObservable<any[]>;
+  }
+
+  private sortByJobStartDate(){
+    this.jobsList = this.jobsList.map(jobs=> jobs.sort((a,b)=> (new Date(a.startDate)> (new Date(b.startDate))))) as FirebaseListObservable<any[]>;
   }
 
   private sortByJobLocation(){
