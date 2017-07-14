@@ -18,7 +18,7 @@ export class JobPostComponent implements OnInit, OnDestroy {
   private showDeleteButton;
   private userId;
 
-  constructor(private appComponent: AppComponent, private angularFireDatabase: AngularFireDatabase
+  constructor(private angularFireDatabase: AngularFireDatabase
     , private router: Router, private dialog: MdDialog, private activatedRoute: ActivatedRoute
     , private angularFireAuth: AngularFireAuth) {
   }
@@ -75,10 +75,6 @@ export class JobPostComponent implements OnInit, OnDestroy {
     });
   }
 
-  private editJob(){
-    this.router.navigate(['/create-job-post']);
-  }
-
   private deleteApplication(){
     let dialogRef = this.dialog.open(DeleteDialogBox);
     dialogRef.afterClosed().subscribe(result => {
@@ -118,7 +114,7 @@ export class JobPostComponent implements OnInit, OnDestroy {
           'jobId': this.job.jobId,
           'datePosted': this.job.datePosted
         });
-        this.angularFireDatabase.object('/studentsApplied/'+this.job.jobId+'/'+authState.uid).set({
+        this.angularFireDatabase.object('/studentsApplied/'+this.job.employerUID+'/'+this.job.jobId+'/'+authState.uid).set({
           'studentUID': authState.uid,
           'jobId': this.job.jobId,
           'employerUID': this.job.employerUID

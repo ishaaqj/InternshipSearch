@@ -9,7 +9,7 @@
   </button>
 </md-toolbar>
 <md-menu #menu="mdMenu">
-  <button md-menu-item>My Account</button>
+  <button md-menu-item [routerLink]="['/my-account']">My Account</button>
   <button md-menu-item [routerLink]="['/create-job-post']" *ngIf="userRole == 'recruiter'">Create Job Post</button>
   <button md-menu-item [routerLink]="['/jobs-applied-to']" *ngIf="userRole == 'student'">Jobs Applied To</button>
   <button md-menu-item (click)="logout()">Sign Out</button>

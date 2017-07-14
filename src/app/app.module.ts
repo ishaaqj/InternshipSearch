@@ -20,6 +20,10 @@ import {AuthGuardService} from "./login/auth-guard.service";
 import {DeleteDialogBox, DialogResultExampleDialog, JobPostComponent} from './job-post/job-post.component';
 import {CreateJobPostComponent, UpdateDialogBox} from './create-job-post/create-job-post.component';
 import { JobsAppliedToComponent } from './jobs-applied-to/jobs-applied-to.component';
+import { StudentsAppliedComponent } from './students-applied/students-applied.component';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { MyAccountStudentComponent } from './my-account-student/my-account-student.component';
+import { MyAccountRecruiterComponent } from './my-account-recruiter/my-account-recruiter.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,11 @@ import { JobsAppliedToComponent } from './jobs-applied-to/jobs-applied-to.compon
     CreateJobPostComponent,
     UpdateDialogBox,
     DeleteDialogBox,
-    JobsAppliedToComponent
+    JobsAppliedToComponent,
+    StudentsAppliedComponent,
+    MyAccountComponent,
+    MyAccountStudentComponent,
+    MyAccountRecruiterComponent
   ],
   imports: [
     BrowserModule,

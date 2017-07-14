@@ -1,0 +1,69 @@
+<h2 *ngIf="gotData">Students Applied To: <a class="link" [routerLink]="['/job-post',jobId]">{{jobTitle}} ({{jobId}})</a></h2>
+<md-toolbar>
+  <span class="spacer"></span>
+  <form [formGroup]="searchForm" >
+    <table cellspacing="10">
+      <tr>
+        <td>
+          <md-input-container style="width: 400px;" floatPlaceholder="never">
+            <input mdInput #filter type="text" [formControl] = "searchForm.controls['search']" placeholder="Search jobs by
+              title, keyword or company">
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container style="width: 400px;" floatPlaceholder="never">
+            <input mdInput type="text" [formControl] = "searchForm.controls['location']" placeholder="Cty, state, postal
+              code or country">
+          </md-input-container>
+        </td>
+        <td>
+          <button md-icon-button (click)="search()" [disabled] = "!searchForm.valid" type="submit">
+            <md-icon>search</md-icon>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <span class="spacer"></span>
+</md-toolbar>
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="space-around start" class="content">
+    <md-card class="blocks" fxFlex="25%">
+      <md-card-title>Filter By</md-card-title>
+      <form [formGroup]="filterForm" >
+        <md-input-container class="full-width">
+          <input mdInput type="text" [formControl] = "filterForm.controls['degree']" placeholder="Degree">
+        </md-input-container>
+        <md-input-container class="full-width">
+          <input mdInput type="text" [formControl] = "filterForm.controls['university']" placeholder="University">
+        </md-input-container>
+        <p style="text-align: center">
+          <button md-raised-button (click)="filterResult()" [disabled] = "!filterForm.valid" type="submit">
+            Filter
+          </button>
+        </p>
+      </form>
+    </md-card>
+    <md-card class="blocks" fxFlex="74%">
+      <md-card-title>Results</md-card-title>
+      <table *ngIf="gotData && studentsList.length!=0" cellspacing="10">
+        <tr>
+          <th class="table-row" (click)="sortByName()">Name</th>
+          <th class="table-row" (click)="sortByDegree()">Degree</th>
+          <th class="table-row" (click)="sortByUniversity()">University</th>
+          <th class="table-row" (click)="sortByLocation()">Location</th>
+        </tr>
+          <tr *ngFor="let student of studentsList">
+            <td class="table-row">{{student.firstName }}  {{student.lastName}}</td>
+            <td class="table-row">{{student.degree}}</td>
+            <td class="table-row">{{student.university}}</td>
+            <td class="table-row">{{student.city}}  {{student.stateOrProvince}} {{student.country}}</td>
+          </tr>
+      </table>
+      <p *ngIf="gotData && studentsList.length==0" style="text-align: center">
+        No Results found
+      </p>
+    </md-card>
+  </div>
+</div>
+
