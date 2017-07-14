@@ -85,7 +85,7 @@
           <tr [routerLink]="['/job-post',job.jobId]">
             <td class="table-row">{{job.jobId}}</td>
             <td class="table-row">{{job.jobTitle}}</td>
-            <td class="table-row">{{job.startDate}}</td>
+            <td class="table-row">{{job.startDate.slice(0,10)}}</td>
             <td class="table-row">{{job.companyName}}</td>
             <td class="table-row">{{job.city}}, {{job.stateOrProvince}}, {{job.country}}</td>
           </tr>

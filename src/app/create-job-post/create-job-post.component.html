@@ -1,7 +1,8 @@
 <div class="container">
   <div fxLayout="row" fxLayoutAlign="space-around center" class="content">
     <md-card class="blocks" fxFlex="50%">
-      <md-card-title>Create Job Post</md-card-title>
+      <md-card-title *ngIf="!updateForm">Create Job Post</md-card-title>
+      <md-card-title *ngIf="updateForm">Update Job Post</md-card-title>
       <form [formGroup]="createjobpostform">
         <md-input-container style="width: 55%">
           <input mdInput type="text" [formControl] = "createjobpostform.controls['jobTitle']"
@@ -98,7 +99,6 @@
             </td>
           </tr>
           </table>
-
         <md-input-container class="full-width">
           <textarea mdInput type="text" [formControl] = "createjobpostform.controls['jobDescription']"
                     placeholder="Job Description" required></textarea>
@@ -155,8 +155,10 @@
                     placeholder="Additional Info"></textarea>
         </md-input-container>
 
-        <p style="text-align: center"><button md-raised-button [disabled] = "!createjobpostform.valid"
-                                              (click)="createpost()" type="submit">Create Job</button></p>
+        <p style="text-align: center">
+          <button md-raised-button *ngIf="!updateForm" [disabled]="!createjobpostform.valid" (click)="createpost()" type="submit">Create Job Post</button>
+          <button md-raised-button *ngIf="updateForm" (click)="updatepost()" >Update Job Post</button>
+        </p>
       </form>
     </md-card>
   </div>

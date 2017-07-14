@@ -42,7 +42,7 @@ export class HomeRecruiterComponent implements OnInit {
           orderByChild: 'employerUID',
           equalTo: this.userId
         }
-      })as FirebaseListObservable<any[]>;
+      }) as FirebaseListObservable<any[]>;
     });
   }
 
