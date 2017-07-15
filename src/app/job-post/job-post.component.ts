@@ -114,11 +114,17 @@ export class JobPostComponent implements OnInit, OnDestroy {
           'jobId': this.job.jobId,
           'datePosted': this.job.datePosted
         });
-        this.angularFireDatabase.object('/studentsApplied/'+this.job.employerUID+'/'+this.job.jobId+'/'+authState.uid).set({
-          'studentUID': authState.uid,
-          'jobId': this.job.jobId,
-          'employerUID': this.job.employerUID
-        })
+        this.angularFireDatabase.object('/users/'+authState.uid, {preserveSnapshot: true}).subscribe(snapshot=>{
+          this.angularFireDatabase.object('/studentsApplied/'+this.job.employerUID+'/'+this.job.jobId+'/'+authState.uid).set({
+            'city': snapshot.val().city,
+            'country': snapshot.val().country,
+            'degree': snapshot.val().degree,
+            'firstName': snapshot.val().firstName,
+            'lastName': snapshot.val().lastName,
+            'university': snapshot.val().university,
+            'stateOrProvince': snapshot.val().stateOrProvince
+          })
+        });
       }
     });
     alert("Applyng to job successful")
