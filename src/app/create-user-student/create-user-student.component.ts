@@ -40,7 +40,7 @@ export class CreateUserStudentComponent implements OnInit {
   ];
 
   constructor(formBuilder: FormBuilder, angularFireAuth: AngularFireAuth, anuglarFireDatabase: AngularFireDatabase,
-              private router: Router) {
+              private router:Router) {
     this.formBuilder = formBuilder;
     this.angularFireAuth = angularFireAuth;
     this.anuglarFireDatabase = anuglarFireDatabase;
