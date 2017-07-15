@@ -127,7 +127,7 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
         'salaryPaid': this.createjobpostform.controls['salaryPaid'].value,
         'securityClearanceRequired': this.createjobpostform.controls['securityClearanceRequired'].value,
         'sponsoringVisa': this.createjobpostform.controls['sponsoringVisa'].value,
-        'startDate': (new Date(this.createjobpostform.controls['startDate'].value)).toLocaleDateString(),
+        'startDate': this.createjobpostform.controls['startDate'].value,
         'stateOrProvince': this.createjobpostform.controls['stateOrProvince'].value,
         'additionalInfo': this.createjobpostform.controls['additionalInfo'].value
       }).then(jobpost => {
