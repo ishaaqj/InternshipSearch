@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MdDialog, MdDialogRef} from "@angular/material";
 
 @Component({
   selector: 'app-create-user-recruiter',
@@ -20,7 +21,7 @@ export class CreateUserRecruiterComponent implements OnInit {
   private userId;
 
   constructor(formBuilder: FormBuilder, angularFireAuth: AngularFireAuth, private angularFireDatabase: AngularFireDatabase,
-              private activatedRoute: ActivatedRoute, private router: Router) {
+              private activatedRoute: ActivatedRoute, private router: Router, private dialog: MdDialog) {
     this.formBuilder = formBuilder;
     this.angularFireAuth = angularFireAuth;
   }
@@ -94,16 +95,28 @@ export class CreateUserRecruiterComponent implements OnInit {
   }
 
   private updateAccount() {
-    this.angularFireDatabase.object('/users/' + this.userId).update({
-      'firstName': this.createRecruiterForm.controls['firstName'].value,
-      'lastName': this.createRecruiterForm.controls['lastName'].value,
-      'email': this.createRecruiterForm.controls['email'].value,
-      'companyName': this.createRecruiterForm.controls['companyName'].value,
-      'companyWebsite': this.createRecruiterForm.controls['companyWebsite'].value,
-
-    }).then(success => {
-      console.log(success);
-      this.router.navigate(['my-account'])
-    }).catch(err => console.log(err.message))
+    let dialogRef = this.dialog.open(UpdateRecruiterDialogBox);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'yes') {
+        this.angularFireDatabase.object('/users/' + this.userId).update({
+          'firstName': this.createRecruiterForm.controls['firstName'].value,
+          'lastName': this.createRecruiterForm.controls['lastName'].value,
+          'email': this.createRecruiterForm.controls['email'].value,
+          'companyName': this.createRecruiterForm.controls['companyName'].value,
+          'companyWebsite': this.createRecruiterForm.controls['companyWebsite'].value,
+        }).then(success => {
+          console.log(success);
+          this.router.navigate(['my-account'])
+        }).catch(err => console.log(err.message))
+      }
+    });
   }
+}
+
+@Component({
+  selector: 'update-recruiter-dialog-box',
+  templateUrl: 'update-recruiter-dialog-box.html',
+})
+export class UpdateRecruiterDialogBox {
+  constructor(public dialogRef: MdDialogRef<UpdateRecruiterDialogBox>) {}
 }

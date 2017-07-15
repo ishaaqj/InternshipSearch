@@ -14,7 +14,10 @@ import { HomeComponent } from './home/home.component';
 import { HomeStudentComponent } from './home-student/home-student.component';
 import { HomeRecruiterComponent } from './home-recruiter/home-recruiter.component';
 import { CreateUserComponent } from './create-user/create-user.component';
-import { CreateUserRecruiterComponent } from './create-user-recruiter/create-user-recruiter.component';
+import {
+  CreateUserRecruiterComponent,
+  UpdateRecruiterDialogBox
+} from './create-user-recruiter/create-user-recruiter.component';
 import { CreateUserStudentComponent } from './create-user-student/create-user-student.component';
 import {AuthGuardService} from "./login/auth-guard.service";
 import {DeleteDialogBox, DialogResultExampleDialog, JobPostComponent} from './job-post/job-post.component';
@@ -43,6 +46,7 @@ import { SearchJobsComponent } from './search-jobs/search-jobs.component';
     DialogResultExampleDialog,
     CreateJobPostComponent,
     UpdateDialogBox,
+    UpdateRecruiterDialogBox,
     DeletePostDialogBox,
     DeleteDialogBox,
     JobsAppliedToComponent,
@@ -62,7 +66,7 @@ import { SearchJobsComponent } from './search-jobs/search-jobs.component';
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
-  entryComponents: [DialogResultExampleDialog, UpdateDialogBox, DeletePostDialogBox, DeleteDialogBox],
+  entryComponents: [DialogResultExampleDialog, UpdateDialogBox, UpdateRecruiterDialogBox, DeletePostDialogBox, DeleteDialogBox],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
