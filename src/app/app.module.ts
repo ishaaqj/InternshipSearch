@@ -18,12 +18,16 @@ import { CreateUserRecruiterComponent } from './create-user-recruiter/create-use
 import { CreateUserStudentComponent } from './create-user-student/create-user-student.component';
 import {AuthGuardService} from "./login/auth-guard.service";
 import {DeleteDialogBox, DialogResultExampleDialog, JobPostComponent} from './job-post/job-post.component';
-import {CreateJobPostComponent, UpdateDialogBox} from './create-job-post/create-job-post.component';
+import {
+  CreateJobPostComponent, DeletePostDialogBox,
+  UpdateDialogBox
+} from './create-job-post/create-job-post.component';
 import { JobsAppliedToComponent } from './jobs-applied-to/jobs-applied-to.component';
 import { StudentsAppliedComponent } from './students-applied/students-applied.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { MyAccountStudentComponent } from './my-account-student/my-account-student.component';
 import { MyAccountRecruiterComponent } from './my-account-recruiter/my-account-recruiter.component';
+import { SearchJobsComponent } from './search-jobs/search-jobs.component';
 
 @NgModule({
   declarations: [
@@ -39,12 +43,14 @@ import { MyAccountRecruiterComponent } from './my-account-recruiter/my-account-r
     DialogResultExampleDialog,
     CreateJobPostComponent,
     UpdateDialogBox,
+    DeletePostDialogBox,
     DeleteDialogBox,
     JobsAppliedToComponent,
     StudentsAppliedComponent,
     MyAccountComponent,
     MyAccountStudentComponent,
-    MyAccountRecruiterComponent
+    MyAccountRecruiterComponent,
+    SearchJobsComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +62,7 @@ import { MyAccountRecruiterComponent } from './my-account-recruiter/my-account-r
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
-  entryComponents: [DialogResultExampleDialog, UpdateDialogBox, DeleteDialogBox],
+  entryComponents: [DialogResultExampleDialog, UpdateDialogBox, DeletePostDialogBox, DeleteDialogBox],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })

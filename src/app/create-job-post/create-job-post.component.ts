@@ -170,6 +170,15 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
     });
   }
 
+  private deletepost(){
+    let dialogRef = this.dialog.open(DeletePostDialogBox);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'yes') {
+        this.angularFireDatabase.object('/jobApplications/' + this.job.jobId).remove();
+      }
+    });
+  }
+
 }
 
 @Component({
@@ -180,3 +189,10 @@ export class UpdateDialogBox {
   constructor(public dialogRef: MdDialogRef<UpdateDialogBox>) {}
 }
 
+@Component({
+  selector: 'delete-dialog-box',
+  templateUrl: 'update-dialog-box.html',
+})
+export class DeletePostDialogBox {
+  constructor(public dialogRef: MdDialogRef<DeletePostDialogBox>) {}
+}
