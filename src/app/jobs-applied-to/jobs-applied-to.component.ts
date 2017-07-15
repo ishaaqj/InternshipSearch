@@ -14,9 +14,14 @@ export class JobsAppliedToComponent implements OnInit {
   private jobsList;
   private searchForm;
   private filterForm;
+  private sortByJobDateAsc = true;
+  private sortByJobIdAsc = true;
+  private sortByJobTitleAsc = true;
+  private sortByCompanyNameAsc = true;
+  private sortByJobLocationAsc = true;
 
   constructor(private formBuilder: FormBuilder,private database: AngularFireDatabase,
-              private router: Router, private angularFireAuth :AngularFireAuth) { }
+              private angularFireAuth :AngularFireAuth) { }
 
   ngOnInit() {
     this.angularFireAuth.authState.subscribe(authState=>{
@@ -76,23 +81,68 @@ export class JobsAppliedToComponent implements OnInit {
   }
 
   private sortByJobId(){
-    this.jobsList = this.jobsList.sort((a,b)=> a.jobId > b.jobId);
+    if(this.sortByJobIdAsc){
+      this.jobsList = this.jobsList.sort((a,b)=> a.jobId > b.jobId)
+    }else {
+      this.jobsList = this.jobsList.sort((a,b)=> a.jobId < b.jobId)
+    }
+    this.sortByJobIdAsc=!this.sortByJobIdAsc;
+    this.sortByJobDateAsc = true;
+    this.sortByCompanyNameAsc=true;
+    this.sortByJobLocationAsc=true;
+    this.sortByJobTitleAsc=true
   }
 
   private sortByJobStartDate(){
-    this.jobsList = this.jobsList.sort((a,b)=> a.startDate > b.startDate);
+    if(this.sortByJobDateAsc){
+      this.jobsList = this.jobsList.sort((a,b)=> (new Date(a.startDate)> (new Date(b.startDate))));
+    }else {
+      this.jobsList = this.jobsList.sort((a,b)=> (new Date(a.startDate)< (new Date(b.startDate))));
+    }
+    this.sortByJobDateAsc=!this.sortByJobDateAsc;
+    this.sortByJobIdAsc=true;
+    this.sortByCompanyNameAsc=true;
+    this.sortByJobLocationAsc=true;
+    this.sortByJobTitleAsc=true
   }
 
   private sortByJobLocation(){
-    this.jobsList = this.jobsList.sort((a,b)=> a.city > b.city);
+    if(this.sortByJobLocationAsc){
+      this.jobsList = this.jobsList.sort((a,b)=> a.city > b.city || a.stateOrProvince > b.stateOrProvince || a.country > b.country)
+    }else {
+      this.jobsList = this.jobsList.sort((a,b)=> a.city < b.city || a.stateOrProvince < b.stateOrProvince || a.country < b.country)
+    }
+    this.sortByJobLocationAsc=!this.sortByJobLocationAsc;
+    this.sortByJobIdAsc=true;
+    this.sortByCompanyNameAsc=true;
+    this.sortByJobDateAsc=true;
+    this.sortByJobTitleAsc=true
   }
 
   private sortByJobTitle(){
-    this.jobsList = this.jobsList.sort((a,b)=> a.jobTitle > b.jobTitle);
+    if(this.sortByJobTitleAsc){
+      this.jobsList = this.jobsList.sort((a,b)=> a.jobTitle > b.jobTitle);
+    }else {
+      this.jobsList = this.jobsList.sort((a,b)=> a.jobTitle < b.jobTitle);
+    }
+    this.sortByJobTitleAsc=!this.sortByJobTitleAsc;
+    this.sortByJobIdAsc=true;
+    this.sortByCompanyNameAsc=true;
+    this.sortByJobLocationAsc=true;
+    this.sortByJobDateAsc=true
   }
 
   private sortByCompanyName(){
-    this.jobsList = this.jobsList.sort((a,b)=> a.companyName > b.companyName);
+    if(this.sortByCompanyNameAsc){
+      this.jobsList = this.jobsList.sort((a,b)=> a.companyName > b.companyName)
+    }else {
+      this.jobsList = this.jobsList.sort((a,b)=> a.companyName < b.companyName)
+    }
+    this.sortByCompanyNameAsc=!this.sortByCompanyNameAsc;
+    this.sortByJobIdAsc=true;
+    this.sortByJobTitleAsc=true;
+    this.sortByJobLocationAsc=true;
+    this.sortByJobDateAsc=true
   }
 
 }
