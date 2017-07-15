@@ -46,7 +46,7 @@
     </md-card>
     <md-card class="blocks" fxFlex="74%">
       <md-card-title>Results</md-card-title>
-      <table *ngIf="gotData && studentsList.length!=0" cellspacing="10">
+      <table *ngIf="gotData" cellspacing="10">
         <tr>
           <th class="table-row" (click)="sortByName()">Name</th>
           <th class="table-row" (click)="sortByDegree()">Degree</th>
@@ -60,9 +60,6 @@
             <td class="table-row">{{student.city}}  {{student.stateOrProvince}} {{student.country}}</td>
           </tr>
       </table>
-      <p *ngIf="gotData && studentsList.length==0" style="text-align: center">
-        No Results found
-      </p>
     </md-card>
   </div>
 </div>
