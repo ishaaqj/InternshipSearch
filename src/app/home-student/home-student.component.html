@@ -16,7 +16,7 @@
           </md-input-container>
         </td>
         <td>
-          <button md-icon-button [disabled] = "!searchForm.valid" type="submit">
+          <button md-icon-button [disabled] = "!searchForm.valid" (click)="search()" type="submit">
             <md-icon>search</md-icon>
           </button>
         </td>

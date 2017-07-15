@@ -11,6 +11,7 @@ import {CreateJobPostComponent} from "./create-job-post/create-job-post.componen
 import {JobsAppliedToComponent} from "./jobs-applied-to/jobs-applied-to.component";
 import {StudentsAppliedComponent} from "./students-applied/students-applied.component";
 import {MyAccountComponent} from "./my-account/my-account.component";
+import {SearchJobsComponent} from "./search-jobs/search-jobs.component";
 /**
  * Created by ishaaq on 7/6/2017.
  */
@@ -30,7 +31,7 @@ const appRoutes: Routes = [
   {path: 'my-account', component: MyAccountComponent, canActivate: [AuthGuardService]},
   {path: 'edit-recruiter-account/:id', component: CreateUserRecruiterComponent, canActivate: [AuthGuardService]},
   {path: 'edit-student-account/:id', component: CreateUserStudentComponent, canActivate: [AuthGuardService]},
-
+  {path: 'search-jobs/:id/:id2', component: SearchJobsComponent, canActivate: [AuthGuardService]}
 ];
 
 export const Approutes: ModuleWithProviders = RouterModule.forRoot(appRoutes);
