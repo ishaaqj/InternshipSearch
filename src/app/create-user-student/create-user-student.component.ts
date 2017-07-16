@@ -118,6 +118,7 @@ export class CreateUserStudentComponent implements OnInit {
     this.projectsList.push(this.createProjectsForm.value);
     this.createProjectsForm.reset();
     this.addProjectsBool = false;
+
   }
 
   private buildForm() {
