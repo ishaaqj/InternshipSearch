@@ -13,23 +13,26 @@ export class CreateUserStudentComponent implements OnInit {
   private createEducationForm: FormGroup;
   private createSkillForm: FormGroup;
   private createExperienceForm: FormGroup;
+  private createProjectsForm: FormGroup;
   private formBuilder: FormBuilder;
   private angularFireAuth: AngularFireAuth;
   private anuglarFireDatabase: AngularFireDatabase;
   private addEducationBool = false;
   private addSkillBool = false;
+  private addProjectsBool = false;
   private educationList =[];
   private skillList=[];
+  private projectsList=[];
   private addExperienceBool = false;
   private experienceList =[];
   private personalInfo;
 
   degrees = [
-    {value: 'highschool', viewValue: 'Highschool'},
-    {value: 'diploma', viewValue: 'Diploma'},
-    {value: 'bachelors', viewValue: 'Bachelors'},
-    {value: 'masters', viewValue: 'Masters'},
-    {value: 'phd', viewValue: 'PhD'},
+    {value: 'HighSchool', viewValue: 'High School'},
+    {value: 'Diploma', viewValue: 'Diploma'},
+    {value: 'Bachelors', viewValue: 'Bachelors'},
+    {value: 'Masters', viewValue: 'Masters'},
+    {value: 'PhD', viewValue: 'PhD'},
   ];
 
   constructor(formBuilder: FormBuilder, angularFireAuth: AngularFireAuth, anuglarFireDatabase: AngularFireDatabase) {
@@ -40,6 +43,7 @@ export class CreateUserStudentComponent implements OnInit {
     this.educationForm();
     this.skillForm();
     this.experienceForm();
+    this.projectForm();
   }
 
   private addEducation(){
@@ -79,6 +83,16 @@ export class CreateUserStudentComponent implements OnInit {
     this.addExperienceBool=false;
   }
 
+  private addProject(){
+    this.addProjectsBool=true;
+  }
+
+  private addNewProject() {
+    this.projectsList.push(this.createProjectsForm.value);
+    this.createProjectsForm.reset()
+    this.addProjectsBool=false;
+  }
+
   private buildForm() {
     this.createStudentForm = this.formBuilder.group({
       'firstName': [null, Validators.required],
@@ -111,9 +125,15 @@ export class CreateUserStudentComponent implements OnInit {
     })
   }
 
-  private savePersonalInfo(){
+  private projectForm(){
+    this.createProjectsForm = this.formBuilder.group({
+      'projectName': [null, Validators.required],
+      'projectDescription': [null, Validators.required],
+    })
+  }
+
+  private saveInfo(){
     this.personalInfo = this.createStudentForm.value;
-    alert("Personal Info saved. If you would like to change saved info, re-enter the info and click the save button again")
     console.log(this.personalInfo)
   }
 
