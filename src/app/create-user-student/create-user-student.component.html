@@ -52,114 +52,125 @@
                    placeholder="career interest" required>
             <md-error>This field is required</md-error>
           </md-input-container>
-          <hr class="bottom-divider">
-          <h2>Education</h2>
-          <table class="full-width">
-            <tr>
-              <td>
-                <md-select placeholder="Degree">
-                  <md-option *ngFor="let degree of degrees" [value]="degree.value">
-                    {{degree.viewValue}}
-                  </md-option>
-                </md-select>
-              </td>
-              <td>
-                <md-input-container class="full-width ">
-                  <input mdInput type="text" [formControl] = "createStudentForm.controls['programOfStudy']"
-                         placeholder="Program of Study" required>
-                  <md-error>This field is required</md-error>
-                </md-input-container>
-              </td>
-            </tr>
-          </table>
-          <md-input-container style="width:60%;">
-            <input mdInput [formControl] = "createStudentForm.controls['startDate']" [mdDatepicker]="picker1" placeholder="Start Date">
-            <button mdSuffix [mdDatepickerToggle]="picker1"></button>
-            <md-error>Enter a valid date</md-error>
-          </md-input-container>
-          <md-datepicker #picker1></md-datepicker>
-          <br>
-          <md-checkbox [formControl] = "createStudentForm.controls['currentlyEnrolled']">Currently Enrolled?</md-checkbox>
-          <br>
-          <md-input-container style="width:60%;">
-            <input mdInput [formControl] = "createStudentForm.controls['endDate']" [mdDatepicker]="picker2" placeholder="End Date">
-            <button mdSuffix [mdDatepickerToggle]="picker2"></button>
-            <md-error>Enter a valid date</md-error>
-          </md-input-container>
-          <md-datepicker #picker2></md-datepicker>
-          <hr>
-          <h2>Experience</h2>
-          <md-input-container class="full-width ">
-            <input mdInput type="text" [formControl] = "createStudentForm.controls['nameOfCompany']"
-                   placeholder="Name Of Company" required>
-            <md-error>This field is required</md-error>
-          </md-input-container>
-          <md-input-container class="full-width ">
-            <input mdInput type="text" [formControl] = "createStudentForm.controls['jobTitle']"
-                   placeholder="Job Title" required>
-            <md-error>This field is required</md-error>
-          </md-input-container>
-          <md-input-container style="width:60%;">
-            <input mdInput [formControl] = "createStudentForm.controls['startDateWork']" [mdDatepicker]="picker3" placeholder="Start Date">
-            <button mdSuffix [mdDatepickerToggle]="picker3"></button>
-            <md-error>Enter a valid date</md-error>
-          </md-input-container>
-          <md-datepicker #picker3></md-datepicker>
-          <br>
-          <md-checkbox [formControl] = "createStudentForm.controls['currentlyEmployed']">Currently Employed?</md-checkbox>
-          <br>
-          <md-input-container  style="width:60%;">
-            <input mdInput [formControl] = "createStudentForm.controls['endDateWork']" [mdDatepicker]="picker4" placeholder="End Date">
-            <button mdSuffix [mdDatepickerToggle]="picker4"></button>
-            <md-error>Enter a valid date</md-error>
-          </md-input-container>
+          <!--<hr class="bottom-divider">-->
+          <!--<h2>Experience</h2>-->
+          <!--<md-input-container class="full-width ">-->
+            <!--<input mdInput type="text" [formControl] = "createStudentForm.controls['nameOfCompany']"-->
+                   <!--placeholder="Name Of Company" required>-->
+            <!--<md-error>This field is required</md-error>-->
+          <!--</md-input-container>-->
+          <!--<md-input-container class="full-width ">-->
+            <!--<input mdInput type="text" [formControl] = "createStudentForm.controls['jobTitle']"-->
+                   <!--placeholder="Job Title" required>-->
+            <!--<md-error>This field is required</md-error>-->
+          <!--</md-input-container>-->
+          <!--<md-input-container style="width:60%;">-->
+            <!--<input mdInput [formControl] = "createStudentForm.controls['startDateWork']" [mdDatepicker]="picker3" placeholder="Start Date">-->
+            <!--<button mdSuffix [mdDatepickerToggle]="picker3"></button>-->
+            <!--<md-error>Enter a valid date</md-error>-->
+          <!--</md-input-container>-->
+          <!--<md-datepicker #picker3></md-datepicker>-->
+          <!--<br>-->
+          <!--<md-checkbox [formControl] = "createStudentForm.controls['currentlyEmployed']">Currently Employed?</md-checkbox>-->
+          <!--<br>-->
+          <!--<md-input-container  style="width:60%;">-->
+            <!--<input mdInput [formControl] = "createStudentForm.controls['endDateWork']" [mdDatepicker]="picker4" placeholder="End Date">-->
+            <!--<button mdSuffix [mdDatepickerToggle]="picker4"></button>-->
+            <!--<md-error>Enter a valid date</md-error>-->
+          <!--</md-input-container>-->
 
-          <md-datepicker #picker4></md-datepicker>
-          <md-input-container class="full-width ">
-            <textarea mdInput type="text" [formControl] = "createStudentForm.controls['jobDescription']"
-                      placeholder="Job Description" required></textarea>
-            <md-error>This field is required</md-error>
-          </md-input-container>
-          <hr>
-          <h2>Skills:</h2>
-          <md-input-container class="full-width ">
-            <input mdInput type="text" [formControl] = "createStudentForm.controls['skillName']"
-                   placeholder="Skill Name" required>
-            <md-error>This field is required</md-error>
-          </md-input-container>
-          <md-input-container class="full-width ">
-            <textarea mdInput type="text" [formControl] = "createStudentForm.controls['skillDescription']"
-                      placeholder="Skill Description" required></textarea>
-            <md-error>This field is required</md-error>
-          </md-input-container>
-          <hr>
-          <h2>Projects:</h2>
-          <md-input-container class="full-width ">
-            <input mdInput type="text" [formControl] = "createStudentForm.controls['projectName']"
-                   placeholder="Project Name" required>
-            <md-error>This field is required</md-error>
-          </md-input-container>
-          <md-input-container class="full-width ">
-            <textarea mdInput type="text" [formControl] = "createStudentForm.controls['projectDescription']"
-                      placeholder="Project Description" required></textarea>
-            <md-error>This field is required</md-error>
-          </md-input-container>
-          <hr>
-          <h2>Additional Information:</h2>
-          <md-input-container class="full-width ">
-            <input mdInput type="text" [formControl] = "createStudentForm.controls['additionalTitle']"
-                   placeholder="Additional Title" required>
-            <md-error>This field is required</md-error>
-          </md-input-container>
-          <md-input-container class="full-width ">
-            <textarea mdInput type="text" [formControl] = "createStudentForm.controls['additionalDescription']"
-                      placeholder="Additional Description" required></textarea>
-            <md-error>This field is required</md-error>
-          </md-input-container>
+          <!--<md-datepicker #picker4></md-datepicker>-->
+          <!--<md-input-container class="full-width ">-->
+            <!--<textarea mdInput type="text" [formControl] = "createStudentForm.controls['jobDescription']"-->
+                      <!--placeholder="Job Description" required></textarea>-->
+            <!--<md-error>This field is required</md-error>-->
+          <!--</md-input-container>-->
+          <!--<hr>-->
+          <!--<h2>Skills:</h2>-->
+          <!--<md-input-container class="full-width ">-->
+            <!--<input mdInput type="text" [formControl] = "createStudentForm.controls['skillName']"-->
+                   <!--placeholder="Skill Name" required>-->
+            <!--<md-error>This field is required</md-error>-->
+          <!--</md-input-container>-->
+          <!--<md-input-container class="full-width ">-->
+            <!--<textarea mdInput type="text" [formControl] = "createStudentForm.controls['skillDescription']"-->
+                      <!--placeholder="Skill Description" required></textarea>-->
+            <!--<md-error>This field is required</md-error>-->
+          <!--</md-input-container>-->
+          <!--<hr>-->
+          <!--<h2>Projects:</h2>-->
+          <!--<md-input-container class="full-width ">-->
+            <!--<input mdInput type="text" [formControl] = "createStudentForm.controls['projectName']"-->
+                   <!--placeholder="Project Name" required>-->
+            <!--<md-error>This field is required</md-error>-->
+          <!--</md-input-container>-->
+          <!--<md-input-container class="full-width ">-->
+            <!--<textarea mdInput type="text" [formControl] = "createStudentForm.controls['projectDescription']"-->
+                      <!--placeholder="Project Description" required></textarea>-->
+            <!--<md-error>This field is required</md-error>-->
+          <!--</md-input-container>-->
+          <!--<hr>-->
+          <!--<h2>Additional Information:</h2>-->
+          <!--<md-input-container class="full-width ">-->
+            <!--<input mdInput type="text" [formControl] = "createStudentForm.controls['additionalTitle']"-->
+                   <!--placeholder="Additional Title" required>-->
+            <!--<md-error>This field is required</md-error>-->
+          <!--</md-input-container>-->
+          <!--<md-input-container class="full-width ">-->
+            <!--<textarea mdInput type="text" [formControl] = "createStudentForm.controls['additionalDescription']"-->
+                      <!--placeholder="Additional Description" required></textarea>-->
+            <!--<md-error>This field is required</md-error>-->
+          <!--</md-input-container>-->
           <p style="text-align: center;">
-            <button md-raised-button>Submit</button>
+            <button type="submit" [disabled]="!createStudentForm.valid" md-raised-button>Submit</button>
           </p>
         </form>
+      <button *ngIf="!addEducationBool" md-raised-button (click)="addEducation()">Add Educaation</button>
+      <form *ngIf="addEducationBool" [formGroup]="createEducationForm">
+        <h2>Add Education</h2>
+        <md-input-container class="full-width ">
+          <input mdInput type="text" [formControl] = "createEducationForm.controls['nameOfInst']"
+                 placeholder="Name Of Institution" required>
+          <md-error>This field is required</md-error>
+        </md-input-container>
+        <table class="full-width">
+          <tr>
+            <td>
+              <md-select [formControl] = "createEducationForm.controls['degree']" placeholder="Degree">
+                <md-option  *ngFor="let degree of degrees" [value]="degree.value" required>
+                  {{degree.viewValue}}
+                </md-option>
+              </md-select>
+            </td>
+            <td>
+              <md-input-container class="full-width ">
+                <input mdInput type="text" [formControl] = "createEducationForm.controls['programOfStudy']"
+                       placeholder="Program of Study" required>
+                <md-error>This field is required</md-error>
+              </md-input-container>
+            </td>
+          </tr>
+        </table>
+        <md-input-container style="width:60%;">
+          <input mdInput [formControl] = "createEducationForm.controls['startDate']" [mdDatepicker]="picker1" placeholder="Start Date">
+          <button mdSuffix [mdDatepickerToggle]="picker1"></button>
+          <md-error>Enter a valid date</md-error>
+        </md-input-container>
+        <md-datepicker #picker1></md-datepicker>
+        <br>
+        <md-checkbox [formControl] = "createEducationForm.controls['currentlyEnrolled']">Currently Enrolled?</md-checkbox>
+        <br>
+        <md-input-container style="width:60%;">
+            <input mdInput [formControl] = "createEducationForm.controls['endDate']" [mdDatepicker]="picker2" placeholder="End Date">
+            <button mdSuffix [mdDatepickerToggle]="picker2"></button>
+            <md-error>Enter a valid date</md-error>
+        </md-input-container>
+        <md-datepicker #picker2></md-datepicker>
+        <p style="text-align: center;">
+          <button md-raised-button type="submit" [disabled]="!createEducationForm.valid" (click)="addNewEducation()">Add New Education</button>
+        </p>
+        <hr>
+      </form>
     </md-card>
   </div>
 </div>

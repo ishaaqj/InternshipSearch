@@ -10,10 +10,13 @@ import {AngularFireDatabase} from "angularfire2/database";
 })
 export class CreateUserStudentComponent implements OnInit {
   private createStudentForm: FormGroup;
+  private createEducationForm: FormGroup;
   private formBuilder: FormBuilder;
   private angularFireAuth: AngularFireAuth;
   private anuglarFireDatabase: AngularFireDatabase;
   private currentlyEmployedBool=false;
+  private addEducationBool = false;
+  private educationList =[];
 
   degrees = [
     {value: 'highschool', viewValue: 'Highschool'},
@@ -28,6 +31,7 @@ export class CreateUserStudentComponent implements OnInit {
     this.angularFireAuth = angularFireAuth;
     this.anuglarFireDatabase = anuglarFireDatabase;
     this.buildForm();
+    this.educationForm();
   }
 
   private currentlyEmployedClicked() {
@@ -36,6 +40,15 @@ export class CreateUserStudentComponent implements OnInit {
     }else {
       this.currentlyEmployedBool=false;
     }
+  }
+
+  private addEducation(){
+    this.addEducationBool=true;
+  }
+  private addNewEducation(){
+    this.educationList.push(this.createEducationForm.value);
+    alert("Education Info added. If you would like to add another education value, please press the button again")
+    this.createEducationForm.reset()
   }
 
   private buildForm() {
@@ -49,11 +62,6 @@ export class CreateUserStudentComponent implements OnInit {
       'profileHeadline': [null, Validators.required],
       'profileIntroduction': [null, Validators.required],
       'careerInterest': [null, Validators.required],
-      'nameOfInst': [null, Validators.required],
-      'degree': [null, Validators.required],
-      'programOfStudy': [null, Validators.required],
-      'startDate': [null, Validators.required],
-      'endDate': [null, Validators.required],
       'nameOfCompany': [null, Validators.required],
       'jobTitle': [null, Validators.required],
       'startDateWork': [null, Validators.required],
@@ -65,8 +73,18 @@ export class CreateUserStudentComponent implements OnInit {
       'projectDescription': [null, Validators.required],
       'additionalTitle': [null, Validators.required],
       'additionalDescription': [null, Validators.required],
-      'currentlyEnrolled': [null, Validators.required],
       'currentlyEmployed': [null, Validators.required]
+    });
+  }
+
+  private educationForm(){
+    this.createEducationForm = this.formBuilder.group({
+      'nameOfInst': [null, Validators.required],
+      'degree': [null, Validators.required],
+      'programOfStudy': [null, Validators.required],
+      'startDate': [null, Validators.required],
+      'endDate': [null],
+      'currentlyEnrolled': [null]
     });
   }
 
