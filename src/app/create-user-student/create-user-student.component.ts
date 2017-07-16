@@ -57,18 +57,21 @@ export class CreateUserStudentComponent implements OnInit {
   }
 
   private addNewEducation(){
-    if (this.createEducationForm.controls['currentlyEnrolled'].value){
-      this.createEducationForm.controls['endDate'].setValue('present');
+    if(this.createEducationForm.controls['endDate'].value<this.createEducationForm.controls['startDate'].value){
+      alert("End date must be after start date ")
     }else {
-      this.createEducationForm.controls['endDate'].setValue(new Date(this.createEducationForm.controls['endDate'].value)
-        .toLocaleDateString().replace(this.re,'-').split('-').reverse().join('-'))
+      if (this.createEducationForm.controls['currentlyEnrolled'].value){
+        this.createEducationForm.controls['endDate'].setValue('present');
+      }else {
+        this.createEducationForm.controls['endDate'].setValue(new Date(this.createEducationForm.controls['endDate'].value)
+          .toLocaleDateString())
+      }
+      this.createEducationForm.controls['startDate'].setValue(new Date(this.createEducationForm.controls['startDate'].value)
+        .toLocaleDateString());
+      this.educationList.push(this.createEducationForm.value);
+      this.createEducationForm.reset();
+      this.addEducationBool=false;
     }
-    this.createEducationForm.controls['startDate'].setValue(new Date(this.createEducationForm.controls['startDate'].value)
-      .toLocaleDateString().replace(this.re,'-').split('-').reverse().join('-'));
-    this.educationList.push(this.createEducationForm.value);
-    this.createEducationForm.reset();
-    this.addEducationBool=false;
-    console.log(this.educationList);
   }
 
   private addSkill(){
@@ -86,18 +89,21 @@ export class CreateUserStudentComponent implements OnInit {
   }
 
   private addNewExperience(){
-    if (this.createExperienceForm.controls['currentlyEmployed'].value){
-      this.createExperienceForm.controls['endDate'].setValue('present');
+    if(this.createExperienceForm.controls['endDate'].value<this.createExperienceForm.controls['startDate'].value){
+      alert("End date must be after start date ")
     }else {
-      this.createExperienceForm.controls['endDate']
-        .setValue(new Date(this.createExperienceForm.controls['endDate'].value).toLocaleDateString().replace(this.re,'-').split('-').reverse().join('-'));
+      if (this.createExperienceForm.controls['currentlyEmployed'].value){
+        this.createExperienceForm.controls['endDate'].setValue('present');
+      }else {
+        this.createExperienceForm.controls['endDate']
+          .setValue(new Date(this.createExperienceForm.controls['endDate'].value).toLocaleDateString());
+      }
+      this.createExperienceForm.controls['startDate']
+        .setValue(new Date(this.createExperienceForm.controls['startDate'].value).toLocaleDateString());
+      this.experienceList.push(this.createExperienceForm.value);
+      this.createExperienceForm.reset();
+      this.addExperienceBool=false;
     }
-    this.createExperienceForm.controls['startDate']
-      .setValue(new Date(this.createExperienceForm.controls['startDate'].value).toLocaleDateString().replace(this.re,'-').split('-').reverse().join('-'));
-    this.experienceList.push(this.createExperienceForm.value);
-    this.createExperienceForm.reset();
-    this.addExperienceBool=false;
-    console.log(this.experienceList);
   }
 
   private addAdditionalInfo(){
@@ -182,36 +188,40 @@ export class CreateUserStudentComponent implements OnInit {
 
   private saveInfo(){
     let uid;
-    this.angularFireAuth.auth.createUserWithEmailAndPassword(this.createStudentForm.controls['email'].value,
-      this.createStudentForm.controls['password'].value).then((user) => {
-      uid = user.uid;
-      this.anuglarFireDatabase.object('/users/' + uid).set({
-        'firstName': this.createStudentForm.controls['firstName'].value,
-        'lastName': this.createStudentForm.controls['lastName'].value,
-        'email': this.createStudentForm.controls['email'].value,
-        'profileHeadline': this.createStudentForm.controls['profileHeadline'].value,
-        'profileIntroduction': this.createStudentForm.controls['profileIntroduction'].value,
-        'careerInterest': this.createStudentForm.controls['careerInterest'].value,
-        'city': this.createStudentForm.controls['city'].value,
-        'country': this.createStudentForm.controls['country'].value,
-        'stateOrProvince': this.createStudentForm.controls['stateOrProvince'].value,
-        'educationList': this.educationList,
-        'additionalInfoList': this.additionalInfoList,
-        'experienceList': this.experienceList,
-        'skillList': this.skillList,
-        'projectsList': this.projectsList,
-        'role': 'student'
+    if (this.educationList.length==0){
+      alert("Add at least one education")
+    }else {
+      this.angularFireAuth.auth.createUserWithEmailAndPassword(this.createStudentForm.controls['email'].value,
+        this.createStudentForm.controls['password'].value).then((user) => {
+        uid = user.uid;
+        this.anuglarFireDatabase.object('/users/' + uid).set({
+          'firstName': this.createStudentForm.controls['firstName'].value,
+          'lastName': this.createStudentForm.controls['lastName'].value,
+          'email': this.createStudentForm.controls['email'].value,
+          'profileHeadline': this.createStudentForm.controls['profileHeadline'].value,
+          'profileIntroduction': this.createStudentForm.controls['profileIntroduction'].value,
+          'careerInterest': this.createStudentForm.controls['careerInterest'].value,
+          'city': this.createStudentForm.controls['city'].value,
+          'country': this.createStudentForm.controls['country'].value,
+          'stateOrProvince': this.createStudentForm.controls['stateOrProvince'].value,
+          'educationList': this.educationList,
+          'additionalInfoList': this.additionalInfoList,
+          'experienceList': this.experienceList,
+          'skillList': this.skillList,
+          'projectsList': this.projectsList,
+          'role': 'student'
+        }).then((success) => {
+          console.log(success)
+        }).catch((error) => {
+          console.log(error.message)
+        });
       }).then((success) => {
+        this.router.navigate([''])
         console.log(success)
       }).catch((error) => {
         console.log(error.message)
       });
-    }).then((success) => {
-      this.router.navigate([''])
-      console.log(success)
-    }).catch((error) => {
-      console.log(error.message)
-    });
+    }
   }
 
   ngOnInit() {
