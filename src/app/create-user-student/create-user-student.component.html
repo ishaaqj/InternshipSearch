@@ -53,7 +53,7 @@
             <md-error>This field is required</md-error>
           </md-input-container>
           <p style="text-align: center;">
-            <button type="submit" [disabled]="!createStudentForm.valid" md-raised-button>Save Personal Info</button>
+            <button type="submit" [disabled]="!createStudentForm.valid" md-raised-button (click)="savePersonalInfo()">Save Personal Info</button>
           </p>
         </form>
       <hr>
