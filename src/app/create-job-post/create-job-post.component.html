@@ -150,6 +150,7 @@
         <p style="text-align: center">
           <button md-raised-button *ngIf="!updateForm" [disabled]="!createjobpostform.valid" (click)="createpost()" type="submit">Create Job Post</button>
           <button md-raised-button *ngIf="updateForm" (click)="updatepost()" >Update Job Post</button>
+          <button md-raised-button *ngIf="updateForm" (click)="deletepost()" >Delete Job Post</button>
         </p>
       </form>
     </md-card>

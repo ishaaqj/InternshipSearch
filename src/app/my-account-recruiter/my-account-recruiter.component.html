@@ -1,0 +1,39 @@
+<md-toolbar>
+  <h2>My Account</h2>
+  <span class="spacer"></span>
+  <a class="link" *ngIf="gotData" style="margin-left: 20px" [routerLink]="['/edit-recruiter-account',userId]">Edit</a>
+</md-toolbar>
+<div class="contaner">
+  <div fxLayout="row" fxLayoutAlign="space-around start" class="content">
+    <span class="spacer"></span>
+    <md-card class="blocks" fxFlex="60%">
+      <table class="table" *ngIf="gotData" cellspacing="10">
+        <tr class="table-row">
+          <th>First Name:</th>
+          <td>{{user.firstName}}</td>
+        </tr>
+        <tr>
+          <th>Last Name:</th>
+          <td>{{user.lastName}}</td>
+        </tr>
+        <tr>
+          <th>E mail:</th>
+          <td>{{user.email}}</td>
+        </tr>
+        <tr>
+          <th>Campany Name:</th>
+          <td>{{user.companyName}}</td>
+        </tr>
+        <tr>
+          <th>Company Website:</th>
+          <td>{{user.companyWebsite}}</td>
+        </tr>
+      </table>
+      <p *ngIf="userRole=='student'" style="text-align: center">
+        <button md-raised-button *ngIf="!showDeleteButton" (click)="applyToJob()">Apply</button>
+        <button md-raised-button style="margin-left: 10%" *ngIf="showDeleteButton" (click)="deleteApplication()">Delete Applcation</button>
+      </p>
+    </md-card>
+    <span class="spacer"></span>
+  </div>
+</div>

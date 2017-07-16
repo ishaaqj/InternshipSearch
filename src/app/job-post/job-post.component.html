@@ -1,14 +1,15 @@
 <md-toolbar>
   <h2>Job Post</h2>
   <span class="spacer"></span>
-  <h2 *ngIf="userRole == 'recruiter' && gotData" [routerLink]="['/edit-job-post',job.jobId]">Edit</h2>
-  <h2 *ngIf="userRole == 'recruiter'" style="margin-left: 20px" (click)="deleteJob()">Delete</h2>
+  <a class="link" *ngIf="userRole == 'recruiter' && gotData" style="margin-left: 20px" [routerLink]="['/students-applied',job.jobId]">Students Applied</a>
+  <a class="link" *ngIf="userRole == 'recruiter' && gotData" style="margin-left: 20px" [routerLink]="['/edit-job-post',job.jobId]">Edit</a>
+  <a class="link" *ngIf="userRole == 'recruiter'" style="margin-left: 20px" (click)="deleteJob()">Delete</a>
 </md-toolbar>
 <div class="contaner">
   <div fxLayout="row" fxLayoutAlign="space-around start" class="content">
     <span class="spacer"></span>
     <md-card class="blocks" fxFlex="60%">
-      <table class="table" *ngIf="gotData">
+      <table class="table" *ngIf="gotData" cellspacing="10">
         <tr class="table-row">
           <th>Job Title:</th>
           <td>{{job.jobTitle}}</td>
@@ -62,6 +63,10 @@
           <td>{{job.additionalInfo}}</td>
         </tr>
       </table>
+      <p *ngIf="userRole=='student'" style="text-align: center">
+        <button md-raised-button *ngIf="!showDeleteButton" (click)="applyToJob()">Apply</button>
+        <button md-raised-button style="margin-left: 10%" *ngIf="showDeleteButton" (click)="deleteApplication()">Delete Applcation</button>
+      </p>
     </md-card>
     <span class="spacer"></span>
   </div>

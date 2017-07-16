@@ -1,61 +1,65 @@
-import {
-  ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnDestroy, OnInit,
-  ViewChild
-} from '@angular/core';
-import {DataSource} from "@angular/cdk";
+import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
-import {Observable} from "rxjs/Observable";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AppComponent} from "../app.component";
-import {Router} from "@angular/router";
 import {AngularFireAuth} from "angularfire2/auth";
-import {MdSort} from "@angular/material";
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/map';
-import "rxjs/add/operator/mergeMap";
-import "rxjs/add/operator/toArray";
-import "rxjs/add/observable/forkJoin";
-import {Subscription} from "rxjs/Subscription";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
-  selector: 'app-home-recruiter',
-  templateUrl: './home-recruiter.component.html',
-  styleUrls: ['./home-recruiter.component.css']
+  selector: 'app-search-jobs',
+  templateUrl: './search-jobs.component.html',
+  styleUrls: ['./search-jobs.component.css']
 })
-export class HomeRecruiterComponent implements OnInit {
+export class SearchJobsComponent implements OnInit {
+  private subscribeToRoute;
+  private jobsList;
+  private gotData;
   private searchForm: FormGroup;
   private filterForm: FormGroup;
-  private userId;
-  private jobsList;
+  private keyword;
+  private location;
   private sortByJobDateAsc = true;
   private sortByJobIdAsc = true;
   private sortByJobTitleAsc = true;
   private sortByCompanyNameAsc = true;
   private sortByJobLocationAsc = true;
 
-  constructor(private formBuilder: FormBuilder,private database: AngularFireDatabase,
-              private router: Router, private angularFireAuth :AngularFireAuth) {
-    this.buildSearchForm();
+  constructor(private activatedRoute: ActivatedRoute, private database: AngularFireDatabase,
+              private formBuilder: FormBuilder, private angularFireAuth :AngularFireAuth) {
     this.buildFilterForm();
   }
 
   ngOnInit() {
-    this.angularFireAuth.authState.subscribe(authState=>{
-      this.userId = authState.uid;
-      this.jobsList = this.database.list('/jobApplications', {
-        query: {
-          orderByChild: 'employerUID',
-          equalTo: this.userId
-        }
-      }) as FirebaseListObservable<any[]>;
-    });
+    this.subscribeToRoute = this.activatedRoute.params.subscribe(params=>{
+      this.keyword = params['id'];
+      this.location = params['id2'];
+      this.jobsList = this.database.list('/jobApplications');
+      if (this.keyword!='empty'){
+        this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => (job.jobTitle.toLocaleLowerCase().indexOf(this.keyword) != -1) || (job.companyName.toLocaleLowerCase().indexOf(this.keyword) != -1))) as FirebaseListObservable<any[]>
+      }else {
+        this.keyword = '';
+      }
+      if (this.location!='empty'){
+        this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => ((job.city.toLocaleLowerCase()+', '+job.stateOrProvince.toLocaleLowerCase()+', '+job.country.toLocaleLowerCase()).indexOf(this.location) != -1))) as FirebaseListObservable<any[]>;
+      } else {
+        this.location='';
+      }
+      this.buildSearchForm();
+      this.gotData=true;
+    })
   }
 
   private buildSearchForm() {
     this.searchForm = this.formBuilder.group({
-      'search': '',
-      'location': ''
+      'search': this.keyword,
+      'location': this.location
     });
+  }
+
+  private search(){
+    let location = this.searchForm.controls['location'].value.toLocaleLowerCase();
+    let keyword = this.searchForm.controls['search'].value.toLocaleLowerCase();
+    this.jobsList = this.jobsList = this.database.list('/jobApplications').map(_jobs => _jobs.filter(job => ((job.city.toLocaleLowerCase()+', '+job.stateOrProvince.toLocaleLowerCase()+', '+job.country.toLocaleLowerCase()).indexOf(location) != -1))) as FirebaseListObservable<any[]>;
+    this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => (job.jobTitle.toLocaleLowerCase().indexOf(keyword) != -1) || (job.companyName.toLocaleLowerCase().indexOf(keyword) != -1))) as FirebaseListObservable<any[]>
   }
 
   private buildFilterForm() {
@@ -84,18 +88,6 @@ export class HomeRecruiterComponent implements OnInit {
     if(this.filterForm.controls['dateStarts'].value != '') {
       this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => (new Date(job.startDate)) >= (new Date(dateStarts)))) as FirebaseListObservable<any[]>;
     }
-  }
-
-  private search(){
-    let location = this.searchForm.controls['location'].value.toLocaleLowerCase();
-    let keyword = this.searchForm.controls['search'].value.toLocaleLowerCase();
-      this.jobsList = this.jobsList = this.database.list('/jobApplications', {
-        query: {
-          orderByChild: 'employerUID',
-          equalTo: this.userId
-        }
-      }).map(_jobs => _jobs.filter(job => ((job.city.toLocaleLowerCase()+', '+job.stateOrProvince.toLocaleLowerCase()+', '+job.country.toLocaleLowerCase()).indexOf(location) != -1))) as FirebaseListObservable<any[]>;
-      this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => (job.jobTitle.toLocaleLowerCase().indexOf(keyword) != -1) || (job.companyName.toLocaleLowerCase().indexOf(keyword) != -1))) as FirebaseListObservable<any[]>
   }
 
   private sortByJobId(){
@@ -162,4 +154,5 @@ export class HomeRecruiterComponent implements OnInit {
     this.sortByJobLocationAsc=true;
     this.sortByJobDateAsc=true
   }
+
 }

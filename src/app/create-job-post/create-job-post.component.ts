@@ -127,7 +127,7 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
         'salaryPaid': this.createjobpostform.controls['salaryPaid'].value,
         'securityClearanceRequired': this.createjobpostform.controls['securityClearanceRequired'].value,
         'sponsoringVisa': this.createjobpostform.controls['sponsoringVisa'].value,
-        'startDate': (new Date(this.createjobpostform.controls['startDate'].value)).toLocaleDateString(),
+        'startDate': this.createjobpostform.controls['startDate'].value,
         'stateOrProvince': this.createjobpostform.controls['stateOrProvince'].value,
         'additionalInfo': this.createjobpostform.controls['additionalInfo'].value
       }).then(jobpost => {
@@ -170,6 +170,15 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
     });
   }
 
+  private deletepost(){
+    let dialogRef = this.dialog.open(DeletePostDialogBox);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'yes') {
+        this.angularFireDatabase.object('/jobApplications/' + this.job.jobId).remove();
+      }
+    });
+  }
+
 }
 
 @Component({
@@ -180,3 +189,10 @@ export class UpdateDialogBox {
   constructor(public dialogRef: MdDialogRef<UpdateDialogBox>) {}
 }
 
+@Component({
+  selector: 'delete-dialog-box',
+  templateUrl: 'update-dialog-box.html',
+})
+export class DeletePostDialogBox {
+  constructor(public dialogRef: MdDialogRef<DeletePostDialogBox>) {}
+}

@@ -33,6 +33,12 @@ export class HomeStudentComponent implements OnInit {
   ngOnInit() {
   }
 
+  private search(){
+    let location = (this.searchForm.controls['location'].value.toLocaleLowerCase()=='')?'empty':this.searchForm.controls['location'].value.toLocaleLowerCase();
+    let keyword = (this.searchForm.controls['search'].value.toLocaleLowerCase()=='')?'empty':this.searchForm.controls['search'].value.toLocaleLowerCase();
+    this.router.navigate(['/search-jobs',keyword, location])
+  }
+
   private getJobsFromDatabase() {
     this.jobsList = this.database.list('/jobApplications')
   }

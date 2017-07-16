@@ -14,7 +14,6 @@ export class CreateUserStudentComponent implements OnInit {
   private formBuilder: FormBuilder;
   private angularFireAuth: AngularFireAuth;
   private anuglarFireDatabase: AngularFireDatabase;
-  private currentlyEmployedBool=false;
   private addEducationBool = false;
   private educationList =[];
 
@@ -32,14 +31,6 @@ export class CreateUserStudentComponent implements OnInit {
     this.anuglarFireDatabase = anuglarFireDatabase;
     this.buildForm();
     this.educationForm();
-  }
-
-  private currentlyEmployedClicked() {
-    if(this.createStudentForm.controls['currentlyEmployed'].value){
-      this.currentlyEmployedBool=true;
-    }else {
-      this.currentlyEmployedBool=false;
-    }
   }
 
   private addEducation(){
@@ -65,7 +56,7 @@ export class CreateUserStudentComponent implements OnInit {
       'nameOfCompany': [null, Validators.required],
       'jobTitle': [null, Validators.required],
       'startDateWork': [null, Validators.required],
-      'endDateWork': [null, Validators.required],
+      'endDateWork': '',
       'jobDescription': [null, Validators.required],
       'skillName': [null, Validators.required],
       'skillDescription': [null, Validators.required],
