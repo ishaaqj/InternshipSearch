@@ -13,13 +13,16 @@ export class CreateUserStudentComponent implements OnInit {
   private createEducationForm: FormGroup;
   private createSkillForm: FormGroup;
   private createExperienceForm: FormGroup;
+  private createAdditionalInfoForm: FormGroup;
   private formBuilder: FormBuilder;
   private angularFireAuth: AngularFireAuth;
   private anuglarFireDatabase: AngularFireDatabase;
   private addEducationBool = false;
   private addSkillBool = false;
+  private addAdditionalInfoBool = false;
   private educationList =[];
   private skillList=[];
+  private additionalInfoList=[];
   private addExperienceBool = false;
   private experienceList =[];
   private personalInfo;
@@ -40,6 +43,7 @@ export class CreateUserStudentComponent implements OnInit {
     this.educationForm();
     this.skillForm();
     this.experienceForm();
+    this.additionalInfoForm();
   }
 
   private addEducation(){
@@ -51,7 +55,6 @@ export class CreateUserStudentComponent implements OnInit {
       this.createEducationForm.controls['endDate'].setValue('present');
     }
     this.educationList.push(this.createEducationForm.value);
-    alert("Education Info added. If you would like to add another education value, please press the button again")
     this.createEducationForm.reset()
     this.addEducationBool=false;
   }
@@ -77,6 +80,16 @@ export class CreateUserStudentComponent implements OnInit {
     this.experienceList.push(this.createExperienceForm.value);
     this.createExperienceForm.reset();
     this.addExperienceBool=false;
+  }
+
+  private addAdditionalInfo(){
+    this.addAdditionalInfoBool=true;
+  }
+
+  private addNewAdditionalInfo() {
+    this.additionalInfoList.push(this.createAdditionalInfoForm.value);
+    this.createAdditionalInfoForm.reset();
+    this.addAdditionalInfoBool=false;
   }
 
   private buildForm() {
@@ -107,10 +120,16 @@ export class CreateUserStudentComponent implements OnInit {
   private skillForm(){
     this.createSkillForm = this.formBuilder.group({
       'skillName': [null, Validators.required],
-      'skillDescription': [null, Validators.required],
-    })
+      'skillDescription': [null, Validators.required]
+    });
   }
 
+  private additionalInfoForm(){
+    this.createAdditionalInfoForm = this.formBuilder.group({
+      'additionalName': [null, Validators.required],
+      'additionalDescription': [null, Validators.required]
+    });
+  }
   private savePersonalInfo(){
     this.personalInfo = this.createStudentForm.value;
     alert("Personal Info saved. If you would like to change saved info, re-enter the info and click the save button again")

@@ -207,6 +207,37 @@
         </p>
       </form>
       <hr>
+      <table *ngIf="additionalInfoList.length!=0" class="full-width">
+        <h2>List of Additional Info</h2>
+        <tr>
+          <th style="width:20%;">Name</th>
+          <th style="width:80%;">Description</th>
+        </tr>
+        <tr *ngFor="let additionalInfo of additionalInfoList">
+          <td style="width:20%;">{{additionalInfo.additionalName}}</td>
+          <td style="width:80%;">{{additionalInfo.additionalDescription}}</td>
+        </tr>
+      </table>
+      <p style="text-align: center;">
+        <button *ngIf="!addAdditionalInfoBool" md-raised-button (click)="addAdditionalInfo()">Add New Additional Info</button>
+      </p>
+      <form *ngIf="addAdditionalInfoBool" [formGroup]="createAdditionalInfoForm">
+        <h2>Additional Info:</h2>
+        <md-input-container class="full-width ">
+          <input mdInput type="text" [formControl] = "createAdditionalInfoForm.controls['additionalName']"
+                 placeholder="Additional Info Name" required>
+          <md-error>This field is required</md-error>
+        </md-input-container>
+        <md-input-container class="full-width ">
+        <textarea mdInput type="text" [formControl] = "createAdditionalInfoForm.controls['additionalDescription']"
+                  placeholder="Additional Info Description" required></textarea>
+          <md-error>This field is required</md-error>
+        </md-input-container>
+        <p style="text-align: center;">
+          <button md-raised-button type="submit" [disabled]="!createAdditionalInfoForm.valid" (click)="addNewAdditionalInfo()">Add Additional Info</button>
+        </p>
+      </form>
+      <hr>
     </md-card>
   </div>
 </div>
