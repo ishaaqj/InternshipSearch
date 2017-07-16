@@ -14,6 +14,7 @@ export class CreateUserStudentComponent implements OnInit {
   private createSkillForm: FormGroup;
   private createExperienceForm: FormGroup;
   private createProjectsForm: FormGroup;
+  private createAdditionalInfoForm: FormGroup;
   private formBuilder: FormBuilder;
   private angularFireAuth: AngularFireAuth;
   private anuglarFireDatabase: AngularFireDatabase;
@@ -23,6 +24,8 @@ export class CreateUserStudentComponent implements OnInit {
   private educationList =[];
   private skillList=[];
   private projectsList=[];
+  private addAdditionalInfoBool = false;
+  private additionalInfoList=[];
   private addExperienceBool = false;
   private experienceList =[];
   private personalInfo;
@@ -44,6 +47,7 @@ export class CreateUserStudentComponent implements OnInit {
     this.skillForm();
     this.experienceForm();
     this.projectForm();
+    this.additionalInfoForm();
   }
 
   private addEducation(){
@@ -55,7 +59,6 @@ export class CreateUserStudentComponent implements OnInit {
       this.createEducationForm.controls['endDate'].setValue('present');
     }
     this.educationList.push(this.createEducationForm.value);
-    alert("Education Info added. If you would like to add another education value, please press the button again")
     this.createEducationForm.reset()
     this.addEducationBool=false;
   }
@@ -90,7 +93,17 @@ export class CreateUserStudentComponent implements OnInit {
   private addNewProject() {
     this.projectsList.push(this.createProjectsForm.value);
     this.createProjectsForm.reset()
-    this.addProjectsBool=false;
+    this.addProjectsBool = false;
+  }
+
+  private addAdditionalInfo(){
+    this.addAdditionalInfoBool=true;
+  }
+
+  private addNewAdditionalInfo() {
+    this.additionalInfoList.push(this.createAdditionalInfoForm.value);
+    this.createAdditionalInfoForm.reset();
+    this.addAdditionalInfoBool=false;
   }
 
   private buildForm() {
@@ -121,8 +134,8 @@ export class CreateUserStudentComponent implements OnInit {
   private skillForm(){
     this.createSkillForm = this.formBuilder.group({
       'skillName': [null, Validators.required],
-      'skillDescription': [null, Validators.required],
-    })
+      'skillDescription': [null, Validators.required]
+    });
   }
 
   private projectForm(){
@@ -130,6 +143,13 @@ export class CreateUserStudentComponent implements OnInit {
       'projectName': [null, Validators.required],
       'projectDescription': [null, Validators.required],
     })
+  }
+
+  private additionalInfoForm(){
+    this.createAdditionalInfoForm = this.formBuilder.group({
+      'additionalName': [null, Validators.required],
+      'additionalDescription': [null, Validators.required]
+    });
   }
 
   private saveInfo(){
