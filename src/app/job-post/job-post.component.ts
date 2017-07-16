@@ -36,7 +36,6 @@ export class JobPostComponent implements OnInit, OnDestroy {
             this.userId = authState.uid;
             this.gotData = true;
             this.angularFireDatabase.object('/jobsAppliedTo/' + authState.uid + '/' + this.job.jobId).subscribe(item => {
-              console.log(item);
               if (item.jobId==this.job.jobId) {
                 this.showDeleteButton = true;
               }
@@ -79,8 +78,12 @@ export class JobPostComponent implements OnInit, OnDestroy {
     let dialogRef = this.dialog.open(DeleteDialogBox);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'yes'){
-        this.angularFireDatabase.object('/jobsAppliedTo/' + this.userId + '/' + this.job.jobId).remove();
-        this.angularFireDatabase.object('/studentsApplied/'+this.job.jobId+'/'+this.userId).remove();
+        this.angularFireDatabase.object('/jobsAppliedTo/' + this.userId + '/' + this.job.jobId).remove()
+          .then(success=>console.log(success))
+          .catch(error=>console.log(error.message));
+        this.angularFireDatabase.object('/studentsApplied/'+this.job.employerUID+'/'+this.job.jobId+'/'+this.userId).remove()
+          .then(success=>console.log(success))
+          .catch(error=>console.log(error.message));;
         this.showDeleteButton=false;
         this.router.navigate(['jobs-applied-to']);
       }
@@ -99,8 +102,8 @@ export class JobPostComponent implements OnInit, OnDestroy {
           'durationOfInternship': this.job.durationOfInternship.split(' ')[0],
           'durationOfInternshipType': this.job.durationOfInternship.split(' ')[1],
           'jobDescription': this.job.jobDescription,
-          'maxSalary': this.job.minSalary,
-          'minSalary': this.job.maxSalary,
+          'maxSalary': this.job.maxSalary,
+          'minSalary': this.job.minSalary,
           'preferredEducation': this.job.preferredEducation,
           'preferredQualification': this.job.preferredQualifications,
           'providingRelocation': this.job.providingRelocation,
@@ -118,10 +121,8 @@ export class JobPostComponent implements OnInit, OnDestroy {
           this.angularFireDatabase.object('/studentsApplied/'+this.job.employerUID+'/'+this.job.jobId+'/'+authState.uid).set({
             'city': snapshot.val().city,
             'country': snapshot.val().country,
-            'degree': snapshot.val().degree,
             'firstName': snapshot.val().firstName,
             'lastName': snapshot.val().lastName,
-            'university': snapshot.val().university,
             'stateOrProvince': snapshot.val().stateOrProvince
           })
         });
