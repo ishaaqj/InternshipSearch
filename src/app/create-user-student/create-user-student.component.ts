@@ -20,6 +20,7 @@ export class CreateUserStudentComponent implements OnInit {
   private educationList =[];
   private addExperienceBool = false;
   private experienceList =[];
+  private personalInfo;
 
 
   degrees = [
@@ -84,18 +85,6 @@ export class CreateUserStudentComponent implements OnInit {
       'profileHeadline': [null, Validators.required],
       'profileIntroduction': [null, Validators.required],
       'careerInterest': [null, Validators.required],
-      'nameOfCompany': [null, Validators.required],
-      'jobTitle': [null, Validators.required],
-      'startDateWork': [null, Validators.required],
-      'endDateWork': '',
-      'jobDescription': [null, Validators.required],
-      'skillName': [null, Validators.required],
-      'skillDescription': [null, Validators.required],
-      'projectName': [null, Validators.required],
-      'projectDescription': [null, Validators.required],
-      'additionalTitle': [null, Validators.required],
-      'additionalDescription': [null, Validators.required],
-      'currentlyEmployed': [null, Validators.required]
     });
   }
 
@@ -108,6 +97,12 @@ export class CreateUserStudentComponent implements OnInit {
       'endDate': [null],
       'currentlyEnrolled': [null]
     });
+  }
+
+  private savePersonalInfo(){
+    this.personalInfo = this.createStudentForm.value;
+    alert("Personal Info saved. If you would like to change saved info, re-enter the info and click the save button again")
+    console.log(this.personalInfo)
   }
 
   private experienceForm(){
