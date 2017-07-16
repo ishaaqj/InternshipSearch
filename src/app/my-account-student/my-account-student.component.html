@@ -1,6 +1,8 @@
 <md-toolbar >
   <h2 *ngIf="!studentProfile">My Account</h2>
   <h2 *ngIf="studentProfile">Student Profile</h2>
+  <span class="spacer"></span>
+  <h2 *ngIf="!studentProfile">Edit</h2>
 </md-toolbar>
 <div *ngIf="gotData" fxLayout="row" fxLayoutAlign="space-around center" class="content">
   <md-card class="blocks" fxFlex="70%">
