@@ -28,17 +28,36 @@
 </md-toolbar>
 <div class="container">
   <div fxLayout="row" fxLayoutAlign="space-around start" class="content">
+    <md-card class="blocks" fxFlex="25%">
+      <md-card-title>Filter By</md-card-title>
+        <form [formGroup]="filterForm" >
+          <md-input-container class="full-width">
+            <input mdInput type="text" [formControl] = "filterForm.controls['degree']" placeholder="Degree">
+          </md-input-container>
+          <md-input-container class="full-width">
+            <input mdInput type="text" [formControl] = "filterForm.controls['university']" placeholder="University">
+          </md-input-container><p style="text-align: center">
+          <button md-raised-button (click)="filterResult()" [disabled] = "!filterForm.valid" type="submit">
+            Filter
+          </button>
+        </p>
+      </form>
+    </md-card>
     <md-card class="blocks" fxFlex="74%">
       <md-card-title>Results</md-card-title>
       <table *ngIf="gotData" cellspacing="10">
         <tr>
           <th class="table-row" (click)="sortByName()">Name</th>
+          <th class="table-row" (click)="sortByDegree()">Education</th>
+          <th class="table-row" (click)="sortByUniversity()">University</th>
           <th class="table-row" (click)="sortByLocation()">Location</th>
         </tr>
         <ng-container *ngFor="let student of studentsList">
           <tr [routerLink]="['/student-profile',student.userId]">
             <td class="table-row">{{student.firstName }}  {{student.lastName}}</td>
-            <td class="table-row">{{student.city}}  {{student.stateOrProvince}} {{student.country}}</td>
+            <td class="table-row">{{student.degree}} of {{student.programOfStudy}}</td>
+            <td class="table-row">{{student.nameOfInst}}</td>
+            <td class="table-row">{{student.city}},  {{student.stateOrProvince}}, {{student.country}}</td>
           </tr>
         </ng-container>
       </table>

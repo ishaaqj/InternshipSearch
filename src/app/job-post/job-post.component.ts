@@ -118,13 +118,17 @@ export class JobPostComponent implements OnInit, OnDestroy {
           'datePosted': this.job.datePosted
         });
         this.angularFireDatabase.object('/users/'+authState.uid, {preserveSnapshot: true}).subscribe(snapshot=>{
+          console.log(snapshot.val().educationList[0].nameOfInst);
           this.angularFireDatabase.object('/studentsApplied/'+this.job.employerUID+'/'+this.job.jobId+'/'+authState.uid).set({
             'city': snapshot.val().city,
             'country': snapshot.val().country,
             'firstName': snapshot.val().firstName,
             'lastName': snapshot.val().lastName,
             'stateOrProvince': snapshot.val().stateOrProvince,
-            'userId': authState.uid
+            'userId': authState.uid,
+            'nameOfnst': snapshot.val().educationList[0].nameOfInst,
+            'degree': snapshot.val().educationList[0].degree,
+            'programOfStudy': snapshot.val().educationList[0].programOfStudy
           })
         });
       }

@@ -21,7 +21,7 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
   private sortByNameAsc = true;
   private sortByDegreeAsc = true;
   private sortByUniversityAsc = true;
-  private sortByLocationAsc
+  private sortByLocationAsc = true;
 
   constructor(private formBuilder: FormBuilder,private database: AngularFireDatabase,
               private router: Router, private angularFireAuth :AngularFireAuth,
@@ -33,9 +33,6 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
         this.userId = authState.uid;
         this.database.list('/studentsApplied/'+this.userId+'/'+params['id']).subscribe(items=>{
           this.studentsList=items;
-          for (let student of items){
-            console.log(student)
-          }
         });
         this.database.object('/jobApplications/'+params['id'],{preserveSnapshot: true}).subscribe(snapshot=>{
           this.jobTitle=snapshot.val().jobTitle;
@@ -59,8 +56,8 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
     this.search();
     let degree = this.filterForm.controls['degree'].value.toLocaleLowerCase();
     let university = this.filterForm.controls['university'].value.toLocaleLowerCase();
-    this.studentsList = this.studentsList.filter(student => student.degree.toLocaleLowerCase().indexOf(degree) != -1)
-    this.studentsList = this.studentsList.filter(student => student.university.toLocaleLowerCase().indexOf(university) != -1)
+    this.studentsList = this.studentsList.filter(student => (student.degree + student.programOfStudy).toLocaleLowerCase().indexOf(degree) != -1);
+    this.studentsList = this.studentsList.filter(student => student.nameOfInst.toLocaleLowerCase().indexOf(university) != -1)
   }
 
   private buildSearchForm() {
@@ -102,8 +99,32 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
     }
     this.sortByLocationAsc=!this.sortByLocationAsc;
     this.sortByNameAsc=true;
-    this.sortByDegreeAsc;
-    this.sortByUniversityAsc;
-
+    this.sortByDegreeAsc = true;
+    this.sortByUniversityAsc = true;
   }
+
+  private sortByDegree() {
+    if (this.sortByDegreeAsc) {
+      this.studentsList = this.studentsList.sort((a, b) => a.degree + a.programOfStudy> b.degree +b.programOfStudy);
+    }else{
+      this.studentsList = this.studentsList.sort((a, b) => a.degree +a.programOfStudy < b.degree + b.programOfStudy);
+    }
+    this.sortByDegreeAsc=!this.sortByDegreeAsc;
+    this.sortByNameAsc=true;
+    this.sortByLocationAsc=true;
+    this.sortByUniversityAsc=true;
+    }
+
+  private sortByUniversity(){
+    if(this.sortByUniversityAsc) {
+      this.studentsList = this.studentsList.sort((a, b) => a.university > b.university);
+    }else {
+      this.studentsList = this.studentsList.sort((a, b) => a.university < b.university);
+    }
+    this.sortByUniversityAsc=!this.sortByUniversityAsc;
+    this.sortByNameAsc=true;
+    this.sortByDegreeAsc=true;
+    this.sortByLocationAsc=true;
+  }
+
 }
