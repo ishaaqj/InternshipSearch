@@ -93,6 +93,8 @@
             <td>{{education.programOfStudy}}</td>
             <td>{{education.startDate}}</td>
             <td>{{education.endDate}}</td>
+            <td><button md-icon-button><md-icon>edit</md-icon></button></td>
+            <td><button md-icon-button><md-icon>delete</md-icon></button></td>
           </tr>
         </table>
         <p style="text-align: center;">
@@ -158,6 +160,8 @@
             <td>{{experience.nameOfInst}}</td>
             <td>{{experience.startDate}}</td>
             <td>{{experience.endDate}}</td>
+            <td><button md-icon-button><md-icon>edit</md-icon></button></td>
+            <td><button md-icon-button><md-icon>delete</md-icon></button></td>
           </tr>
         </table>
         <p style="text-align: center;">
@@ -210,6 +214,8 @@
           <tr *ngFor="let skill of skillList">
             <td style="width:20%;">{{skill.skillName}}</td>
             <td style="width:80%;">{{skill.skillDescription}}</td>
+            <td><button md-icon-button><md-icon>edit</md-icon></button></td>
+            <td><button md-icon-button><md-icon>delete</md-icon></button></td>
           </tr>
         </table>
         <p style="text-align: center;">
@@ -241,6 +247,8 @@
           <tr *ngFor="let project of projectsList">
             <td style="width:20%;">{{project.projectName}}</td>
             <td style="width:80%;">{{project.projectDescription}}</td>
+            <td><button md-icon-button><md-icon>edit</md-icon></button></td>
+            <td><button md-icon-button><md-icon>delete</md-icon></button></td>
           </tr>
         </table>
         <p style="text-align: center;">
@@ -272,6 +280,8 @@
           <tr *ngFor="let additionalInfo of additionalInfoList">
             <td style="width:20%;">{{additionalInfo.additionalName}}</td>
             <td style="width:80%;">{{additionalInfo.additionalDescription}}</td>
+            <td><button md-icon-button><md-icon>edit</md-icon></button></td>
+            <td><button md-icon-button><md-icon>delete</md-icon></button></td>
           </tr>
         </table>
         <p style="text-align: center;">

@@ -57,7 +57,7 @@ export class CreateUserStudentComponent implements OnInit {
   }
 
   private addNewEducation(){
-    if(this.createEducationForm.controls['endDate'].value<this.createEducationForm.controls['startDate'].value){
+    if(!this.createEducationForm.controls['currentlyEnrolled'].value&&this.createEducationForm.controls['endDate'].value<this.createEducationForm.controls['startDate'].value){
       alert("End date must be after start date ")
     }else {
       if (this.createEducationForm.controls['currentlyEnrolled'].value){
@@ -89,7 +89,7 @@ export class CreateUserStudentComponent implements OnInit {
   }
 
   private addNewExperience(){
-    if(this.createExperienceForm.controls['endDate'].value<this.createExperienceForm.controls['startDate'].value){
+    if(!this.createExperienceForm.controls['currentlyEmployed'].value&&this.createExperienceForm.controls['endDate'].value<this.createExperienceForm.controls['startDate'].value){
       alert("End date must be after start date ")
     }else {
       if (this.createExperienceForm.controls['currentlyEmployed'].value){
