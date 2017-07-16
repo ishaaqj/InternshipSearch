@@ -37,6 +37,9 @@ export class CreateUserStudentComponent implements OnInit {
     this.addEducationBool=true;
   }
   private addNewEducation(){
+    if (this.createEducationForm.controls['currentlyEnrolled'].value){
+      this.createEducationForm.controls['endDate'].setValue('present');
+    }
     this.educationList.push(this.createEducationForm.value);
     alert("Education Info added. If you would like to add another education value, please press the button again")
     this.createEducationForm.reset()
