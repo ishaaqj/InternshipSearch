@@ -77,6 +77,7 @@
                    placeholder="career interest" required>
             <md-error>This field is required</md-error>
           </md-input-container>
+<<<<<<< 7c7e498fc45e20795cc27a6ee051178b471ec4ba
           <hr>
           <table *ngIf="educationList.length!=0" class="full-width">
             <h2>List of Education</h2>
@@ -296,6 +297,53 @@
           <hr>
           <p style="text-align: center;">
             <button type="submit" [disabled]="!createStudentForm.valid" md-raised-button (click)="saveInfo()">Submit</button>
+=======
+      <form *ngIf="addEducationBool" [formGroup]="createEducationForm">
+        <h2>Add Education</h2>
+        <md-input-container class="full-width ">
+          <input mdInput type="text" [formControl] = "createEducationForm.controls['nameOfInst']"
+                 placeholder="Name Of Institution" required>
+          <md-error>This field is required</md-error>
+        </md-input-container>
+        <table class="full-width">
+          <tr>
+            <td>
+              <md-select [formControl] = "createEducationForm.controls['degree']" placeholder="Degree">
+                <md-option  *ngFor="let degree of degrees" [value]="degree.value" required>
+                  {{degree.viewValue}}
+                </md-option>
+              </md-select>
+            </td>
+            <td>
+              <md-input-container class="full-width ">
+                <input mdInput type="text" [formControl] = "createEducationForm.controls['programOfStudy']"
+                       placeholder="Program of Study" required>
+                <md-error>This field is required</md-error>
+              </md-input-container>
+            </td>
+          </tr>
+        </table>
+        <md-input-container style="width:60%;">
+          <input mdInput [formControl] = "createEducationForm.controls['startDate']" [mdDatepicker]="picker1" placeholder="Start Date">
+          <button mdSuffix [mdDatepickerToggle]="picker1"></button>
+          <md-error>Enter a valid date</md-error>
+        </md-input-container>
+        <md-datepicker #picker1></md-datepicker>
+        <br>
+        <md-checkbox [formControl] = "createEducationForm.controls['currentlyEnrolled']">Currently Enrolled?</md-checkbox>
+        <br>
+        <md-input-container style="width:60%;">
+            <input mdInput [formControl] = "createEducationForm.controls['endDate']" [mdDatepicker]="picker2" placeholder="End Date">
+            <button mdSuffix [mdDatepickerToggle]="picker2"></button>
+            <md-error>Enter a valid date</md-error>
+        </md-input-container>
+        <md-datepicker #picker2></md-datepicker>
+        <p style="text-align: center;">
+          <button md-raised-button type="submit" [disabled]="!createEducationForm.valid" (click)="addNewEducation()">Add New Education</button>
+        </p>
+        <hr>
+      </form>
+>>>>>>> Added more functionality to education. Education is now in a seperate form, and will create an array for education values. We can use these values for seperate problems
         </form>
     </md-card>
   </div>
