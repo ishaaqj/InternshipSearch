@@ -123,7 +123,8 @@ export class JobPostComponent implements OnInit, OnDestroy {
             'country': snapshot.val().country,
             'firstName': snapshot.val().firstName,
             'lastName': snapshot.val().lastName,
-            'stateOrProvince': snapshot.val().stateOrProvince
+            'stateOrProvince': snapshot.val().stateOrProvince,
+            'userId': authState.uid
           })
         });
       }

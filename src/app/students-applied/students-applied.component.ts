@@ -33,6 +33,9 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
         this.userId = authState.uid;
         this.database.list('/studentsApplied/'+this.userId+'/'+params['id']).subscribe(items=>{
           this.studentsList=items;
+          for (let student of items){
+            console.log(student)
+          }
         });
         this.database.object('/jobApplications/'+params['id'],{preserveSnapshot: true}).subscribe(snapshot=>{
           this.jobTitle=snapshot.val().jobTitle;
@@ -88,30 +91,6 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
     this.sortByNameAsc=!this.sortByNameAsc;
     this.sortByDegreeAsc=true;
     this.sortByUniversityAsc=true;
-    this.sortByLocationAsc=true;
-  }
-
-  private sortByDegree() {
-    if (this.sortByDegreeAsc) {
-      this.studentsList = this.studentsList.sort((a, b) => a.degree > b.degree);
-    }else{
-      this.studentsList = this.studentsList.sort((a, b) => a.degree < b.degree);
-    }
-    this.sortByDegreeAsc=!this.sortByDegreeAsc;
-    this.sortByNameAsc=true;
-    this.sortByLocationAsc=true;
-    this.sortByUniversityAsc=true;
-  }
-
-  private sortByUniversity(){
-    if(this.sortByUniversityAsc) {
-      this.studentsList = this.studentsList.sort((a, b) => a.university > b.university);
-    }else {
-      this.studentsList = this.studentsList.sort((a, b) => a.university < b.university);
-    }
-    this.sortByUniversityAsc=!this.sortByUniversityAsc;
-    this.sortByNameAsc=true;
-    this.sortByDegreeAsc=true;
     this.sortByLocationAsc=true;
   }
 
