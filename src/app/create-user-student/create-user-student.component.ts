@@ -120,12 +120,6 @@ export class CreateUserStudentComponent implements OnInit {
     this.addProjectsBool = false;
   }
 
-  private addNewEducation(){
-    this.educationList.push(this.createEducationForm.value);
-    alert("Education Info added. If you would like to add another education value, please press the button again")
-    this.createEducationForm.reset()
-  }
-
   private buildForm() {
     this.createStudentForm = this.formBuilder.group({
       'firstName': [null, Validators.required],

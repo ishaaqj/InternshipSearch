@@ -1,3 +1,4 @@
+<<<<<<< 5d3419e16858d91fa1bad6604a1b8e14f2fe157c
 <md-toolbar >
   <h2 *ngIf="!studentProfile">My Account</h2>
   <h2 *ngIf="studentProfile">Student Profile</h2>
@@ -12,12 +13,31 @@
       <tr>
         <th>Email:</th>
         <td>{{user.email}}</td>
+=======
+<md-toolbar>
+  <h2>My Account</h2>
+  <span class="spacer"></span>
+</md-toolbar>
+<div fxLayout="row" fxLayoutAlign="space-around center" class="content">
+  <md-card class="blocks" fxFlex="70%">
+    <span class="spacer"></span>
+    <md-card-title>Student Account</md-card-title>
+    <table class="table" *ngIf="gotData" cellspace="10">
+      <tr class="table-row">
+        <th>First Name:</th>
+        <td>{{user.firstName}}</td>
+      </tr>
+      <tr>
+        <th>Last Name:</th>
+        <td>{{user.lastName}}</td>
+>>>>>>> Added implementation for student account page. Fixed typo in Recruiter account page
       </tr>
       <tr>
         <th>Location:</th>
         <td>{{user.country}}, {{user.stateOrProvince}}, {{user.city}}</td>
       </tr>
       <tr>
+<<<<<<< 5d3419e16858d91fa1bad6604a1b8e14f2fe157c
         <th>Headline:</th>
         <td>{{user.profileHeadline}}</td>
       </tr>
@@ -114,6 +134,15 @@
           <td>{{additionalInfo.additionalDescription}}</td>
         </tr>
       </ng-container>
+=======
+        <th>Degree:</th>
+        <td>{{user.degree}}</td>
+      </tr>
+      <tr>
+        <th>University:</th>
+        <td>{{user.university}}</td>
+      </tr>
+>>>>>>> Added implementation for student account page. Fixed typo in Recruiter account page
     </table>
   </md-card>
 </div>
