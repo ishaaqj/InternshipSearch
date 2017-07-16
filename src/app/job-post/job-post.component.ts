@@ -83,7 +83,7 @@ export class JobPostComponent implements OnInit, OnDestroy {
           .catch(error=>console.log(error.message));
         this.angularFireDatabase.object('/studentsApplied/'+this.job.employerUID+'/'+this.job.jobId+'/'+this.userId).remove()
           .then(success=>console.log(success))
-          .catch(error=>console.log(error.message));;
+          .catch(error=>console.log(error.message));
         this.showDeleteButton=false;
         this.router.navigate(['jobs-applied-to']);
       }
