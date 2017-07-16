@@ -48,8 +48,8 @@ export class CreateUserStudentComponent implements OnInit {
     this.educationForm();
     this.skillForm();
     this.experienceForm();
-    this.additionalInfoForm();
     this.projectForm();
+    this.additionalInfoForm();
   }
 
   private addEducation(){
@@ -116,9 +116,8 @@ export class CreateUserStudentComponent implements OnInit {
 
   private addNewProject() {
     this.projectsList.push(this.createProjectsForm.value);
-    this.createProjectsForm.reset();
+    this.createProjectsForm.reset()
     this.addProjectsBool = false;
-
   }
 
   private buildForm() {
@@ -156,18 +155,18 @@ export class CreateUserStudentComponent implements OnInit {
     });
   }
 
-  private additionalInfoForm(){
-    this.createAdditionalInfoForm = this.formBuilder.group({
-      'additionalName': [null, Validators.required],
-      'additionalDescription': [null, Validators.required]
-    });
-  }
-
   private projectForm(){
     this.createProjectsForm = this.formBuilder.group({
       'projectName': [null, Validators.required],
       'projectDescription': [null, Validators.required],
     })
+  }
+
+  private additionalInfoForm(){
+    this.createAdditionalInfoForm = this.formBuilder.group({
+      'additionalName': [null, Validators.required],
+      'additionalDescription': [null, Validators.required]
+    });
   }
 
   private experienceForm(){

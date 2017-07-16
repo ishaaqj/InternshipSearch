@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireDatabase} from "angularfire2/database";
 import {ActivatedRoute} from "@angular/router";
-import {FormBuilder} from "@angular/forms";
-import {Router} from "@angular/router";
 import {AngularFireAuth} from "angularfire2/auth";
 
 @Component({
@@ -39,8 +37,6 @@ export class MyAccountStudentComponent implements OnInit {
         })
       });
     }
-
-
   }
 
 }
