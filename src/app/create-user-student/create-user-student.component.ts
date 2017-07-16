@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-user-student',
@@ -28,7 +29,7 @@ export class CreateUserStudentComponent implements OnInit {
   private additionalInfoList=[];
   private addExperienceBool = false;
   private experienceList =[];
-  private personalInfo;
+  private re = /\//gi;
 
   degrees = [
     {value: 'HighSchool', viewValue: 'High School'},
@@ -38,7 +39,8 @@ export class CreateUserStudentComponent implements OnInit {
     {value: 'PhD', viewValue: 'PhD'},
   ];
 
-  constructor(formBuilder: FormBuilder, angularFireAuth: AngularFireAuth, anuglarFireDatabase: AngularFireDatabase) {
+  constructor(formBuilder: FormBuilder, angularFireAuth: AngularFireAuth, anuglarFireDatabase: AngularFireDatabase,
+              private router: Router) {
     this.formBuilder = formBuilder;
     this.angularFireAuth = angularFireAuth;
     this.anuglarFireDatabase = anuglarFireDatabase;
@@ -57,10 +59,16 @@ export class CreateUserStudentComponent implements OnInit {
   private addNewEducation(){
     if (this.createEducationForm.controls['currentlyEnrolled'].value){
       this.createEducationForm.controls['endDate'].setValue('present');
+    }else {
+      this.createEducationForm.controls['endDate'].setValue(new Date(this.createEducationForm.controls['endDate'].value)
+        .toLocaleDateString().replace(this.re,'-').split('-').reverse().join('-'))
     }
+    this.createEducationForm.controls['startDate'].setValue(new Date(this.createEducationForm.controls['startDate'].value)
+      .toLocaleDateString().replace(this.re,'-').split('-').reverse().join('-'));
     this.educationList.push(this.createEducationForm.value);
-    this.createEducationForm.reset()
+    this.createEducationForm.reset();
     this.addEducationBool=false;
+    console.log(this.educationList);
   }
 
   private addSkill(){
@@ -69,7 +77,7 @@ export class CreateUserStudentComponent implements OnInit {
 
   private addNewSkill() {
     this.skillList.push(this.createSkillForm.value);
-    this.createSkillForm.reset()
+    this.createSkillForm.reset();
     this.addSkillBool=false;
   }
 
@@ -80,10 +88,16 @@ export class CreateUserStudentComponent implements OnInit {
   private addNewExperience(){
     if (this.createExperienceForm.controls['currentlyEmployed'].value){
       this.createExperienceForm.controls['endDate'].setValue('present');
+    }else {
+      this.createExperienceForm.controls['endDate']
+        .setValue(new Date(this.createExperienceForm.controls['endDate'].value).toLocaleDateString().replace(this.re,'-').split('-').reverse().join('-'));
     }
+    this.createExperienceForm.controls['startDate']
+      .setValue(new Date(this.createExperienceForm.controls['startDate'].value).toLocaleDateString().replace(this.re,'-').split('-').reverse().join('-'));
     this.experienceList.push(this.createExperienceForm.value);
     this.createExperienceForm.reset();
     this.addExperienceBool=false;
+    console.log(this.experienceList);
   }
 
   private addProject(){
@@ -117,6 +131,9 @@ export class CreateUserStudentComponent implements OnInit {
       'profileHeadline': [null, Validators.required],
       'profileIntroduction': [null, Validators.required],
       'careerInterest': [null, Validators.required],
+      'city': [null, Validators.required],
+      'country': [null, Validators.required],
+      'stateOrProvince': [null, Validators.required],
     });
   }
 
@@ -152,11 +169,6 @@ export class CreateUserStudentComponent implements OnInit {
     });
   }
 
-  private saveInfo(){
-    this.personalInfo = this.createStudentForm.value;
-    console.log(this.personalInfo)
-  }
-
   private experienceForm(){
     this.createExperienceForm = this.formBuilder.group({
       'nameOfInst': [null, Validators.required],
@@ -165,6 +177,40 @@ export class CreateUserStudentComponent implements OnInit {
       'startDate': [null, Validators.required],
       'endDate': '',
       'currentlyEmployed': ''
+    });
+  }
+
+  private saveInfo(){
+    let uid;
+    this.angularFireAuth.auth.createUserWithEmailAndPassword(this.createStudentForm.controls['email'].value,
+      this.createStudentForm.controls['password'].value).then((user) => {
+      uid = user.uid;
+      this.anuglarFireDatabase.object('/users/' + uid).set({
+        'firstName': this.createStudentForm.controls['firstName'].value,
+        'lastName': this.createStudentForm.controls['lastName'].value,
+        'email': this.createStudentForm.controls['email'].value,
+        'profileHeadline': this.createStudentForm.controls['profileHeadline'].value,
+        'profileIntroduction': this.createStudentForm.controls['profileIntroduction'].value,
+        'careerInterest': this.createStudentForm.controls['careerInterest'].value,
+        'city': this.createStudentForm.controls['city'].value,
+        'country': this.createStudentForm.controls['country'].value,
+        'stateOrProvince': this.createStudentForm.controls['stateOrProvince'].value,
+        'educationList': this.educationList,
+        'additionalInfoList': this.additionalInfoList,
+        'experienceList': this.experienceList,
+        'skillList': this.skillList,
+        'projectsList': this.projectsList,
+        'role': 'student'
+      }).then((success) => {
+        console.log(success)
+      }).catch((error) => {
+        console.log(error.message)
+      });
+    }).then((success) => {
+      this.router.navigate([''])
+      console.log(success)
+    }).catch((error) => {
+      console.log(error.message)
     });
   }
 
