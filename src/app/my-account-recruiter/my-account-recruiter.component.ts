@@ -20,11 +20,10 @@ export class MyAccountRecruiterComponent implements OnInit {
   ngOnInit() {
     this.angularFireAuth.authState.subscribe(authState => {
       this.userId = authState.uid;
-      this.database.object('/users/' + this.userId, {preserveSnapshot: true}).subscribe(snapshot=>{
+      this.database.object('/users/' + this.userId, {preserveSnapshot: true}).subscribe(snapshot => {
         this.user = snapshot.val();
-        this.gotData=true;
+        this.gotData = true;
       })
     });
   }
-
 }
