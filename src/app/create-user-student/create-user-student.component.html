@@ -53,29 +53,31 @@
             <md-error>This field is required</md-error>
           </md-input-container>
           <p style="text-align: center;">
-            <button type="submit" [disabled]="!createStudentForm.valid" md-raised-button>Submit</button>
+            <button type="submit" [disabled]="!createStudentForm.valid" md-raised-button (click)="savePersonalInfo()">Save Personal Info</button>
           </p>
         </form>
+      <hr>
+      <table *ngIf="educationList.length!=0" class="full-width">
+        <h2>List of Education</h2>
+        <tr>
+          <th>Name of Institution</th>
+          <th>Degree</th>
+          <th>Program of Study</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+        </tr>
+        <tr *ngFor="let education of educationList">
+          <td>{{education.nameOfInst}}</td>
+          <td>{{education.degree}}</td>
+          <td>{{education.programOfStudy}}</td>
+          <td>{{education.startDate}}</td>
+          <td>{{education.endDate}}</td>
+        </tr>
+      </table>
       <p style="text-align: center;">
-        <button *ngIf="!addEducationBool" md-raised-button (click)="addEducation()">Add Educaation</button>
+        <button *ngIf="!addEducationBool" md-raised-button (click)="addEducation()">Add New Education</button>
       </p>
       <form *ngIf="addEducationBool" [formGroup]="createEducationForm">
-        <table *ngIf="educationList.lenght!=0" class="full-width">
-          <tr>
-            <th>Name of Institution</th>
-            <th>Degree</th>
-            <th>Program of Study</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-          </tr>
-          <tr *ngFor="let education of educationList">
-            <td>{{education.nameOfInst}}</td>
-            <td>{{education.degree}}</td>
-            <td>{{education.programOfStudy}}</td>
-            <td>{{education.startDate}}</td>
-            <td>{{education.endDate}}</td>
-          </tr>
-        </table>
         <h2>Add Education</h2>
         <md-input-container class="full-width ">
           <input mdInput type="text" [formControl] = "createEducationForm.controls['nameOfInst']"
@@ -116,25 +118,79 @@
         </md-input-container>
         <md-datepicker *ngIf="!createEducationForm.controls['currentlyEnrolled'].value" #picker2></md-datepicker>
         <p style="text-align: center;">
-          <button md-raised-button type="submit" [disabled]="!createEducationForm.valid" (click)="addNewEducation()">Add New Education</button>
+          <button md-raised-button type="submit" [disabled]="!createEducationForm.valid" (click)="addNewEducation()">Add Education</button>
         </p>
-        <hr>
       </form>
+      <hr>
+      <table *ngIf="experienceList.length!=0" class="full-width">
+        <h2>List of Experiences</h2>
+        <tr>
+          <th>Job Title</th>
+          <th>Name of Institution</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+        </tr>
+        <tr *ngFor="let experience of experienceList">
+          <td>{{experience.jobTitle}}</td>
+          <td>{{experience.nameOfInst}}</td>
+          <td>{{experience.startDate}}</td>
+          <td>{{experience.endDate}}</td>
+        </tr>
+      </table>
       <p style="text-align: center;">
-        <button *ngIf="!addSkillBool" md-raised-button (click)="addSkill()">Add Skill</button>
+        <button *ngIf="!addExperienceBool" md-raised-button (click)="addExperience()">Add New Experience</button>
+      </p>
+      <form *ngIf="addExperienceBool" [formGroup]="createExperienceForm">
+        <h2>Add Experience</h2>
+        <md-input-container class="full-width ">
+          <input mdInput type="text" [formControl] = "createExperienceForm.controls['jobTitle']"
+                 placeholder="Job Title" required>
+          <md-error>This field is required</md-error>
+        </md-input-container>
+        <md-input-container class="full-width ">
+          <input mdInput type="text" [formControl] = "createExperienceForm.controls['nameOfInst']"
+                 placeholder="Name Of Institution" required>
+          <md-error>This field is required</md-error>
+        </md-input-container>
+        <md-input-container style="width:60%;">
+          <input mdInput [formControl] = "createExperienceForm.controls['startDate']" [mdDatepicker]="picker1" placeholder="Start Date">
+          <button mdSuffix [mdDatepickerToggle]="picker1"></button>
+          <md-error>Enter a valid date</md-error>
+        </md-input-container>
+        <md-datepicker #picker1></md-datepicker>
+        <br>
+        <md-checkbox [formControl] = "createExperienceForm.controls['currentlyEmployed']">Currently Employed?</md-checkbox>
+        <br>
+        <md-input-container *ngIf="!createExperienceForm.controls['currentlyEmployed'].value" style="width:60%;">
+          <input mdInput [formControl] = "createExperienceForm.controls['endDate']" [mdDatepicker]="picker2" placeholder="End Date">
+          <button mdSuffix [mdDatepickerToggle]="picker2"></button>
+          <md-error>Enter a valid date</md-error>
+        </md-input-container>
+        <md-datepicker *ngIf="!createExperienceForm.controls['currentlyEmployed'].value" #picker2></md-datepicker>
+        <md-input-container class="full-width ">
+          <textarea mdInput type="text" [formControl] = "createExperienceForm.controls['jobDescription']"
+                    placeholder="Job Description"></textarea>
+        </md-input-container>
+        <p style="text-align: center;">
+          <button md-raised-button type="submit" [disabled]="!createExperienceForm.valid" (click)="addNewExperience()">Add Experience</button>
+        </p>
+      </form>
+      <hr>
+      <table *ngIf="skillList.length!=0" class="full-width">
+        <h2>List of Skills</h2>
+        <tr>
+          <th style="width:20%;">Skill Name</th>
+          <th style="width:80%;">Skill Description</th>
+        </tr>
+        <tr *ngFor="let skill of skillList">
+          <td style="width:20%;">{{skill.skillName}}</td>
+          <td style="width:80%;">{{skill.skillDescription}}</td>
+        </tr>
+      </table>
+      <p style="text-align: center;">
+        <button *ngIf="!addSkillBool" md-raised-button (click)="addSkill()">Add New Skill</button>
       </p>
       <form *ngIf="addSkillBool" [formGroup]="createSkillForm">
-        <table *ngIf="skillList.length!=0" class="full-width">
-          <tr>
-            <th style="width:20%;">Skill Name</th>
-            <th style="width:80%;">Skill Description</th>
-          </tr>
-          <tr *ngFor="let skill of skillList">
-            <td style="width:20%;">{{skill.skillName}}</td>
-            <td style="width:80%;">{{skill.skillDescription}}</td>
-          </tr>
-        </table>
-
         <h2>Skills:</h2>
         <md-input-container class="full-width ">
           <input mdInput type="text" [formControl] = "createSkillForm.controls['skillName']"
@@ -147,10 +203,10 @@
           <md-error>This field is required</md-error>
         </md-input-container>
         <p style="text-align: center;">
-          <button md-raised-button type="submit" [disabled]="!createSkillForm.valid" (click)="addNewSkill()">Add New Skill</button>
+          <button md-raised-button type="submit" [disabled]="!createSkillForm.valid" (click)="addNewSkill()">Add Skill</button>
         </p>
-        <hr>
       </form>
+      <hr>
     </md-card>
   </div>
 </div>
