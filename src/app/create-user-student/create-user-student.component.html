@@ -53,14 +53,15 @@
             <md-error>This field is required</md-error>
           </md-input-container>
           <p style="text-align: center;">
-            <button type="submit" [disabled]="!createStudentForm.valid" md-raised-button>Submit</button>
+            <button type="submit" [disabled]="!createStudentForm.valid" md-raised-button>Save Personal Info</button>
           </p>
         </form>
+      <hr>
       <p style="text-align: center;">
-        <button *ngIf="!addEducationBool" md-raised-button (click)="addEducation()">Add Educaation</button>
+        <button *ngIf="!addEducationBool" md-raised-button (click)="addEducation()">Add Education</button>
       </p>
       <form *ngIf="addEducationBool" [formGroup]="createEducationForm">
-        <table *ngIf="educationList.lenght!=0" class="full-width">
+        <table *ngIf="educationList.length!=0" class="full-width">
           <tr>
             <th>Name of Institution</th>
             <th>Degree</th>
@@ -118,8 +119,67 @@
         <p style="text-align: center;">
           <button md-raised-button type="submit" [disabled]="!createEducationForm.valid" (click)="addNewEducation()">Add New Education</button>
         </p>
-        <hr>
       </form>
+      <hr>
+      <p style="text-align: center;">
+        <button *ngIf="!addExperienceBool" md-raised-button (click)="addExperience()">Add Experience</button>
+      </p>
+      <form *ngIf="addExperienceBool" [formGroup]="createExperienceForm">
+        <table *ngIf="experienceList.length!=0" class="full-width">
+          <tr>
+            <th>Job Title</th>
+            <th>Name of Institution</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+          </tr>
+          <tr *ngFor="let experience of experienceList">
+            <td>{{experience.jobTitle}}</td>
+            <td>{{experience.nameOfInst}}</td>
+            <td>{{experience.startDate}}</td>
+            <td>{{experience.endDate}}</td>
+          </tr>
+        </table>
+        <h2>Add Experience</h2>
+        <md-input-container class="full-width ">
+          <input mdInput type="text" [formControl] = "createExperienceForm.controls['jobTitle']"
+                 placeholder="Job Title" required>
+          <md-error>This field is required</md-error>
+        </md-input-container>
+        <md-input-container class="full-width ">
+          <input mdInput type="text" [formControl] = "createExperienceForm.controls['nameOfInst']"
+                 placeholder="Name Of Institution" required>
+          <md-error>This field is required</md-error>
+        </md-input-container>
+        <md-input-container style="width:60%;">
+          <input mdInput [formControl] = "createExperienceForm.controls['startDate']" [mdDatepicker]="picker1" placeholder="Start Date">
+          <button mdSuffix [mdDatepickerToggle]="picker1"></button>
+          <md-error>Enter a valid date</md-error>
+        </md-input-container>
+        <md-datepicker #picker1></md-datepicker>
+        <br>
+        <md-checkbox [formControl] = "createExperienceForm.controls['currentlyEmployed']">Currently Employed?</md-checkbox>
+        <br>
+        <md-input-container *ngIf="!createExperienceForm.controls['currentlyEmployed'].value" style="width:60%;">
+          <input mdInput [formControl] = "createExperienceForm.controls['endDate']" [mdDatepicker]="picker2" placeholder="End Date">
+          <button mdSuffix [mdDatepickerToggle]="picker2"></button>
+          <md-error>Enter a valid date</md-error>
+        </md-input-container>
+        <md-datepicker *ngIf="!createExperienceForm.controls['currentlyEmployed'].value" #picker2></md-datepicker>
+        <md-input-container class="full-width ">
+          <textarea mdInput type="text" [formControl] = "createExperienceForm.controls['jobDescription']"
+                    placeholder="Job Description"></textarea>
+        </md-input-container>
+        <p style="text-align: center;">
+          <button md-raised-button type="submit" [disabled]="!createExperienceForm.valid" (click)="addNewExperience()">Add New Experience</button>
+        </p>
+      </form>
+      <hr>
+
+
+
+
+
+
     </md-card>
   </div>
 </div>

@@ -11,11 +11,15 @@ import {AngularFireDatabase} from "angularfire2/database";
 export class CreateUserStudentComponent implements OnInit {
   private createStudentForm: FormGroup;
   private createEducationForm: FormGroup;
+  private createExperienceForm: FormGroup;
   private formBuilder: FormBuilder;
   private angularFireAuth: AngularFireAuth;
   private anuglarFireDatabase: AngularFireDatabase;
   private addEducationBool = false;
   private educationList =[];
+  private addExperienceBool = false;
+  private experienceList =[];
+
 
   degrees = [
     {value: 'highschool', viewValue: 'Highschool'},
@@ -31,11 +35,13 @@ export class CreateUserStudentComponent implements OnInit {
     this.anuglarFireDatabase = anuglarFireDatabase;
     this.buildForm();
     this.educationForm();
+    this.experienceForm();
   }
 
   private addEducation(){
     this.addEducationBool=true;
   }
+
   private addNewEducation(){
     if (this.createEducationForm.controls['currentlyEnrolled'].value){
       this.createEducationForm.controls['endDate'].setValue('present');
@@ -43,6 +49,19 @@ export class CreateUserStudentComponent implements OnInit {
     this.educationList.push(this.createEducationForm.value);
     alert("Education Info added. If you would like to add another education value, please press the button again")
     this.createEducationForm.reset()
+  }
+
+  private addExperience(){
+    this.addExperienceBool=true;
+  }
+
+  private addNewExperience(){
+    if (this.createExperienceForm.controls['currentlyEmployed'].value){
+      this.createExperienceForm.controls['endDate'].setValue('present');
+    }
+    this.experienceList.push(this.createExperienceForm.value);
+    alert("Experience Info added. If you would like to add another experience value, please press the button again")
+    this.createExperienceForm.reset()
   }
 
   private buildForm() {
@@ -79,6 +98,17 @@ export class CreateUserStudentComponent implements OnInit {
       'startDate': [null, Validators.required],
       'endDate': [null],
       'currentlyEnrolled': [null]
+    });
+  }
+
+  private experienceForm(){
+    this.createExperienceForm = this.formBuilder.group({
+      'nameOfInst': [null, Validators.required],
+      'jobTitle': [null, Validators.required],
+      'jobDescription': '',
+      'startDate': [null, Validators.required],
+      'endDate': '',
+      'currentlyEmployed': ''
     });
   }
 
