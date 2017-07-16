@@ -50,7 +50,6 @@
                 <input mdInput type="text" [formControl] = "createjobpostform.controls['country']"
                        placeholder="Country" required>
                 <md-error *ngIf="createjobpostform.controls['country'].hasError('required')">This field is required</md-error>
-                <md-error *ngIf="createjobpostform.controls['country'].hasError('pattern')">Please enter fullname of country</md-error>
               </md-input-container>
             </td>
           </tr>
