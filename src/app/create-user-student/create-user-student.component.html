@@ -120,6 +120,37 @@
         </p>
         <hr>
       </form>
+      <p style="text-align: center;">
+        <button *ngIf="!addSkillBool" md-raised-button (click)="addSkill()">Add Skill</button>
+      </p>
+      <form *ngIf="addSkillBool" [formGroup]="createSkillForm">
+        <table *ngIf="skillList.length!=0" class="full-width">
+          <tr>
+            <th style="width:20%;">Skill Name</th>
+            <th style="width:80%;">Skill Description</th>
+          </tr>
+          <tr *ngFor="let skill of skillList">
+            <td style="width:20%;">{{skill.skillName}}</td>
+            <td style="width:80%;">{{skill.skillDescription}}</td>
+          </tr>
+        </table>
+
+        <h2>Skills:</h2>
+        <md-input-container class="full-width ">
+          <input mdInput type="text" [formControl] = "createSkillForm.controls['skillName']"
+                 placeholder="Skill Name" required>
+          <md-error>This field is required</md-error>
+        </md-input-container>
+        <md-input-container class="full-width ">
+        <textarea mdInput type="text" [formControl] = "createSkillForm.controls['skillDescription']"
+                  placeholder="Skill Description" required></textarea>
+          <md-error>This field is required</md-error>
+        </md-input-container>
+        <p style="text-align: center;">
+          <button md-raised-button type="submit" [disabled]="!createSkillForm.valid" (click)="addNewSkill()">Add New Skill</button>
+        </p>
+        <hr>
+      </form>
     </md-card>
   </div>
 </div>

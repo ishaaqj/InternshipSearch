@@ -11,11 +11,14 @@ import {AngularFireDatabase} from "angularfire2/database";
 export class CreateUserStudentComponent implements OnInit {
   private createStudentForm: FormGroup;
   private createEducationForm: FormGroup;
+  private createSkillForm: FormGroup;
   private formBuilder: FormBuilder;
   private angularFireAuth: AngularFireAuth;
   private anuglarFireDatabase: AngularFireDatabase;
   private addEducationBool = false;
+  private addSkillBool = false;
   private educationList =[];
+  private skillList=[];
 
   degrees = [
     {value: 'highschool', viewValue: 'Highschool'},
@@ -31,6 +34,7 @@ export class CreateUserStudentComponent implements OnInit {
     this.anuglarFireDatabase = anuglarFireDatabase;
     this.buildForm();
     this.educationForm();
+    this.skillForm();
   }
 
   private addEducation(){
@@ -45,6 +49,16 @@ export class CreateUserStudentComponent implements OnInit {
     this.createEducationForm.reset()
   }
 
+  private addSkill(){
+    this.addSkillBool=true;
+  }
+
+  private addNewSkill(){
+    this.skillList.push(this.createSkillForm.value);
+    alert("Education Info added. If you would like to add another education value, please press the button again")
+    this.createSkillForm.reset()
+  }
+
   private buildForm() {
     this.createStudentForm = this.formBuilder.group({
       'firstName': [null, Validators.required],
@@ -56,18 +70,7 @@ export class CreateUserStudentComponent implements OnInit {
       'profileHeadline': [null, Validators.required],
       'profileIntroduction': [null, Validators.required],
       'careerInterest': [null, Validators.required],
-      'nameOfCompany': [null, Validators.required],
-      'jobTitle': [null, Validators.required],
-      'startDateWork': [null, Validators.required],
-      'endDateWork': '',
-      'jobDescription': [null, Validators.required],
-      'skillName': [null, Validators.required],
-      'skillDescription': [null, Validators.required],
-      'projectName': [null, Validators.required],
-      'projectDescription': [null, Validators.required],
-      'additionalTitle': [null, Validators.required],
-      'additionalDescription': [null, Validators.required],
-      'currentlyEmployed': [null, Validators.required]
+
     });
   }
 
@@ -80,6 +83,12 @@ export class CreateUserStudentComponent implements OnInit {
       'endDate': [null],
       'currentlyEnrolled': [null]
     });
+  }
+  private skillForm(){
+    this.createSkillForm = this.formBuilder.group({
+      'skillName': [null, Validators.required],
+      'skillDescription': [null, Validators.required],
+    })
   }
 
   ngOnInit() {
