@@ -26,8 +26,8 @@ export class JobsAppliedToComponent implements OnInit {
   ngOnInit() {
     this.angularFireAuth.authState.subscribe(authState=>{
       this.userId = authState.uid;
-      this.database.list('/jobsAppliedTo/'+this.userId).subscribe(items=>{
-        this.jobsList=items;
+      this.database.list('/jobsAppliedTo/'+this.userId,).subscribe(items=>{
+        this.jobsList=items
       });
     });
     this.buildSearchForm();
