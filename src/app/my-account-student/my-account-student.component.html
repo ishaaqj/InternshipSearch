@@ -1,3 +1,32 @@
-<p>
-  my-account-student works!
-</p>
+<md-toolbar>
+  <h2>My Account</h2>
+  <span class="spacer"></span>
+</md-toolbar>
+<div fxLayout="row" fxLayoutAlign="space-around center" class="content">
+  <md-card class="blocks" fxFlex="70%">
+    <span class="spacer"></span>
+    <md-card-title>Student Account</md-card-title>
+    <table class="table" *ngIf="gotData" cellspace="10">
+      <tr class="table-row">
+        <th>First Name:</th>
+        <td>{{user.firstName}}</td>
+      </tr>
+      <tr>
+        <th>Last Name:</th>
+        <td>{{user.lastName}}</td>
+      </tr>
+      <tr>
+        <th>Location:</th>
+        <td>{{user.country}}, {{user.stateOrProvince}}, {{user.city}}</td>
+      </tr>
+      <tr>
+        <th>Degree:</th>
+        <td>{{user.degree}}</td>
+      </tr>
+      <tr>
+        <th>University:</th>
+        <td>{{user.university}}</td>
+      </tr>
+    </table>
+  </md-card>
+</div>

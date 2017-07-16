@@ -54,7 +54,7 @@ import { SearchJobsComponent } from './search-jobs/search-jobs.component';
     MyAccountComponent,
     MyAccountStudentComponent,
     MyAccountRecruiterComponent,
-    SearchJobsComponent
+    SearchJobsComponent,
   ],
   imports: [
     BrowserModule,
