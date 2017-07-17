@@ -56,10 +56,7 @@ import { HelpComponent } from './help/help.component';
     MyAccountStudentComponent,
     MyAccountRecruiterComponent,
     SearchJobsComponent,
-<<<<<<< HEAD
     HelpComponent
-=======
->>>>>>> 9a64f517e7ef17007dfe1edcb37e51b94339ee72
   ],
   imports: [
     BrowserModule,
