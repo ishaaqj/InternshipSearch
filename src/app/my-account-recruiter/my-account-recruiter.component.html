@@ -1,9 +1,9 @@
 <md-toolbar>
   <h2>My Account</h2>
   <span class="spacer"></span>
-  <a class="link" *ngIf="gotData" style="margin-left: 20px" [routerLink]="['/edit-recruiter-account',userId]">Edit</a>
+  <button md-button><h2 class="link" *ngIf="gotData" style="margin-left: 20px" [routerLink]="['/edit-recruiter-account',userId]">Edit</h2></button>
 </md-toolbar>
-<div class="contaner">
+<div class="container">
   <div fxLayout="row" fxLayoutAlign="space-around start" class="content">
     <span class="spacer"></span>
     <md-card class="blocks" fxFlex="60%">
@@ -17,11 +17,11 @@
           <td>{{user.lastName}}</td>
         </tr>
         <tr>
-          <th>E mail:</th>
+          <th>E-mail:</th>
           <td>{{user.email}}</td>
         </tr>
         <tr>
-          <th>Campany Name:</th>
+          <th>Company Name:</th>
           <td>{{user.companyName}}</td>
         </tr>
         <tr>

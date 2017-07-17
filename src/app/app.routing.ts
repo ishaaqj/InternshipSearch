@@ -12,7 +12,11 @@ import {JobsAppliedToComponent} from "./jobs-applied-to/jobs-applied-to.componen
 import {StudentsAppliedComponent} from "./students-applied/students-applied.component";
 import {MyAccountComponent} from "./my-account/my-account.component";
 import {SearchJobsComponent} from "./search-jobs/search-jobs.component";
+<<<<<<< HEAD
 import {HelpComponent} from "./help/help.component";
+=======
+import {MyAccountStudentComponent} from "./my-account-student/my-account-student.component";
+>>>>>>> 9a64f517e7ef17007dfe1edcb37e51b94339ee72
 /**
  * Created by ishaaq on 7/6/2017.
  */
@@ -30,6 +34,7 @@ const appRoutes: Routes = [
   {path: 'jobs-applied-to', component: JobsAppliedToComponent, canActivate: [AuthGuardService]},
   {path: 'students-applied/:id', component: StudentsAppliedComponent, canActivate: [AuthGuardService]},
   {path: 'my-account', component: MyAccountComponent, canActivate: [AuthGuardService]},
+  {path: 'student-profile/:id', component: MyAccountStudentComponent, canActivate: [AuthGuardService]},
   {path: 'edit-recruiter-account/:id', component: CreateUserRecruiterComponent, canActivate: [AuthGuardService]},
   {path: 'edit-student-account/:id', component: CreateUserStudentComponent, canActivate: [AuthGuardService]},
   {path: 'search-jobs/:id/:id2', component: SearchJobsComponent, canActivate: [AuthGuardService]},

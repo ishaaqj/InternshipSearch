@@ -11,7 +11,7 @@
         </td>
         <td>
           <md-input-container style="width: 400px;" floatPlaceholder="never">
-            <input mdInput type="text" [formControl] = "searchForm.controls['location']" placeholder="Cty, state, postal
+            <input mdInput type="text" [formControl] = "searchForm.controls['location']" placeholder="City, state, postal
               code or country">
           </md-input-container>
         </td>
@@ -40,7 +40,7 @@
           <tr>
             <td style="padding-right: 10px">
               <md-input-container floatPlaceholder="never">
-                <input mdInput type="text" [formControl] = "filterForm.controls['minSalary']" placeholder="min Salary">
+                <input mdInput type="text" [formControl] = "filterForm.controls['minSalary']" placeholder="Min Salary">
               </md-input-container>
             </td>
             <td>
@@ -48,7 +48,7 @@
             </td>
             <td style="padding-left: 10px">
               <md-input-container  floatPlaceholder="never">
-                <input mdInput type="text" [formControl] = "filterForm.controls['maxSalary']" placeholder="max Salary">
+                <input mdInput type="text" [formControl] = "filterForm.controls['maxSalary']" placeholder="Max Salary">
               </md-input-container>
             </td>
           </tr>
@@ -75,14 +75,14 @@
       <md-card-title>Results</md-card-title>
       <table *ngIf="gotData">
         <tr>
-          <th class="table-row" (click)="sortByJobId()">Job Id</th>
-          <th class="table-row" (click)="sortByJobTitle()">Job Title</th>
-          <th class="table-row" (click)="sortByJobStartDate()">Job Start Date</th>
-          <th class="table-row" (click)="sortByCompanyName()">Company Name</th>
-          <th class="table-row" (click)="sortByJobLocation()">Job Location</th>
+          <th class="table-row" (click)="sortByJobId()"><span class="pointer-cursor" >Job Id</span></th>
+          <th class="table-row" (click)="sortByJobTitle()"><span class="pointer-cursor" >Job Title</span></th>
+          <th class="table-row" (click)="sortByJobStartDate()"><span class="pointer-cursor" >Job Start Date</span></th>
+          <th class="table-row" (click)="sortByCompanyName()"><span class="pointer-cursor" >Company Name</span></th>
+          <th class="table-row" (click)="sortByJobLocation()"><span class="pointer-cursor" >Job Location</span></th>
         </tr>
         <ng-container *ngFor="let job of jobsList|async">
-          <tr [routerLink]="['/job-post',job.jobId]">
+          <tr class="pointer-cursor" [routerLink]="['/job-post',job.jobId]">
             <td class="table-row">{{job.jobId}}</td>
             <td class="table-row">{{job.jobTitle}}</td>
             <td class="table-row">{{job.startDate.slice(0,10)}}</td>

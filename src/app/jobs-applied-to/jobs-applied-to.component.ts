@@ -19,6 +19,7 @@ export class JobsAppliedToComponent implements OnInit {
   private sortByJobTitleAsc = true;
   private sortByCompanyNameAsc = true;
   private sortByJobLocationAsc = true;
+  private gotData: boolean;
 
   constructor(private formBuilder: FormBuilder,private database: AngularFireDatabase,
               private angularFireAuth :AngularFireAuth) { }
@@ -28,6 +29,7 @@ export class JobsAppliedToComponent implements OnInit {
       this.userId = authState.uid;
       this.database.list('/jobsAppliedTo/'+this.userId).subscribe(items=>{
         this.jobsList=items;
+        this.gotData=true;
       });
     });
     this.buildSearchForm();
@@ -53,8 +55,8 @@ export class JobsAppliedToComponent implements OnInit {
     let datePosted = this.filterForm.controls['datePosted'].value;
     let dateStarts = this.filterForm.controls['dateStarts'].value;
     this.jobsList = this.jobsList.filter(job => job.companyName.toLocaleLowerCase().indexOf(companyName) != -1)
-    this.jobsList = this.jobsList.filter(job => job.minSalary - minSalary + 1)
-    this.jobsList = this.jobsList.filter(job => maxSalary - job.maxSalary + 1)
+    this.jobsList = this.jobsList.filter(job => job.minSalary - minSalary + 1);
+    this.jobsList = this.jobsList.filter(job => maxSalary - job.maxSalary + 1);
     if(this.filterForm.controls['datePosted'].value != '') {
       this.jobsList = this.jobsList.filter(job => (new Date(job.datePosted)) >= (new Date(datePosted)))
     }
