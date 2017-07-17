@@ -95,6 +95,8 @@
             <td>{{education.endDate}}</td>
             <td><button type="button" md-icon-button (click)="editEducation(i)"><md-icon>edit</md-icon></button></td>
             <td><button md-icon-button><md-icon>delete</md-icon></button></td>
+            <td *ngIf="i!=0"><button md-icon-button><md-icon>arrow_upward</md-icon></button></td>
+            <td *ngIf="i!=(educationList.length-1)"><button md-icon-button><md-icon>arrow_downward</md-icon></button></td>
           </tr>
         </table>
         <p style="text-align: center;">
@@ -162,6 +164,8 @@
             <td>{{experience.endDate}}</td>
             <td><button md-icon-button ><md-icon>edit</md-icon></button></td>
             <td><button md-icon-button><md-icon>delete</md-icon></button></td>
+            <td *ngIf="i!=0"><button md-icon-button><md-icon>arrow_upward</md-icon></button></td>
+            <td *ngIf="i!=(experienceList.length-1)"><button md-icon-button><md-icon>arrow_downward</md-icon></button></td>
           </tr>
         </table>
         <p style="text-align: center;">
@@ -216,6 +220,8 @@
             <td style="width:80%;">{{skill.skillDescription}}</td>
             <td><button md-icon-button><md-icon>edit</md-icon></button></td>
             <td><button md-icon-button><md-icon>delete</md-icon></button></td>
+            <td *ngIf="i!=0"><button md-icon-button><md-icon>arrow_upward</md-icon></button></td>
+            <td *ngIf="i!=(skillList.length-1)"><button md-icon-button><md-icon>arrow_downward</md-icon></button></td>
           </tr>
         </table>
         <p style="text-align: center;">
@@ -249,6 +255,8 @@
             <td style="width:80%;">{{project.projectDescription}}</td>
             <td><button md-icon-button><md-icon>edit</md-icon></button></td>
             <td><button md-icon-button><md-icon>delete</md-icon></button></td>
+            <td *ngIf="i!=0"><button md-icon-button><md-icon>arrow_upward</md-icon></button></td>
+            <td *ngIf="i!=(projectsList.length-1)"><button md-icon-button><md-icon>arrow_downward</md-icon></button></td>
           </tr>
         </table>
         <p style="text-align: center;">
@@ -282,6 +290,8 @@
             <td style="width:80%;">{{additionalInfo.additionalDescription}}</td>
             <td><button md-icon-button><md-icon>edit</md-icon></button></td>
             <td><button md-icon-button><md-icon>delete</md-icon></button></td>
+            <td *ngIf="i!=0"><button md-icon-button><md-icon>arrow_upward</md-icon></button></td>
+            <td *ngIf="i!=(additionalInfoList.length-1)"><button md-icon-button><md-icon>arrow_downward</md-icon></button></td>
           </tr>
         </table>
         <p style="text-align: center;">
