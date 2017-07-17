@@ -31,6 +31,7 @@ import { MyAccountComponent } from './my-account/my-account.component';
 import { MyAccountStudentComponent } from './my-account-student/my-account-student.component';
 import { MyAccountRecruiterComponent } from './my-account-recruiter/my-account-recruiter.component';
 import { SearchJobsComponent } from './search-jobs/search-jobs.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { SearchJobsComponent } from './search-jobs/search-jobs.component';
     MyAccountComponent,
     MyAccountStudentComponent,
     MyAccountRecruiterComponent,
-    SearchJobsComponent
+    SearchJobsComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
