@@ -224,7 +224,7 @@ export class CreateUserStudentComponent implements OnInit {
         this.router.navigate([''])
         console.log(success)
       }).catch((error) => {
-        console.log(error.message)
+        alert(error.message)
       });
     }
   }
