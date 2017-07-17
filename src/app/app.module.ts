@@ -31,6 +31,7 @@ import { MyAccountComponent } from './my-account/my-account.component';
 import { MyAccountStudentComponent } from './my-account-student/my-account-student.component';
 import { MyAccountRecruiterComponent } from './my-account-recruiter/my-account-recruiter.component';
 import { SearchJobsComponent } from './search-jobs/search-jobs.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,10 @@ import { SearchJobsComponent } from './search-jobs/search-jobs.component';
     MyAccountStudentComponent,
     MyAccountRecruiterComponent,
     SearchJobsComponent,
+<<<<<<< HEAD
+    HelpComponent
+=======
+>>>>>>> 9a64f517e7ef17007dfe1edcb37e51b94339ee72
   ],
   imports: [
     BrowserModule,
