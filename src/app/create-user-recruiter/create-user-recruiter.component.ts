@@ -11,14 +11,14 @@ import {MdDialog, MdDialogRef} from "@angular/material";
   styleUrls: ['./create-user-recruiter.component.css']
 })
 export class CreateUserRecruiterComponent implements OnInit {
-  private createRecruiterForm: FormGroup;
+  createRecruiterForm: FormGroup;
   private formBuilder: FormBuilder;
   private angularFireAuth: AngularFireAuth;
-  private user;
+  user;
   private subscribeToRoute;
-  private gotData;
-  private updateForm;
-  private userId;
+  gotData;
+  updateForm;
+  userId;
 
   constructor(formBuilder: FormBuilder, angularFireAuth: AngularFireAuth, private angularFireDatabase: AngularFireDatabase,
               private activatedRoute: ActivatedRoute, private router: Router, private dialog: MdDialog) {
@@ -58,7 +58,7 @@ export class CreateUserRecruiterComponent implements OnInit {
     this.gotData=true;
   }
 
-  private createRecruiter() {
+  createRecruiter() {
     let uid;
     this.angularFireAuth.auth.createUserWithEmailAndPassword(this.createRecruiterForm.controls['email'].value,
       this.createRecruiterForm.controls['password'].value).then((user) => {
@@ -94,7 +94,7 @@ export class CreateUserRecruiterComponent implements OnInit {
     });
   }
 
-  private updateAccount() {
+  updateAccount() {
     let dialogRef = this.dialog.open(UpdateRecruiterDialogBox);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'yes') {

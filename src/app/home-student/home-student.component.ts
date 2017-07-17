@@ -10,9 +10,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./home-student.component.css']
 })
 export class HomeStudentComponent implements OnInit {
-  private searchForm: FormGroup;
+  searchForm: FormGroup;
   private formBuilder: FormBuilder;
-  private jobsList;
+  jobsList;
   private database: AngularFireDatabase;
 
   constructor(formBuilder: FormBuilder, database: AngularFireDatabase, private appComponent: AppComponent,
@@ -33,13 +33,13 @@ export class HomeStudentComponent implements OnInit {
   ngOnInit() {
   }
 
-  private search(){
+  search(){
     let location = (this.searchForm.controls['location'].value.toLocaleLowerCase()=='')?'empty':this.searchForm.controls['location'].value.toLocaleLowerCase();
     let keyword = (this.searchForm.controls['search'].value.toLocaleLowerCase()=='')?'empty':this.searchForm.controls['search'].value.toLocaleLowerCase();
     this.router.navigate(['/search-jobs',keyword, location])
   }
 
-  private getJobsFromDatabase() {
+  getJobsFromDatabase() {
     this.jobsList = this.database.list('/jobApplications')
   }
 

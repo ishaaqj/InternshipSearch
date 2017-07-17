@@ -11,11 +11,11 @@ import {AngularFireAuth} from "angularfire2/auth";
   styleUrls: ['./job-post.component.css']
 })
 export class JobPostComponent implements OnInit, OnDestroy {
-  private job;
+  job;
   private subscribeToRoute;
-  private userRole;
-  private gotData;
-  private showDeleteButton;
+  userRole;
+  gotData;
+  showDeleteButton;
   private userId;
 
   constructor(private angularFireDatabase: AngularFireDatabase
@@ -63,7 +63,7 @@ export class JobPostComponent implements OnInit, OnDestroy {
     });
   }
 
-  private deleteJob(){
+  deleteJob(){
     let dialogRef = this.dialog.open(DialogResultExampleDialog);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'yes'){
@@ -74,7 +74,7 @@ export class JobPostComponent implements OnInit, OnDestroy {
     });
   }
 
-  private deleteApplication(){
+  deleteApplication(){
     let dialogRef = this.dialog.open(DeleteDialogBox);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'yes'){
@@ -90,7 +90,7 @@ export class JobPostComponent implements OnInit, OnDestroy {
     });
   }
 
-  private applyToJob(){
+  applyToJob(){
     this.angularFireAuth.authState.subscribe(authState => {
       if (authState != null) {
         this.angularFireDatabase.object('/jobsAppliedTo/'+authState.uid+'/'+this.job.jobId).update({

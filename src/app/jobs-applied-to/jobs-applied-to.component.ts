@@ -11,15 +11,15 @@ import {Router} from "@angular/router";
 })
 export class JobsAppliedToComponent implements OnInit {
   private userId;
-  private jobsList;
-  private searchForm;
-  private filterForm;
+  jobsList;
+  searchForm;
+  filterForm;
   private sortByJobDateAsc = true;
   private sortByJobIdAsc = true;
   private sortByJobTitleAsc = true;
   private sortByCompanyNameAsc = true;
   private sortByJobLocationAsc = true;
-  private gotData: boolean;
+  gotData: boolean;
 
   constructor(private formBuilder: FormBuilder,private database: AngularFireDatabase,
               private angularFireAuth :AngularFireAuth) { }
@@ -46,7 +46,7 @@ export class JobsAppliedToComponent implements OnInit {
     });
   }
 
-  private filterResult(){
+  filterResult(){
     this.search();
     console.log(1)
     let companyName = this.filterForm.controls['companyName'].value.toLocaleLowerCase();
@@ -72,7 +72,7 @@ export class JobsAppliedToComponent implements OnInit {
     });
   }
 
-  private search(){
+  search(){
     let location = this.searchForm.controls['location'].value.toLocaleLowerCase();
     let keyword = this.searchForm.controls['search'].value.toLocaleLowerCase();
     this.database.list('/jobsAppliedTo/'+this.userId).subscribe(items=>{
@@ -82,7 +82,7 @@ export class JobsAppliedToComponent implements OnInit {
     })
   }
 
-  private sortByJobId(){
+  sortByJobId(){
     if(this.sortByJobIdAsc){
       this.jobsList = this.jobsList.sort((a,b)=> a.jobId > b.jobId)
     }else {
@@ -95,7 +95,7 @@ export class JobsAppliedToComponent implements OnInit {
     this.sortByJobTitleAsc=true
   }
 
-  private sortByJobStartDate(){
+  sortByJobStartDate(){
     if(this.sortByJobDateAsc){
       this.jobsList = this.jobsList.sort((a,b)=> (new Date(a.startDate)> (new Date(b.startDate))));
     }else {
@@ -108,7 +108,7 @@ export class JobsAppliedToComponent implements OnInit {
     this.sortByJobTitleAsc=true
   }
 
-  private sortByJobLocation(){
+  sortByJobLocation(){
     if(this.sortByJobLocationAsc){
       this.jobsList = this.jobsList.sort((a,b)=> a.city > b.city || a.stateOrProvince > b.stateOrProvince || a.country > b.country)
     }else {
@@ -121,7 +121,7 @@ export class JobsAppliedToComponent implements OnInit {
     this.sortByJobTitleAsc=true
   }
 
-  private sortByJobTitle(){
+  sortByJobTitle(){
     if(this.sortByJobTitleAsc){
       this.jobsList = this.jobsList.sort((a,b)=> a.jobTitle > b.jobTitle);
     }else {
@@ -134,7 +134,7 @@ export class JobsAppliedToComponent implements OnInit {
     this.sortByJobDateAsc=true
   }
 
-  private sortByCompanyName(){
+  sortByCompanyName(){
     if(this.sortByCompanyNameAsc){
       this.jobsList = this.jobsList.sort((a,b)=> a.companyName > b.companyName)
     }else {

@@ -11,13 +11,13 @@ import {MdDialogRef, MdDialog} from "@angular/material";
   styleUrls: ['./create-job-post.component.css']
 })
 export class CreateJobPostComponent implements OnInit, OnDestroy {
-  private job;
-  private createjobpostform;
-  private salaryPaid = 'Hourly';
-  private durationType = 'Week(s)';
+  job;
+  createjobpostform;
+  salaryPaid = 'Hourly';
+  durationType = 'Week(s)';
   private subscribeToRoute;
-  private updateForm;
-  private gotData;
+  updateForm;
+  gotData;
 
   constructor(private activatedRoute: ActivatedRoute, private angularFireDatabase: AngularFireDatabase,
               private angularFireAuth: AngularFireAuth, private formBuilder: FormBuilder, private router: Router,
@@ -104,7 +104,7 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
     });
   }
 
-  private createpost() {
+  createpost() {
     if (this.createjobpostform.controls['maxSalary'].value<this.createjobpostform.controls['minSalary'].value){
       alert("Max salary should not be less than Min Salary")
     }else if(new Date(this.createjobpostform.controls['startDate'].value)<(new Date)){
@@ -145,7 +145,7 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
     }
   }
 
-  private updatepost() {
+  updatepost() {
     let dialogRef = this.dialog.open(UpdateDialogBox);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'yes') {
@@ -182,7 +182,7 @@ export class CreateJobPostComponent implements OnInit, OnDestroy {
     });
   }
 
-  private deletepost(){
+  deletepost(){
     let dialogRef = this.dialog.open(DeletePostDialogBox);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'yes') {

@@ -10,25 +10,25 @@ import {Router} from "@angular/router";
   styleUrls: ['./create-user-student.component.css']
 })
 export class CreateUserStudentComponent implements OnInit {
-  private createStudentForm: FormGroup;
-  private createEducationForm: FormGroup;
-  private createSkillForm: FormGroup;
-  private createExperienceForm: FormGroup;
-  private createAdditionalInfoForm: FormGroup
-  private createProjectsForm: FormGroup;
+  createStudentForm: FormGroup;
+  createEducationForm: FormGroup;
+  createSkillForm: FormGroup;
+  createExperienceForm: FormGroup;
+  createAdditionalInfoForm: FormGroup
+  createProjectsForm: FormGroup;
   private formBuilder: FormBuilder;
   private angularFireAuth: AngularFireAuth;
   private anuglarFireDatabase: AngularFireDatabase;
-  private addEducationBool = false;
-  private addSkillBool = false;
-  private addAdditionalInfoBool = false;
-  private educationList =[];
-  private skillList=[];
-  private additionalInfoList=[];
-  private addProjectsBool = false;
-  private projectsList=[];
-  private addExperienceBool = false;
-  private experienceList =[];
+  addEducationBool = false;
+  addSkillBool = false;
+  addAdditionalInfoBool = false;
+  educationList =[];
+  skillList=[];
+  additionalInfoList=[];
+  addProjectsBool = false;
+  projectsList=[];
+  addExperienceBool = false;
+  experienceList =[];
   private re = /\//gi;
 
   degrees = [
@@ -52,11 +52,11 @@ export class CreateUserStudentComponent implements OnInit {
     this.additionalInfoForm();
   }
 
-  private addEducation(){
+  addEducation(){
     this.addEducationBool=true;
   }
 
-  private addNewEducation(){
+  addNewEducation(){
     if(!this.createEducationForm.controls['currentlyEnrolled'].value&&this.createEducationForm.controls['endDate'].value<this.createEducationForm.controls['startDate'].value){
       alert("End date must be after start date ")
     }else {
@@ -75,21 +75,21 @@ export class CreateUserStudentComponent implements OnInit {
     }
   }
 
-  private addSkill(){
+  addSkill(){
     this.addSkillBool=true;
   }
 
-  private addNewSkill() {
+  addNewSkill() {
     this.skillList.push(this.createSkillForm.value);
     this.createSkillForm.reset();
     this.addSkillBool=false;
   }
 
-  private addExperience(){
+  addExperience(){
     this.addExperienceBool=true;
   }
 
-  private addNewExperience(){
+  addNewExperience(){
     if(!this.createExperienceForm.controls['currentlyEmployed'].value&&this.createExperienceForm.controls['endDate'].value<this.createExperienceForm.controls['startDate'].value){
       alert("End date must be after start date ")
     }else {
@@ -107,21 +107,21 @@ export class CreateUserStudentComponent implements OnInit {
     }
   }
 
-  private addAdditionalInfo(){
+  addAdditionalInfo(){
     this.addAdditionalInfoBool=true;
   }
 
-  private addNewAdditionalInfo() {
+  addNewAdditionalInfo() {
     this.additionalInfoList.push(this.createAdditionalInfoForm.value);
     this.createAdditionalInfoForm.reset();
     this.addAdditionalInfoBool = false;
   }
 
-  private addProject(){
+  addProject(){
     this.addProjectsBool=true;
   }
 
-  private addNewProject() {
+  addNewProject() {
     this.projectsList.push(this.createProjectsForm.value);
     this.createProjectsForm.reset()
     this.addProjectsBool = false;
@@ -187,11 +187,11 @@ export class CreateUserStudentComponent implements OnInit {
     });
   }
 
-  private editEducation(i){
+  editEducation(i){
     console.log(i);
   }
 
-  private saveInfo(){
+  saveInfo(){
     let uid;
     if (this.educationList.length==0){
       alert("Add at least one education")

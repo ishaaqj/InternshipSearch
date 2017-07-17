@@ -11,10 +11,10 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class SearchJobsComponent implements OnInit {
   private subscribeToRoute;
-  private jobsList;
-  private gotData;
-  private searchForm: FormGroup;
-  private filterForm: FormGroup;
+  jobsList;
+  gotData;
+  searchForm: FormGroup;
+  filterForm: FormGroup;
   private keyword;
   private location;
   private sortByJobDateAsc = true;
@@ -55,7 +55,7 @@ export class SearchJobsComponent implements OnInit {
     });
   }
 
-  private search(){
+  search(){
     let location = this.searchForm.controls['location'].value.toLocaleLowerCase();
     let keyword = this.searchForm.controls['search'].value.toLocaleLowerCase();
     this.jobsList = this.jobsList = this.database.list('/jobApplications').map(_jobs => _jobs.filter(job => ((job.city.toLocaleLowerCase()+', '+job.stateOrProvince.toLocaleLowerCase()+', '+job.country.toLocaleLowerCase()).indexOf(location) != -1))) as FirebaseListObservable<any[]>;
@@ -72,7 +72,7 @@ export class SearchJobsComponent implements OnInit {
     });
   }
 
-  private filterResult(){
+  filterResult(){
     this.search();
     let companyName = this.filterForm.controls['companyName'].value.toLocaleLowerCase();
     let minSalary = this.filterForm.controls['minSalary'].value;
@@ -90,7 +90,7 @@ export class SearchJobsComponent implements OnInit {
     }
   }
 
-  private sortByJobId(){
+  sortByJobId(){
     if(this.sortByJobIdAsc){
       this.jobsList = this.jobsList.map(jobs=> jobs.sort((a,b)=> a.jobId > b.jobId)) as FirebaseListObservable<any[]>;
     }else {
@@ -103,7 +103,7 @@ export class SearchJobsComponent implements OnInit {
     this.sortByJobTitleAsc=true
   }
 
-  private sortByJobStartDate(){
+  sortByJobStartDate(){
     if(this.sortByJobDateAsc){
       this.jobsList = this.jobsList.map(jobs=> jobs.sort((a,b)=> (new Date(a.startDate)> (new Date(b.startDate))))) as FirebaseListObservable<any[]>;
     }else {
@@ -116,7 +116,7 @@ export class SearchJobsComponent implements OnInit {
     this.sortByJobTitleAsc=true
   }
 
-  private sortByJobLocation(){
+  sortByJobLocation(){
     if(this.sortByJobLocationAsc){
       this.jobsList = this.jobsList.map(jobs=> jobs.sort((a,b)=> a.city > b.city || a.stateOrProvince > b.stateOrProvince || a.country > b.country)) as FirebaseListObservable<any[]>;
     }else {
@@ -129,7 +129,7 @@ export class SearchJobsComponent implements OnInit {
     this.sortByJobTitleAsc=true
   }
 
-  private sortByJobTitle(){
+  sortByJobTitle(){
     if(this.sortByJobTitleAsc){
       this.jobsList = this.jobsList.map(jobs=> jobs.sort((a,b)=> a.jobTitle > b.jobTitle)) as FirebaseListObservable<any[]>;
     }else {
@@ -142,7 +142,7 @@ export class SearchJobsComponent implements OnInit {
     this.sortByJobDateAsc=true
   }
 
-  private sortByCompanyName(){
+  sortByCompanyName(){
     if(this.sortByCompanyNameAsc){
       this.jobsList = this.jobsList.map(jobs=> jobs.sort((a,b)=> a.companyName > b.companyName)) as FirebaseListObservable<any[]>;
     }else {

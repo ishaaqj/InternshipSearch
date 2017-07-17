@@ -11,7 +11,7 @@ import {AppComponent} from "../app.component";
 })
 export class LoginComponent implements OnInit {
 
-  private loginForm: FormGroup;
+  loginForm: FormGroup;
   private formBuilder: FormBuilder;
   private angularFireAuth: AngularFireAuth;
   private router: Router;
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     // for use in registration forms for password field Validators.compose([Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)])
   }
 
-  private login(){
+  login(){
     this.angularFireAuth.auth.signInWithEmailAndPassword(this.loginForm.controls['email'].value,
       this.loginForm.controls['password'].value).then(
       _ => {

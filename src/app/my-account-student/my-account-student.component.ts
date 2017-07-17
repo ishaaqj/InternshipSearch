@@ -9,11 +9,11 @@ import {AngularFireAuth} from "angularfire2/auth";
   styleUrls: ['./my-account-student.component.css']
 })
 export class MyAccountStudentComponent implements OnInit {
-  private gotData: boolean;
-  private user: any;
+  gotData: boolean;
+  user: any;
   private userId: string;
   private subscribeToRoute;
-  private studentProfile = false;
+  studentProfile = false;
 
   constructor(private database: AngularFireDatabase, private angularFireAuth :AngularFireAuth,
               private activatedRoute: ActivatedRoute)  { }

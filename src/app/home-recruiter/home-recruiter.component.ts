@@ -23,11 +23,11 @@ import {Subscription} from "rxjs/Subscription";
   styleUrls: ['./home-recruiter.component.css']
 })
 export class HomeRecruiterComponent implements OnInit {
-  private searchForm: FormGroup;
-  private filterForm: FormGroup;
+  searchForm: FormGroup;
+  filterForm: FormGroup;
   private userId;
-  private jobsList;
-  private sortByJobDateAsc = true;
+  jobsList;
+  sortByJobDateAsc = true;
   private sortByJobIdAsc = true;
   private sortByJobTitleAsc = true;
   private sortByCompanyNameAsc = true;
@@ -68,7 +68,7 @@ export class HomeRecruiterComponent implements OnInit {
     });
   }
 
-  private filterResult(){
+  filterResult(){
     this.search();
     let companyName = this.filterForm.controls['companyName'].value.toLocaleLowerCase();
     let minSalary = this.filterForm.controls['minSalary'].value;
@@ -86,7 +86,7 @@ export class HomeRecruiterComponent implements OnInit {
     }
   }
 
-  private search(){
+  search(){
     let location = this.searchForm.controls['location'].value.toLocaleLowerCase();
     let keyword = this.searchForm.controls['search'].value.toLocaleLowerCase();
       this.jobsList = this.jobsList = this.database.list('/jobApplications', {
@@ -98,7 +98,7 @@ export class HomeRecruiterComponent implements OnInit {
       this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => (job.jobTitle.toLocaleLowerCase().indexOf(keyword) != -1) || (job.companyName.toLocaleLowerCase().indexOf(keyword) != -1))) as FirebaseListObservable<any[]>
   }
 
-  private sortByJobId(){
+  sortByJobId(){
     if(this.sortByJobIdAsc){
       this.jobsList = this.jobsList.map(jobs=> jobs.sort((a,b)=> a.jobId > b.jobId)) as FirebaseListObservable<any[]>;
     }else {
@@ -111,7 +111,7 @@ export class HomeRecruiterComponent implements OnInit {
     this.sortByJobTitleAsc=true
   }
 
-  private sortByJobStartDate(){
+  sortByJobStartDate(){
     if(this.sortByJobDateAsc){
       this.jobsList = this.jobsList.map(jobs=> jobs.sort((a,b)=> (new Date(a.startDate)> (new Date(b.startDate))))) as FirebaseListObservable<any[]>;
     }else {
@@ -124,7 +124,7 @@ export class HomeRecruiterComponent implements OnInit {
     this.sortByJobTitleAsc=true
   }
 
-  private sortByJobLocation(){
+  sortByJobLocation(){
     if(this.sortByJobLocationAsc){
       this.jobsList = this.jobsList.map(jobs=> jobs.sort((a,b)=> a.city > b.city || a.stateOrProvince > b.stateOrProvince || a.country > b.country)) as FirebaseListObservable<any[]>;
     }else {
@@ -137,7 +137,7 @@ export class HomeRecruiterComponent implements OnInit {
     this.sortByJobTitleAsc=true
   }
 
-  private sortByJobTitle(){
+  sortByJobTitle(){
     if(this.sortByJobTitleAsc){
       this.jobsList = this.jobsList.map(jobs=> jobs.sort((a,b)=> a.jobTitle > b.jobTitle)) as FirebaseListObservable<any[]>;
     }else {
@@ -150,7 +150,7 @@ export class HomeRecruiterComponent implements OnInit {
     this.sortByJobDateAsc=true
   }
 
-  private sortByCompanyName(){
+  sortByCompanyName(){
     if(this.sortByCompanyNameAsc){
       this.jobsList = this.jobsList.map(jobs=> jobs.sort((a,b)=> a.companyName > b.companyName)) as FirebaseListObservable<any[]>;
     }else {

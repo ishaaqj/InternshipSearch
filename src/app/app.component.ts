@@ -12,9 +12,9 @@ import {HomeComponent} from "./home/home.component";
   providers:[LoginComponent, HomeComponent]
 })
 export class AppComponent {
-  private showAccountButton: boolean;
+  showAccountButton: boolean;
   static job;
-  private userRole = '';
+  userRole = '';
 
   constructor(private loginComponent: LoginComponent, private router: Router,
               private angularFireAuth: AngularFireAuth, private angularFireDatabase: AngularFireDatabase) {
@@ -30,7 +30,7 @@ export class AppComponent {
     });
   }
 
-  private logout() {
+  logout() {
     this.loginComponent.logout();
     this.userRole='';
     this.router.navigate(['/login']);

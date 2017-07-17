@@ -11,8 +11,8 @@ import {AngularFireAuth} from "angularfire2/auth";
 })
 export class MyAccountRecruiterComponent implements OnInit {
   private userId;
-  private user;
-  private gotData;
+  user;
+  gotData;
 
   constructor(private formBuilder: FormBuilder,private database: AngularFireDatabase,
               private router: Router, private angularFireAuth :AngularFireAuth)  { }

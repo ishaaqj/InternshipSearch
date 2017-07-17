@@ -11,13 +11,13 @@ import {AngularFireAuth} from "angularfire2/auth";
 })
 export class StudentsAppliedComponent implements OnInit, OnDestroy {
   private userId;
-  private studentsList;
-  private searchForm;
-  private filterForm;
+  studentsList;
+  searchForm;
+  filterForm;
   private subscribeToRoute;
-  private jobTitle;
-  private jobId;
-  private gotData;
+  jobTitle;
+  jobId;
+  gotData;
   private sortByNameAsc = true;
   private sortByDegreeAsc = true;
   private sortByUniversityAsc = true;
@@ -55,7 +55,7 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
     });
   }
 
-  private filterResult() {
+  filterResult() {
     this.search();
     let degree = this.filterForm.controls['degree'].value.toLocaleLowerCase();
     let university = this.filterForm.controls['university'].value.toLocaleLowerCase();
@@ -69,7 +69,7 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
       'location': ''
     });
   }
-  private search(){
+  search(){
     let keyword = this.searchForm.controls['search'].value.toLocaleLowerCase();
     let location = this.searchForm.controls['location'].value.toLocaleLowerCase();
     this.database.list('/studentsApplied/'+this.userId+'/'+this.jobId).subscribe(items=>{
@@ -82,7 +82,7 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.subscribeToRoute.unsubscribe()
   }
-  private sortByName(){
+  sortByName(){
     if(this.sortByNameAsc) {
       this.studentsList = this.studentsList.sort((a, b) => a.firstName > b.firstName);
     }else{
@@ -94,7 +94,7 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
     this.sortByLocationAsc=true;
   }
 
-  private sortByLocation(){
+  sortByLocation(){
     if(this.sortByLocationAsc){
     this.studentsList = this.studentsList.sort((a,b)=> a.city > b.city);
   }else{
@@ -106,7 +106,7 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
     this.sortByUniversityAsc = true;
   }
 
-  private sortByDegree() {
+  sortByDegree() {
     if (this.sortByDegreeAsc) {
       this.studentsList = this.studentsList.sort((a, b) => a.degree + a.programOfStudy> b.degree +b.programOfStudy);
     }else{
@@ -118,7 +118,7 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
     this.sortByUniversityAsc=true;
     }
 
-  private sortByUniversity(){
+  sortByUniversity(){
     if(this.sortByUniversityAsc) {
       this.studentsList = this.studentsList.sort((a, b) => a.university > b.university);
     }else {

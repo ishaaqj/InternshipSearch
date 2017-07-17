@@ -10,8 +10,8 @@ import {AngularFireAuth} from "angularfire2/auth";
   styleUrls: ['./my-account.component.css']
 })
 export class MyAccountComponent implements OnInit {
-  private userRole;
-  private gotData;
+  userRole;
+  gotData;
 
   constructor(private angularFireAuth: AngularFireAuth, private angularFireDatabase: AngularFireDatabase) {
     this.angularFireAuth.authState.subscribe(authState=>{

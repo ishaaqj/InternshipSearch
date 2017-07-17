@@ -8,7 +8,7 @@ import {AngularFireDatabase} from "angularfire2/database";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  private userRole;
+  userRole;
 
   constructor(private angularFireAuth: AngularFireAuth, private angularFireDatabase: AngularFireDatabase) {
     this.angularFireAuth.authState.subscribe(authState=>{
