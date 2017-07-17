@@ -1,10 +1,10 @@
-import { Phase3Page } from './app.po';
+import { InternshipSearchPage } from './app.po';
 
-describe('phase3 App', () => {
-  let page: Phase3Page;
+describe('internshpSearch App', () => {
+  let page: InternshipSearchPage;
 
   beforeEach(() => {
-    page = new Phase3Page();
+    page = new InternshipSearchPage();
   });
 
   it('should display welcome message', () => {
