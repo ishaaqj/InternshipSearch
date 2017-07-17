@@ -2,7 +2,7 @@
   <button md-icon-button>
     <md-icon [routerLink]="['']">home</md-icon>
   </button>
-  <h2 [routerLink]="['']">Internship Search</h2>
+  <h2 class="pointer-cursor" [routerLink]="['']">Internship Search</h2>
   <span class="spacer"></span>
   <button md-icon-button [mdMenuTriggerFor]="menu" *ngIf="showAccountButton">
     <md-icon>person</md-icon>
@@ -14,4 +14,6 @@
   <button md-menu-item [routerLink]="['/jobs-applied-to']" *ngIf="userRole == 'student'">Jobs Applied To</button>
   <button md-menu-item (click)="logout()">Sign Out</button>
 </md-menu>
-<router-outlet></router-outlet>
+<div style="margin: 0 1% 1% 1%">
+  <router-outlet></router-outlet>
+</div>

@@ -126,7 +126,7 @@ export class JobPostComponent implements OnInit, OnDestroy {
             'lastName': snapshot.val().lastName,
             'stateOrProvince': snapshot.val().stateOrProvince,
             'userId': authState.uid,
-            'nameOfnst': snapshot.val().educationList[0].nameOfInst,
+            'nameOfInst': snapshot.val().educationList[0].nameOfInst,
             'degree': snapshot.val().educationList[0].degree,
             'programOfStudy': snapshot.val().educationList[0].programOfStudy
           })

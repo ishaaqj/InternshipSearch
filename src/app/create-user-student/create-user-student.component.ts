@@ -69,6 +69,7 @@ export class CreateUserStudentComponent implements OnInit {
       this.createEducationForm.controls['startDate'].setValue(new Date(this.createEducationForm.controls['startDate'].value)
         .toLocaleDateString());
       this.educationList.push(this.createEducationForm.value);
+      console.log(this.educationList);
       this.createEducationForm.reset();
       this.addEducationBool=false;
     }
@@ -184,6 +185,10 @@ export class CreateUserStudentComponent implements OnInit {
       'endDate': '',
       'currentlyEmployed': ''
     });
+  }
+
+  private editEducation(i){
+    console.log(i);
   }
 
   private saveInfo(){

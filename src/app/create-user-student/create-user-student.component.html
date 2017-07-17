@@ -87,13 +87,13 @@
             <th>Start Date</th>
             <th>End Date</th>
           </tr>
-          <tr *ngFor="let education of educationList">
+          <tr *ngFor="let education of educationList; let i = index">
             <td>{{education.nameOfInst}}</td>
             <td>{{education.degree}}</td>
             <td>{{education.programOfStudy}}</td>
             <td>{{education.startDate}}</td>
             <td>{{education.endDate}}</td>
-            <td><button md-icon-button><md-icon>edit</md-icon></button></td>
+            <td><button type="button" md-icon-button (click)="editEducation(i)"><md-icon>edit</md-icon></button></td>
             <td><button md-icon-button><md-icon>delete</md-icon></button></td>
           </tr>
         </table>
@@ -155,12 +155,12 @@
             <th>Start Date</th>
             <th>End Date</th>
           </tr>
-          <tr *ngFor="let experience of experienceList">
+          <tr *ngFor="let experience of experienceList; let i = index">
             <td>{{experience.jobTitle}}</td>
             <td>{{experience.nameOfInst}}</td>
             <td>{{experience.startDate}}</td>
             <td>{{experience.endDate}}</td>
-            <td><button md-icon-button><md-icon>edit</md-icon></button></td>
+            <td><button md-icon-button ><md-icon>edit</md-icon></button></td>
             <td><button md-icon-button><md-icon>delete</md-icon></button></td>
           </tr>
         </table>

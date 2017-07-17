@@ -73,7 +73,7 @@
             <td style="width: 30%">
               <md-input-container>
                 <input mdInput type="text" [formControl] = "createjobpostform.controls['durationOfInternship']"
-                       placeholder="Duration of Intership" required>
+                       placeholder="Duration of Internship" required>
                 <md-error *ngIf="createjobpostform.controls['durationOfInternship'].hasError('required')">This field is required</md-error>
                 <md-error *ngIf="createjobpostform.controls['durationOfInternship'].hasError('pattern')">Please enter a positive number</md-error>
               </md-input-container>

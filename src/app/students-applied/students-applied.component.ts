@@ -33,6 +33,9 @@ export class StudentsAppliedComponent implements OnInit, OnDestroy {
         this.userId = authState.uid;
         this.database.list('/studentsApplied/'+this.userId+'/'+params['id']).subscribe(items=>{
           this.studentsList=items;
+          for (let students of this.studentsList){
+            console.log(students)
+          }
         });
         this.database.object('/jobApplications/'+params['id'],{preserveSnapshot: true}).subscribe(snapshot=>{
           this.jobTitle=snapshot.val().jobTitle;

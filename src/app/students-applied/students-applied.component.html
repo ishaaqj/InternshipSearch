@@ -1,4 +1,4 @@
-<h2 *ngIf="gotData">Students Applied To: <a class="link" [routerLink]="['/job-post',jobId]">{{jobTitle}} ({{jobId}})</a></h2>
+<md-toolbar><h2 *ngIf="gotData">Students Applied To: <a class="link" [routerLink]="['/job-post',jobId]">{{jobTitle}} ({{jobId}})</a></h2></md-toolbar>
 <md-toolbar>
   <span class="spacer"></span>
   <form [formGroup]="searchForm" >
@@ -12,7 +12,7 @@
         </td>
         <td>
           <md-input-container style="width: 400px;" floatPlaceholder="never">
-            <input mdInput type="text" [formControl] = "searchForm.controls['location']" placeholder="Cty, state, postal
+            <input mdInput type="text" [formControl] = "searchForm.controls['location']" placeholder="City, state, postal
               code or country">
           </md-input-container>
         </td>
@@ -47,13 +47,13 @@
       <md-card-title>Results</md-card-title>
       <table *ngIf="gotData" cellspacing="10">
         <tr>
-          <th class="table-row" (click)="sortByName()">Name</th>
-          <th class="table-row" (click)="sortByDegree()">Education</th>
-          <th class="table-row" (click)="sortByUniversity()">University</th>
-          <th class="table-row" (click)="sortByLocation()">Location</th>
+          <th class="table-row" (click)="sortByName()"><span class="pointer-cursor">Name</span></th>
+          <th class="table-row" (click)="sortByDegree()"><span class="Education">Education</span></th>
+          <th class="table-row" (click)="sortByUniversity()"><span class="pointer-cursor">University</span></th>
+          <th class="table-row" (click)="sortByLocation()"><span class="pointer-cursor">Location</span></th>
         </tr>
         <ng-container *ngFor="let student of studentsList">
-          <tr [routerLink]="['/student-profile',student.userId]">
+          <tr class="pointer-cursor" [routerLink]="['/student-profile',student.userId]">
             <td class="table-row">{{student.firstName }}  {{student.lastName}}</td>
             <td class="table-row">{{student.degree}} of {{student.programOfStudy}}</td>
             <td class="table-row">{{student.nameOfInst}}</td>

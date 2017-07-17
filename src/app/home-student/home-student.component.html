@@ -11,7 +11,7 @@
         </td>
         <td>
           <md-input-container style="width: 400px;" floatPlaceholder="never">
-            <input mdInput type="text" [formControl] = "searchForm.controls['location']" placeholder="Cty, state, postal
+            <input mdInput type="text" [formControl] = "searchForm.controls['location']" placeholder="City, state, postal
               code or country">
           </md-input-container>
         </td>
@@ -25,7 +25,9 @@
   </form>
   <span class="spacer"></span>
 </md-toolbar>
-<h1>Recommended for you</h1>
+<md-toolbar>
+  <h1>Recommended for you</h1>
+</md-toolbar>
 <md-grid-list cols="4" rowHeight="150px">
   <md-grid-tile *ngFor="let job of jobsList | async">
     <md-card class="full-width card" [routerLink]="['/job-post',job.jobId]">

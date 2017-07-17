@@ -2,7 +2,7 @@
   <h2 *ngIf="!studentProfile">My Account</h2>
   <h2 *ngIf="studentProfile">Student Profile</h2>
   <span class="spacer"></span>
-  <h2 *ngIf="!studentProfile">Edit</h2>
+  <button md-button><h2 *ngIf="!studentProfile">Edit</h2></button>
 </md-toolbar>
 <div *ngIf="gotData" fxLayout="row" fxLayoutAlign="space-around center" class="content">
   <md-card class="blocks" fxFlex="70%">
@@ -31,90 +31,90 @@
         <th>Career Interest:</th>
         <td>{{user.careerInterest}}</td>
       </tr>
-    </table>
-    <table *ngIf="this.user.educationList">
-      <h2 >Education:</h2>
-      <ng-container *ngFor="let education of user.educationList">
-        <tr>
-          <th>Name of Institution:</th>
-          <td>{{education.nameOfInst}}</td>
-        </tr>
-        <tr>
-          <th>Degree:</th>
-          <td>{{education.degree}} of {{education.programOfStudy}}</td>
-        </tr>
-        <tr>
-          <th>Start Date:</th>
-          <td>{{education.startDate}}</td>
-        </tr>
-        <tr>
-          <th>End Date:</th>
-          <td>{{education.endDate}}</td>
-        </tr>
+      <ng-container *ngIf="this.user.educationList">
+        <h2 >Education:</h2>
+        <ng-container *ngFor="let education of user.educationList">
+          <tr>
+            <th>Name of Institution:</th>
+            <td>{{education.nameOfInst}}</td>
+          </tr>
+          <tr>
+            <th>Degree:</th>
+            <td>{{education.degree}} of {{education.programOfStudy}}</td>
+          </tr>
+          <tr>
+            <th>Start Date:</th>
+            <td>{{education.startDate}}</td>
+          </tr>
+          <tr>
+            <th>End Date:</th>
+            <td>{{education.endDate}}</td>
+          </tr>
+        </ng-container>
       </ng-container>
-    </table>
-    <table *ngIf="this.user.experienceList">
-      <h2 >Experience:</h2>
-      <ng-container *ngFor="let experience of user.experienceList">
-        <tr>
-          <th>Job Title:</th>
-          <td>{{experience.jobTitle}}</td>
-        </tr>
-        <tr>
-          <th>Name of Institution:</th>
-          <td>{{experience.nameOfInst}}</td>
-        </tr>
-        <tr>
-          <th>Start Date:</th>
-          <td>{{experience.startDate}}</td>
-        </tr>
-        <tr>
-          <th>End Date:</th>
-          <td>{{experience.endDate}}</td>
-        </tr>
-        <tr>
-          <th>Job Description:</th>
-          <td>{{experience.jobDescription}}</td>
-        </tr>
+      <ng-container *ngIf="this.user.experienceList">
+        <h2 >Experience:</h2>
+        <ng-container *ngFor="let experience of user.experienceList">
+          <tr>
+            <th>Job Title:</th>
+            <td>{{experience.jobTitle}}</td>
+          </tr>
+          <tr>
+            <th>Name of Institution:</th>
+            <td>{{experience.nameOfInst}}</td>
+          </tr>
+          <tr>
+            <th>Start Date:</th>
+            <td>{{experience.startDate}}</td>
+          </tr>
+          <tr>
+            <th>End Date:</th>
+            <td>{{experience.endDate}}</td>
+          </tr>
+          <tr>
+            <th>Job Description:</th>
+            <td>{{experience.jobDescription}}</td>
+          </tr>
+        </ng-container>
       </ng-container>
-    </table>
-    <table *ngIf="this.user.skillList">
-      <h2 >Skills:</h2>
-      <ng-container *ngFor="let skill of user.skillList">
-        <tr>
-          <th>Name:</th>
-          <td>{{skill.skillName}}</td>
-        </tr>
-        <tr>
-          <th>Description:</th>
-          <td>{{skill.skillDescription}}</td>
-        </tr>
+      <ng-container *ngIf="this.user.skillList">
+        <h2 >Skills:</h2>
+        <ng-container *ngFor="let skill of user.skillList">
+          <tr>
+            <th>Name:</th>
+            <td>{{skill.skillName}}</td>
+          </tr>
+          <tr>
+            <th>Description:</th>
+            <td>{{skill.skillDescription}}</td>
+          </tr>
+        </ng-container>
       </ng-container>
-    </table>
-    <table *ngIf="this.user.projectsList">
-      <h2 >Projects:</h2>
-      <ng-container *ngFor="let project of user.projectsList">
-        <tr>
-          <th>Name:</th>
-          <td>{{project.projectName}}</td>
-        </tr>
-        <tr>
-          <th>Description:</th>
-          <td>{{project.projectDescription}}</td>
-        </tr>
+      <ng-container *ngIf="this.user.projectsList">
+        <h2 >Projects:</h2>
+        <ng-container *ngFor="let project of user.projectsList">
+          <tr>
+            <th>Name:</th>
+            <td>{{project.projectName}}</td>
+          </tr>
+          <tr>
+            <th>Description:</th>
+            <td>{{project.projectDescription}}</td>
+          </tr>
+        </ng-container>
       </ng-container>
-    </table>
-    <table *ngIf="this.user.additionalInfoList">
-      <h2 >Additional Information:</h2>
-      <ng-container *ngFor="let additionalInfo of user.additionalInfoList">
-        <tr>
-          <th>Name:</th>
-          <td>{{additionalInfo.additionalName}}</td>
-        </tr>
-        <tr>
-          <th>Description:</th>
-          <td>{{additionalInfo.additionalDescription}}</td>
-        </tr>
+      <ng-container *ngIf="this.user.additionalInfoList">
+        <h2 >Additional Information:</h2>
+        <ng-container *ngFor="let additionalInfo of user.additionalInfoList">
+          <tr>
+            <th>Name:</th>
+            <td>{{additionalInfo.additionalName}}</td>
+          </tr>
+          <tr>
+            <th>Description:</th>
+            <td>{{additionalInfo.additionalDescription}}</td>
+          </tr>
+        </ng-container>
       </ng-container>
     </table>
   </md-card>
