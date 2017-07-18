@@ -30,7 +30,9 @@ export class JobPostComponent implements OnInit, OnDestroy {
           let userObservable = this.angularFireDatabase.object('users/' + authState.uid, {preserveSnapshot: true});
           userObservable.subscribe(snapshot => {
             this.userRole = snapshot.val().role;
+            console.log(this.userRole)
           });
+          console.log(this.userRole)
           this.angularFireDatabase.object('jobApplications/' + params['id'], {preserveSnapshot: true}).subscribe(snapshot => {
             this.job = snapshot.val();
             this.userId = authState.uid;
