@@ -76,8 +76,8 @@ export class HomeRecruiterComponent implements OnInit {
     let datePosted = this.filterForm.controls['datePosted'].value;
     let dateStarts = this.filterForm.controls['dateStarts'].value;
     this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => job.companyName.toLocaleLowerCase().indexOf(companyName) != -1)) as FirebaseListObservable<any[]>
-    this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => job.minSalary - minSalary + 1)) as FirebaseListObservable<any[]>;
-    this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => maxSalary - job.maxSalary + 1)) as FirebaseListObservable<any[]>;
+    this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => job.minSalary >= minSalary)) as FirebaseListObservable<any[]>;
+    this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => job.maxSalary <= maxSalary)) as FirebaseListObservable<any[]>;
     if(this.filterForm.controls['datePosted'].value != '') {
       this.jobsList = this.jobsList.map(_jobs => _jobs.filter(job => (new Date(job.datePosted)) >= (new Date(datePosted)))) as FirebaseListObservable<any[]>;
     }

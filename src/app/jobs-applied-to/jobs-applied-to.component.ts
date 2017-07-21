@@ -55,8 +55,8 @@ export class JobsAppliedToComponent implements OnInit {
     let datePosted = this.filterForm.controls['datePosted'].value;
     let dateStarts = this.filterForm.controls['dateStarts'].value;
     this.jobsList = this.jobsList.filter(job => job.companyName.toLocaleLowerCase().indexOf(companyName) != -1)
-    this.jobsList = this.jobsList.filter(job => job.minSalary - minSalary + 1);
-    this.jobsList = this.jobsList.filter(job => maxSalary - job.maxSalary + 1);
+    this.jobsList = this.jobsList.filter(job => job.minSalary >= minSalary);
+    this.jobsList = this.jobsList.filter(job => job.maxSalary <= maxSalary);
     if(this.filterForm.controls['datePosted'].value != '') {
       this.jobsList = this.jobsList.filter(job => (new Date(job.datePosted)) >= (new Date(datePosted)))
     }
