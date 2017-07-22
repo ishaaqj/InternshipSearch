@@ -28,6 +28,7 @@ export class HomeRecruiterComponent implements OnInit {
   private userId;
   jobsList;
   sortByJobDateAsc = true;
+  gotData = false;
   private sortByJobIdAsc = true;
   private sortByJobTitleAsc = true;
   private sortByCompanyNameAsc = true;
@@ -40,6 +41,7 @@ export class HomeRecruiterComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("123" + this.gotData);
     this.angularFireAuth.authState.subscribe(authState=>{
       this.userId = authState.uid;
       this.jobsList = this.database.list('/jobApplications', {
@@ -48,6 +50,8 @@ export class HomeRecruiterComponent implements OnInit {
           equalTo: this.userId
         }
       }) as FirebaseListObservable<any[]>;
+      this.gotData = true;
+      console.log("456" + this.gotData);
     });
   }
 

@@ -1,2 +1,9 @@
-<app-home-student *ngIf="userRole == 'student'"></app-home-student>
-<app-home-recruiter *ngIf="userRole == 'recruiter'"></app-home-recruiter>
+<div *ngIf="gotData">
+  <app-home-student *ngIf="userRole == 'student'"></app-home-student>
+  <app-home-recruiter *ngIf="userRole == 'recruiter'"></app-home-recruiter>
+</div>
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="center center" class="content">
+    <md-spinner class="blocks" *ngIf="!gotData"></md-spinner>
+  </div>
+</div>

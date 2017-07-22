@@ -9,6 +9,7 @@ import {AngularFireDatabase} from "angularfire2/database";
 })
 export class HomeComponent implements OnInit {
   userRole;
+  gotData = false;
 
   constructor(private angularFireAuth: AngularFireAuth, private angularFireDatabase: AngularFireDatabase) {
     this.angularFireAuth.authState.subscribe(authState=>{
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
       let userObservable = this.angularFireDatabase.object('users/'+ userId, {preserveSnapshot: true});
       userObservable.subscribe(snapshot=>{
         this.userRole = snapshot.val().role;
+        this.gotData=true;
       })
     });
   }

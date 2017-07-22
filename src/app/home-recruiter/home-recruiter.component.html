@@ -1,96 +1,99 @@
-<md-toolbar>
-  <span class="spacer"></span>
-  <form [formGroup]="searchForm" >
-    <table cellspacing="10">
-      <tr>
-        <td>
-          <md-input-container style="width: 400px;" floatPlaceholder="never">
-            <input mdInput #filter type="text" [formControl] = "searchForm.controls['search']" placeholder="Search jobs by
-              title, keyword or company">
-          </md-input-container>
-        </td>
-        <td>
-          <md-input-container style="width: 400px;" floatPlaceholder="never">
-            <input mdInput type="text" [formControl] = "searchForm.controls['location']" placeholder="City, state, postal
-              code or country">
-          </md-input-container>
-        </td>
-        <td>
-          <button md-icon-button (click)="search()" [disabled] = "!searchForm.valid" type="submit">
-            <md-icon>search</md-icon>
-          </button>
-        </td>
-      </tr>
-    </table>
-  </form>
-  <span class="spacer"></span>
-</md-toolbar>
-<div class="container">
+<div *ngIf="gotData">
   <md-toolbar>
-    <h2>Jobs Posted</h2>
+    <span class="spacer"></span>
+    <form [formGroup]="searchForm" >
+      <table cellspacing="10">
+        <tr>
+          <td>
+            <md-input-container style="width: 400px;" floatPlaceholder="never">
+              <input mdInput #filter type="text" [formControl] = "searchForm.controls['search']" placeholder="Search jobs by
+              title, keyword or company">
+            </md-input-container>
+          </td>
+          <td>
+            <md-input-container style="width: 400px;" floatPlaceholder="never">
+              <input mdInput type="text" [formControl] = "searchForm.controls['location']" placeholder="City, state, postal
+              code or country">
+            </md-input-container>
+          </td>
+          <td>
+            <button md-icon-button (click)="search()" [disabled] = "!searchForm.valid" type="submit">
+              <md-icon>search</md-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <span class="spacer"></span>
   </md-toolbar>
-  <div fxLayout="row" fxLayoutAlign="space-around start" class="content">
-    <md-card class="blocks" fxFlex="25%">
-      <md-card-title>Filter By</md-card-title>
-      <form [formGroup]="filterForm" >
-        <md-input-container class="full-width">
-          <input mdInput type="text" [formControl] = "filterForm.controls['companyName']" placeholder="Company name">
-        </md-input-container>
+  <div class="container">
+    <md-toolbar>
+      <h2>Jobs Posted</h2>
+    </md-toolbar>
+    <div fxLayout="row" fxLayoutAlign="space-around start" class="content">
+      <md-card class="blocks" fxFlex="25%">
+        <md-card-title>Filter By</md-card-title>
+        <form [formGroup]="filterForm" >
+          <md-input-container class="full-width">
+            <input mdInput type="text" [formControl] = "filterForm.controls['companyName']" placeholder="Company name">
+          </md-input-container>
+          <table>
+            <tr>
+              <td style="padding-right: 10px">
+                <md-input-container floatPlaceholder="never">
+                  <input mdInput type="text" [formControl] = "filterForm.controls['minSalary']" placeholder="Min Salary">
+                </md-input-container>
+              </td>
+              <td>
+                to
+              </td>
+              <td style="padding-left: 10px">
+                <md-input-container  floatPlaceholder="never">
+                  <input mdInput type="text" [formControl] = "filterForm.controls['maxSalary']" placeholder="Max Salary">
+                </md-input-container>
+              </td>
+            </tr>
+          </table>
+          <md-input-container>
+            <input mdInput [formControl] = "filterForm.controls['datePosted']" [mdDatepicker]="picker" placeholder="Date posted">
+            <button mdSuffix [mdDatepickerToggle]="picker"></button>
+          </md-input-container>
+          <md-datepicker #picker></md-datepicker>
+          <md-input-container>
+            <input mdInput [formControl] = "filterForm.controls['dateStarts']" [mdDatepicker]="picker2" placeholder="Date Starts">
+            <button mdSuffix [mdDatepickerToggle]="picker2"></button>
+          </md-input-container>
+          <md-datepicker #picker2></md-datepicker>
+          <p style="text-align: center">
+            <button md-raised-button (click)="filterResult()" [disabled] = "!filterForm.valid" type="submit">
+              Filter
+            </button>
+          </p>
+        </form>
+      </md-card>
+      <span class="spacer"></span>
+      <md-card class="blocks" fxFlex="74%">
+        <md-card-title>Results</md-card-title>
         <table>
           <tr>
-            <td style="padding-right: 10px">
-              <md-input-container floatPlaceholder="never">
-                <input mdInput type="text" [formControl] = "filterForm.controls['minSalary']" placeholder="Min Salary">
-              </md-input-container>
-            </td>
-            <td>
-              to
-            </td>
-            <td style="padding-left: 10px">
-              <md-input-container  floatPlaceholder="never">
-                <input mdInput type="text" [formControl] = "filterForm.controls['maxSalary']" placeholder="Max Salary">
-              </md-input-container>
-            </td>
+            <th class="table-row" (click)="sortByJobId()"><span class="pointer-cursor">Job Id</span></th>
+            <th class="table-row" (click)="sortByJobTitle()"><span class="pointer-cursor">Job Title</span></th>
+            <th class="table-row" (click)="sortByJobStartDate()"><span class="pointer-cursor">Job Start Date</span></th>
+            <th class="table-row" (click)="sortByCompanyName()"><span class="pointer-cursor">Company Name</span></th>
+            <th class="table-row" (click)="sortByJobLocation()"><span class="pointer-cursor">Job Location</span></th>
           </tr>
+          <ng-container *ngFor="let job of jobsList|async">
+            <tr class="pointer-cursor" [routerLink]="['/job-post',job.jobId]">
+              <td class="table-row">{{job.jobId}}</td>
+              <td class="table-row">{{job.jobTitle}}</td>
+              <td class="table-row">{{job.startDate.slice(0,10)}}</td>
+              <td class="table-row">{{job.companyName}}</td>
+              <td class="table-row">{{job.city}}, {{job.stateOrProvince}}, {{job.country}}</td>
+            </tr>
+          </ng-container>
         </table>
-        <md-input-container>
-          <input mdInput [formControl] = "filterForm.controls['datePosted']" [mdDatepicker]="picker" placeholder="Date posted">
-          <button mdSuffix [mdDatepickerToggle]="picker"></button>
-        </md-input-container>
-        <md-datepicker #picker></md-datepicker>
-        <md-input-container>
-          <input mdInput [formControl] = "filterForm.controls['dateStarts']" [mdDatepicker]="picker2" placeholder="Date Starts">
-          <button mdSuffix [mdDatepickerToggle]="picker2"></button>
-        </md-input-container>
-        <md-datepicker #picker2></md-datepicker>
-        <p style="text-align: center">
-          <button md-raised-button (click)="filterResult()" [disabled] = "!filterForm.valid" type="submit">
-            Filter
-          </button>
-        </p>
-      </form>
-    </md-card>
-    <span class="spacer"></span>
-    <md-card class="blocks" fxFlex="74%">
-      <md-card-title>Results</md-card-title>
-      <table>
-        <tr>
-          <th class="table-row" (click)="sortByJobId()"><span class="pointer-cursor">Job Id</span></th>
-          <th class="table-row" (click)="sortByJobTitle()"><span class="pointer-cursor">Job Title</span></th>
-          <th class="table-row" (click)="sortByJobStartDate()"><span class="pointer-cursor">Job Start Date</span></th>
-          <th class="table-row" (click)="sortByCompanyName()"><span class="pointer-cursor">Company Name</span></th>
-          <th class="table-row" (click)="sortByJobLocation()"><span class="pointer-cursor">Job Location</span></th>
-        </tr>
-        <ng-container *ngFor="let job of jobsList|async">
-          <tr class="pointer-cursor" [routerLink]="['/job-post',job.jobId]">
-            <td class="table-row">{{job.jobId}}</td>
-            <td class="table-row">{{job.jobTitle}}</td>
-            <td class="table-row">{{job.startDate.slice(0,10)}}</td>
-            <td class="table-row">{{job.companyName}}</td>
-            <td class="table-row">{{job.city}}, {{job.stateOrProvince}}, {{job.country}}</td>
-          </tr>
-        </ng-container>
-      </table>
-    </md-card>
+      </md-card>
+    </div>
   </div>
 </div>
+<span *ngIf="!gotData">Loading...</span>

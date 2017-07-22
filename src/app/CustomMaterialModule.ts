@@ -7,7 +7,7 @@ import {
   MdButtonModule, MdCardModule, MdCheckboxModule, MdDatepickerModule, MdDialogModule, MdGridListModule, MdIconModule,
   MdInputModule,
   MdMenuModule,
-  MdNativeDateModule, MdSelectModule,
+  MdNativeDateModule, MdProgressSpinnerModule, MdSelectModule,
   MdSortModule,
   MdTableModule,
   MdToolbarModule
@@ -33,7 +33,8 @@ import {CdkTableModule} from "@angular/cdk";
     MdNativeDateModule,
     MdDialogModule,
     MdCheckboxModule,
-    MdSelectModule
+    MdSelectModule,
+    MdProgressSpinnerModule
   ],
   exports: [
     MdButtonModule,
@@ -52,7 +53,8 @@ import {CdkTableModule} from "@angular/cdk";
     MdNativeDateModule,
     MdDialogModule,
     MdCheckboxModule,
-    MdSelectModule
+    MdSelectModule,
+    MdProgressSpinnerModule
   ]
 })
 
